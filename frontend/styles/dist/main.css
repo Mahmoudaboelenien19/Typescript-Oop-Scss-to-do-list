@@ -272,6 +272,21 @@
   color: rgb(5, 5, 139);
 }
 
+.focus {
+  top: -10px;
+  border-radius: 2px;
+  background: wheat;
+  border-left: 3px solid rgb(6, 6, 139);
+  border-right: 3px solid rgb(6, 6, 139);
+  left: 20px;
+}
+
+.blur {
+  top: 50%;
+  transform: translateY(-50%);
+  left: 20px;
+}
+
 .pop, .task-cont .task .btns > *, .task-cont .task .btns, .task-cont #options, .container form, .container > *, .container {
   display: flex;
   align-items: center;
@@ -362,6 +377,7 @@ body {
   background: linear-gradient(135deg, wheat, rgb(51, 48, 230));
 }
 .container form {
+  position: relative;
   gap: 0;
   width: 100%;
   height: 40px;
@@ -372,8 +388,27 @@ body {
   border: none;
   box-shadow: none;
 }
+.container form .focus {
+  position: absolute;
+  top: -10px;
+  height: 20px;
+  left: 25px;
+  z-index: 50;
+  padding: 0 5px;
+  background: wheat;
+  border-radius: 2px;
+  border-left: 3px solid rgb(6, 6, 139);
+  border-right: 3px solid rgb(6, 6, 139);
+}
+.container form span {
+  position: absolute;
+  height: 20px;
+  z-index: 50;
+  padding: 0 5px;
+  transition: 0.15s;
+}
 .container form input {
-  height: 40px;
+  height: 100%;
   padding-left: 10px;
   letter-spacing: 0.8px;
 }
@@ -384,7 +419,7 @@ body {
   outline: none;
   border: none;
   box-shadow: none;
-  height: 40px;
+  height: 100%;
 }
 .container form button:hover {
   background-color: rgb(71, 71, 170);

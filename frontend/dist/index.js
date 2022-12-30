@@ -6,6 +6,7 @@ const clr = document.querySelector('#clr');
 const tasks = document.querySelector('#tasks');
 const taskCont = document.querySelector(".task-cont");
 // let cont= document.querySelector(".container")
+let isFocus = false;
 for (let i = 0; i < 300; i++) {
     // let span=`<span> </span>`;
     let span = document.createElement("span");
@@ -80,6 +81,17 @@ class UI {
         UI.handleCheck(arr);
         Actions.displayClearAllBtn(arr);
         LocalStorageDATA.saveDataToLocalStorage(arr);
+    }
+    static handleInp() {
+        let placeholder = document.querySelector("form span");
+        if (isFocus) {
+            placeholder === null || placeholder === void 0 ? void 0 : placeholder.classList.add("focus");
+            placeholder === null || placeholder === void 0 ? void 0 : placeholder.classList.remove("blur");
+        }
+        else {
+            placeholder === null || placeholder === void 0 ? void 0 : placeholder.classList.remove("focus");
+            placeholder === null || placeholder === void 0 ? void 0 : placeholder.classList.add("blur");
+        }
     }
     static addDataToArr() {
         if (UI.Mode === "create") {
@@ -196,9 +208,18 @@ class Actions {
 form.addEventListener('submit', (e) => {
     e.preventDefault();
 });
+UI.handleInp();
 /* get data from localstorge if there are data  */
 LocalStorageDATA.getDataFromLocalStorage();
 /* clicking EVENT */
 btn.addEventListener('click', Actions.validiation);
 tasks.addEventListener("click", Actions.actionsFn);
 clr.addEventListener("click", Actions.clearAll);
+inp.addEventListener("focus", () => {
+    isFocus = true;
+    UI.handleInp();
+});
+inp.addEventListener("blur", () => {
+    isFocus = false;
+    UI.handleInp();
+});

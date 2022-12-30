@@ -8,6 +8,9 @@ const taskCont = document.querySelector(".task-cont") as HTMLElement;
 
 
 // let cont= document.querySelector(".container")
+let isFocus=false;
+
+
 
 for(let i=0;i<300;i++){
     // let span=`<span> </span>`;
@@ -111,11 +114,21 @@ class UI {
     UI.handleCheck(arr)
     Actions.displayClearAllBtn(arr)
     LocalStorageDATA.saveDataToLocalStorage(arr);
-
-
-
   }
 
+  static handleInp(){
+    let placeholder=document.querySelector("form span")
+    if(isFocus){
+      placeholder?.classList.add("focus")
+      placeholder?.classList.remove("blur")
+    }else{
+      
+      placeholder?.classList.remove("focus")
+      placeholder?.classList.add("blur")
+
+    }
+
+  }
   static addDataToArr(): void {
 
     if (UI.Mode === "create") {
@@ -159,6 +172,7 @@ class UI {
       UI.handlePopUp("success", "task updated !")
     }
     inp.value = '';
+   
   }
 
 
@@ -217,9 +231,6 @@ Actions.checkData(arr)
       let updatedElementIndex: number = arr.findIndex(e => e.id == UI.updateId)
 
       inp.value = arr[updatedElementIndex].content
-
-
-
     }
     if ((e.target as HTMLElement).classList.contains("check")) {
 
@@ -298,6 +309,7 @@ form.addEventListener('submit', (e) => {
   e.preventDefault();
 });
 
+UI.handleInp();
 /* get data from localstorge if there are data  */
 LocalStorageDATA.getDataFromLocalStorage()
 
@@ -310,3 +322,13 @@ tasks.addEventListener("click", Actions.actionsFn)
 
 clr.addEventListener("click", Actions.clearAll);
 
+
+inp.addEventListener("focus",()=>{
+  isFocus=true;
+  UI.handleInp()
+})
+inp.addEventListener("blur",()=>{
+  isFocus=false;
+  UI.handleInp()
+
+})

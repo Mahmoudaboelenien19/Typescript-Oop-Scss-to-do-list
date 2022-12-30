@@ -48,3 +48,20 @@
   .text.unchecked{
   color: rgb(5, 5, 139);
   }
+
+  .focus{
+    top: -10px; 
+   border-radius:2px ;
+  background: wheat;  
+    border-left: 3px solid rgb(6, 6, 139);
+    border-right: 3px solid rgb(6, 6, 139);
+left: 20px;
+
+  }
+  .blur{
+    top: 50%;
+    transform: translateY(-50%);
+left: 20px;
+
+
+  }
