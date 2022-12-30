@@ -1,0 +1,40 @@
+.container {
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  $grid__cols: 16;
+  @for $i from 1 through $grid__cols {
+    .col-#{$i} {
+      width: percentage($i / ($grid__cols));
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    $grid__cols: 16;
+    @for $i from 1 through $grid__cols {
+      .col-sm-#{$i} {
+        width: percentage($i / ($grid__cols));
+      }
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    $grid__cols: 16;
+    @for $i from 1 through $grid__cols {
+      .col-md-#{$i} {
+        width: percentage($i / ($grid__cols));
+      }
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    $grid__cols: 16;
+    @for $i from 1 through $grid__cols {
+      .col-lg-#{$i} {
+        width: percentage($i / ($grid__cols));
+      }
+    }
+  }
+}

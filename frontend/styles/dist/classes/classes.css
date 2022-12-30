@@ -1,0 +1,53 @@
+.hide {
+  display: none;
+}
+
+#options #clr.block {
+  display: block;
+}
+
+.pop.danger {
+  background-color: rgb(80, 2, 2);
+}
+
+.pop.success {
+  background-color: rgb(4, 91, 4);
+}
+
+.no-data.hide {
+  display: none;
+}
+
+.task.created {
+  border-left: 4px solid rgb(5, 5, 139);
+}
+
+.task.updated {
+  border-left: 4px solid rgb(0, 126, 0);
+}
+
+.task.checked {
+  border-left: 4px solid rgb(138, 1, 1);
+}
+
+.task.unchecked {
+  border-left: 4px solid rgb(5, 5, 139);
+}
+
+.text.created {
+  color: rgb(5, 5, 139);
+}
+
+.text.updated {
+  color: rgb(0, 126, 0);
+}
+
+.text.checked {
+  color: rgb(138, 1, 1);
+}
+
+.text.unchecked {
+  color: rgb(5, 5, 139);
+}
+
+/*# sourceMappingURL=classes.css.map */

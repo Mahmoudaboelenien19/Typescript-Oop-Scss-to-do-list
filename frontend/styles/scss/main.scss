@@ -1,0 +1,302 @@
+@use './helpers/globals';
+@use './helpers/grid-system';
+@use './classes/classes.scss';
+@import './helpers/mixins';
+
+
+
+
+body {
+
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background:rgb(9, 9, 10);
+  // background-color: rgba(14, 12, 12, 0.87);
+;
+  position: relative
+
+}
+.bg-cont{
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: 105%;
+  height: 105%; 
+   display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+
+&:before{
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: linear-gradient(rgba(0, 0, 0, 0.74),rgba(236, 214, 214, 0.384),rgba(0, 0, 0, 0.71));
+    z-index: -5;
+    animation: animate-bg 5s linear infinite;
+  }
+  
+  @keyframes animate-bg {
+    0%{
+        transform: translateY(-100%);
+    }
+   100%{
+        transform: translateY(100%);
+    }
+  }
+ .bg-span{
+    display: inline-block;
+    background: #0a0704;
+    width: calc(6vw - 3px);
+    height: calc(6vw - 3px);
+  transition: 2s;
+  border: 1px solid rgba(255, 255, 255, 0.121);
+  }
+  
+  .bg-span:hover{
+    background: rgba(212, 208, 208, 0.795);
+    transition: 0s;
+  }
+}
+
+
+
+.row {
+  width: 100%;
+}
+
+.container {
+position:absolute;
+@extend %centered;
+flex-direction: column;
+padding: 20px 0;
+justify-content: space-evenly;
+top: 0;
+left: 10%;
+height:100%;
+width: 80%;
+  margin: 0 auto;
+padding: 20px 0;
+  >* {
+    @extend %centered;
+  }
+
+  p#head {
+    color: white;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    width: fit-content;
+    margin: 0 auto;
+    position: relative;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 120%;
+      left: 20%;
+      height: 2px;
+      width: 60%;
+      background: linear-gradient(135deg, wheat, rgb(51, 48, 230));
+    }
+  }
+
+  form {
+    @extend %centered;
+    gap: 0;
+    width: 100%;
+    height: 40px;
+    margin: 100px auto;
+
+    >* {
+      outline: none;
+      border: none;
+      box-shadow: none;
+    }
+
+    input {
+      height: 40px;
+      padding-left: 10px;
+      letter-spacing: 0.8px;
+    }
+
+    button {
+      @include button(rgb(6, 6, 139), (rgb(71, 71, 170)));
+      height: 40px;
+    }
+  }
+}
+
+.task-cont {
+  background: rgba(255, 255, 255, 0.3);
+  min-height: 45px;
+  max-height: 200px;
+  width: 100%;
+  border-radius: 8px;
+  overflow: auto;
+  margin: 10px 0;
+ 
+  
+  
+  #options {
+    @extend %centered;
+    justify-content: flex-end;
+
+  }
+
+  button#clr {
+    @include button(rgb(97, 5, 5), (rgb(243, 38, 38)));
+    height: 30px;
+    width: 120px;
+    margin: 5px 0;
+    margin-right: 5px;
+    border-radius: 8px;
+    display: none;
+
+  }
+
+
+
+  .task {
+
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template:
+      "cont cont cont  btn" 25px
+      "time time time  btn" 10px
+    ;
+    height: 35px;
+    width: calc(100% - 10px);
+    justify-content: space-between;
+    padding: 0 15px;
+    background: rgba(245, 222, 179, 0.858);
+    margin: 5px auto;
+
+    #content {
+      grid-area: cont;
+      font-weight: bold;
+
+
+    }
+
+    #time {
+      grid-area: time;
+      font-size: 10px;
+
+      .text {
+       font-weight: bolder;
+      }
+
+    }
+
+    .btns {
+
+      @extend %centered;
+      grid-area: btn;
+      width: 100%;
+      height: 100%;
+      gap: 3px;
+
+      >* {
+        @extend %centered;
+        border-radius: 2px;
+        text-align: center;
+      }
+    }
+  }
+
+  $classes : "update" rgb(4, 73, 4) rgb(7, 145, 7),
+  "check" rgba(8, 8, 124, 0.966) rgba(7, 7, 194, 0.966),
+  "del" rgb(97, 5, 5) rgb(243, 38, 38);
+
+  @each $class ,
+  $clr,
+  $hvr in $classes {
+    .#{$class } {
+
+      @include button($clr, $hvr);
+
+color: white;
+      width: 15px;
+      height: 15px;
+      transition: .3s;
+      padding: 3px;
+
+         }
+  }
+}
+
+p#content {
+  padding: 5px;
+
+  &.checked {
+  text-decoration: line-through;
+  opacity: .7;
+  text-decoration-color: red;
+  text-decoration-thickness: 3px;
+}
+}
+
+
+
+
+/* pop up styling */
+.pop {
+  @extend %centered;
+  color: white;
+  letter-spacing: 1px;
+  font-size: 12px;
+  width: 100%;
+  height: 30px;
+  border-radius: 5px;
+  margin: 10px 0;
+  position: relative;
+
+  &:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(210deg, black, white);
+    animation: animate2 1.8s linear;
+    width: 100%;
+  }
+}
+
+@keyframes animate2 {
+  0% {
+    width: 0;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+
+
+.pop-cont {
+  position: absolute;
+  height: fit-content;
+  width: 150px;
+  left: 20px;
+  bottom: 0;
+
+}
+
+.no-data {
+display: flex;
+align-items: center;
+justify-content: center;
+  width: 100%;
+  height: 45px;
+  color: white;
+
+}
+
+
+

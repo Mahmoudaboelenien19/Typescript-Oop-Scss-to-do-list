@@ -1,0 +1,17 @@
+%centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin button($clr, $hvr) {
+  background: $clr;
+  color: white;
+  transition: 0.3s;
+  outline: none;
+  border: none;
+  box-shadow: none;
+  &:hover {
+    background-color: $hvr;
+  }
+}
