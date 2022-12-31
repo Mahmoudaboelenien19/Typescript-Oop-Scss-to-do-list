@@ -2,23 +2,23 @@
 const inp = document.querySelector('#inp') as HTMLInputElement;
 const form = document.querySelector('form') as HTMLFormElement;
 const btn = document.querySelector('#btn') as HTMLButtonElement;
-const clr = document.querySelector('#clr') as HTMLButtonElement;
+const clearCont = document.querySelector('#options') as HTMLButtonElement;
+const clear = document.querySelector('#clr') as HTMLButtonElement;
 const tasks = document.querySelector('#tasks') as HTMLElement;
 const taskCont = document.querySelector(".task-cont") as HTMLElement;
-const placeholder = document.querySelector("form .placeholder") as HTMLElement;
+const placeholder = document.querySelector("#placeholder") as HTMLElement;
 
-console.log(placeholder);
 
 // let cont= document.querySelector(".container")
-let isFocus=false;
+let isFocus = false;
 
 
 
-for(let i=0;i<300;i++){
-    // let span=`<span> </span>`;
-    let span=document.createElement("span")
-    span.setAttribute("class","bg-span")
-  document.querySelector(".bg-cont")!.insertAdjacentElement("afterbegin",span)
+for (let i = 0; i < 300; i++) {
+  // let span=`<span> </span>`;
+  let span = document.createElement("span")
+  span.setAttribute("class", "bg-span")
+  document.querySelector(".bg-cont")!.insertAdjacentElement("afterbegin", span)
 }
 
 interface DATA {
@@ -104,7 +104,7 @@ class UI {
       <span class="date"  ><span style="color:black">&&</span> Date : ${arr[i].date}</span>
       
       </div>
-<div class="btns">
+<div id="btns">
 <i title="update" class="fa-solid fa-pen-to-square fa-sm update"></i>
 <i title="check"  class="fa fa-check fa-sm check " aria-hidden="true"></i>
 <i  title="del" class="fa-solid fa-x fa-sm del"></i></div>
@@ -118,17 +118,20 @@ class UI {
     LocalStorageDATA.saveDataToLocalStorage(arr);
   }
 
-  static handleInp(){
-    let placeholder=document.querySelector("form span")
-    if(isFocus){
+  static handleInp() {
+    let placeholder = document.querySelector("form span");
+    if (isFocus) {
       placeholder?.classList.add("focus")
       placeholder?.classList.remove("blur")
-    }else{
-      
+    } else {
+
       placeholder?.classList.remove("focus")
       placeholder?.classList.add("blur")
+     
+      UI.handlePlaceholderText()
 
     }
+    UI.handleSubmitBtn();
 
   }
   static addDataToArr(): void {
@@ -136,59 +139,57 @@ class UI {
     if (UI.Mode === "create") {
 
       const id = Math.random() * 100;
-      const content = inp.value
-      const checked = false
-      const text = "created"
-      const date = handelDate()
-      const time = handelTime()
-
-
+      const content = inp.value;
+      const checked = false;
+      const text = "created";
+      const date = handelDate();
+      const time = handelTime();
       const task = new TASK(id, content, checked, text, date, time);
 
 
       arr.unshift(task);
-
       Actions.checkData(arr)
-
-
-
       UI.handlePopUp("success", "task added !")
     } else {
-
       Actions.newArr = arr.map((ele: DATA) => {
         return +(ele.id) === UI.updateId ?
           {
             ...ele,
             content: inp.value,
             date: handelDate(),
-             time: handelTime(),
-             text:"updated",
-             checked:false
+            time: handelTime(),
+            text: "updated",
+            checked: false
           } : ele
       })
       arr = Actions.newArr
       UI.showData(arr);
 
       UI.Mode = "create"
-      btn.innerHTML = 'Add tasks'
+  
       UI.handlePopUp("success", "task updated !")
     }
     inp.value = '';
+
     UI.handlePlaceholderText();
-   
+      UI.handleSubmitBtn();
   }
 
-static handlePlaceholderText(){
-  if (UI.Mode ==="create"){
-placeholder.innerHTML="add a task"
-  }else{
-placeholder.innerHTML="update this task"
+  static handlePlaceholderText() {
+
+    if (UI.Mode === "create") {
+      placeholder.innerHTML = "add a task"
+    } else {
+      placeholder.innerHTML = "update task"
+    }
 
   }
 
-}
+  static handleSubmitBtn() {
+    btn.innerHTML = UI.Mode === "create" ? "add tasks" : "update";
+  }
   static handlePopUp(clr: string, msg: string): void {
-    // const pop = `<div class='pop ${clr}'>${msg}</div>` as Element  ;
+    // const pop = `<div class='pop ${clearCont}'>${msg}</div>` as Element  ;
     const div = document.createElement("div") as Element;
     div.setAttribute("class", `pop ${clr}`)
     const text = document.createTextNode(msg)
@@ -199,7 +200,7 @@ placeholder.innerHTML="update this task"
     popUps.forEach(ele => {
       setTimeout(() => {
         ele?.remove();
-      }, 2000);
+      }, 3000);
     })
 
 
@@ -224,8 +225,8 @@ class Actions {
 
       Actions.newArr = arr.filter((ele: DATA) => + (ele.id) !== + (parent.dataset.id!))
       arr = Actions.newArr
-UI.handlePopUp("success","deleted")
-Actions.checkData(arr)
+      UI.handlePopUp("success", "deleted")
+      Actions.checkData(arr)
     }
 
 
@@ -234,7 +235,7 @@ Actions.checkData(arr)
       inp.value = "";
 
       UI.Mode = "update"
-      btn.innerHTML = 'Update'
+
 
       inp.focus();
       UI.updateId = +parent.dataset.id!;
@@ -244,13 +245,13 @@ Actions.checkData(arr)
       inp.value = arr[updatedElementIndex].content
       UI.handlePlaceholderText();
     }
-    
+
     if ((e.target as HTMLElement).classList.contains("check")) {
 
 
       Actions.newArr = arr.map(e => e.id == + (parent.dataset.id!) && e.checked == false ?
-        { ...e, checked: true, date: handelDate(), time: handelTime() , text:"checked"} : e.id == + (parent.dataset.id!) && e.checked == true ?
-          { ...e, checked: false , date: handelDate(), time: handelTime() , text:"unchecked" } : e)
+        { ...e, checked: true, date: handelDate(), time: handelTime(), text: "checked" } : e.id == + (parent.dataset.id!) && e.checked == true ?
+          { ...e, checked: false, date: handelDate(), time: handelTime(), text: "unchecked" } : e)
 
       arr = Actions.newArr
 
@@ -268,21 +269,21 @@ Actions.checkData(arr)
   static clearAll() {
     arr.splice(0);
     Actions.checkData(arr);
-    UI.handlePopUp("danger", "All cleard")
+    UI.handlePopUp("success", "All cleard")
 
   }
 
   static displayClearAllBtn(arr: DATA[]) {
 
     if (arr.length <= 1) {
-      clr.classList.add("hide")
-      clr.classList.remove("block")
+      clearCont.classList.add("hide")
+      clearCont.classList.remove("block")
     } else if (arr.length > 1) {
-      clr.classList.remove("hide")
-      clr.classList.add("block")
+      clearCont.classList.remove("hide")
+      clearCont.classList.add("block")
     }
 
-    clr.innerHTML = `Clear All (${arr.length})`
+    clear.innerHTML = `Clear All (${arr.length})`
   }
 
 
@@ -296,7 +297,7 @@ Actions.checkData(arr)
       div.setAttribute("class", `no-data`)
       const text = document.createTextNode(" No tasks to show ")
       div.appendChild(text)
-      taskCont!.insertAdjacentElement("afterbegin", div)
+      tasks!.insertAdjacentElement("afterbegin", div)
 
     } else {
       document.querySelector(".no-data")?.classList.add("hide");
@@ -324,6 +325,7 @@ form.addEventListener('submit', (e) => {
 
 UI.handleInp();
 
+
 /* get data from localstorge if there are data  */
 LocalStorageDATA.getDataFromLocalStorage()
 
@@ -334,20 +336,19 @@ btn.addEventListener('click', Actions.validiation);
 tasks.addEventListener("click", Actions.actionsFn)
 
 
-clr.addEventListener("click", Actions.clearAll);
+clearCont.addEventListener("click", Actions.clearAll);
 
 
-inp.addEventListener("focus",()=>{
-  isFocus=true;
+inp.addEventListener("focus", () => {
+  isFocus = true;
   UI.handleInp()
 })
-inp.addEventListener("blur",()=>{
-  isFocus=false;
+inp.addEventListener("blur", () => {
+  isFocus = false;
   UI.handleInp();
-
   setTimeout(() => {
-    
-    inp.value=""
-  }, 700);
+     inp.value = ""
+  }, 400);
+
 
 })

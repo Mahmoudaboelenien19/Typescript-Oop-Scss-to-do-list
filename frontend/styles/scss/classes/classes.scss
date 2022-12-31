@@ -1,10 +1,4 @@
-.hide {
-  display: none;
-}
 
-#options #clr.block {
-  display: block;
-}
 
 .pop.danger {
   background-color: rgb(80, 2, 2);
@@ -51,7 +45,7 @@
   color: rgb(5, 5, 139);
 }
 
-form span.focus {
+#form-section form #placeholder.focus {
   top: -10px;
   border-radius: 2px;
   background:wheat;
@@ -64,3 +58,4 @@ form span.focus {
   top: 50%;
   transform: translateY(-50%);
 }
+

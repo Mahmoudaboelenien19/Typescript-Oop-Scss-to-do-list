@@ -2,11 +2,11 @@
 const inp = document.querySelector('#inp');
 const form = document.querySelector('form');
 const btn = document.querySelector('#btn');
-const clr = document.querySelector('#clr');
+const clearCont = document.querySelector('#options');
+const clear = document.querySelector('#clr');
 const tasks = document.querySelector('#tasks');
 const taskCont = document.querySelector(".task-cont");
-const placeholder = document.querySelector("form .placeholder");
-console.log(placeholder);
+const placeholder = document.querySelector("#placeholder");
 // let cont= document.querySelector(".container")
 let isFocus = false;
 for (let i = 0; i < 300; i++) {
@@ -74,7 +74,7 @@ class UI {
       <span class="date"  ><span style="color:black">&&</span> Date : ${arr[i].date}</span>
       
       </div>
-<div class="btns">
+<div id="btns">
 <i title="update" class="fa-solid fa-pen-to-square fa-sm update"></i>
 <i title="check"  class="fa fa-check fa-sm check " aria-hidden="true"></i>
 <i  title="del" class="fa-solid fa-x fa-sm del"></i></div>
@@ -93,7 +93,9 @@ class UI {
         else {
             placeholder === null || placeholder === void 0 ? void 0 : placeholder.classList.remove("focus");
             placeholder === null || placeholder === void 0 ? void 0 : placeholder.classList.add("blur");
+            UI.handlePlaceholderText();
         }
+        UI.handleSubmitBtn();
     }
     static addDataToArr() {
         if (UI.Mode === "create") {
@@ -115,22 +117,25 @@ class UI {
             arr = Actions.newArr;
             UI.showData(arr);
             UI.Mode = "create";
-            btn.innerHTML = 'Add tasks';
             UI.handlePopUp("success", "task updated !");
         }
         inp.value = '';
         UI.handlePlaceholderText();
+        UI.handleSubmitBtn();
     }
     static handlePlaceholderText() {
         if (UI.Mode === "create") {
             placeholder.innerHTML = "add a task";
         }
         else {
-            placeholder.innerHTML = "update this task";
+            placeholder.innerHTML = "update task";
         }
     }
+    static handleSubmitBtn() {
+        btn.innerHTML = UI.Mode === "create" ? "add tasks" : "update";
+    }
     static handlePopUp(clr, msg) {
-        // const pop = `<div class='pop ${clr}'>${msg}</div>` as Element  ;
+        // const pop = `<div class='pop ${clearCont}'>${msg}</div>` as Element  ;
         const div = document.createElement("div");
         div.setAttribute("class", `pop ${clr}`);
         const text = document.createTextNode(msg);
@@ -141,7 +146,7 @@ class UI {
         popUps.forEach(ele => {
             setTimeout(() => {
                 ele === null || ele === void 0 ? void 0 : ele.remove();
-            }, 2000);
+            }, 3000);
         });
     }
 }
@@ -160,7 +165,6 @@ class Actions {
         if (e.target.classList.contains("update")) {
             inp.value = "";
             UI.Mode = "update";
-            btn.innerHTML = 'Update';
             inp.focus();
             UI.updateId = +parent.dataset.id;
             let updatedElementIndex = arr.findIndex(e => e.id == UI.updateId);
@@ -178,18 +182,18 @@ class Actions {
     static clearAll() {
         arr.splice(0);
         Actions.checkData(arr);
-        UI.handlePopUp("danger", "All cleard");
+        UI.handlePopUp("success", "All cleard");
     }
     static displayClearAllBtn(arr) {
         if (arr.length <= 1) {
-            clr.classList.add("hide");
-            clr.classList.remove("block");
+            clearCont.classList.add("hide");
+            clearCont.classList.remove("block");
         }
         else if (arr.length > 1) {
-            clr.classList.remove("hide");
-            clr.classList.add("block");
+            clearCont.classList.remove("hide");
+            clearCont.classList.add("block");
         }
-        clr.innerHTML = `Clear All (${arr.length})`;
+        clear.innerHTML = `Clear All (${arr.length})`;
     }
     static checkData(arr) {
         var _a;
@@ -200,7 +204,7 @@ class Actions {
             div.setAttribute("class", `no-data`);
             const text = document.createTextNode(" No tasks to show ");
             div.appendChild(text);
-            taskCont.insertAdjacentElement("afterbegin", div);
+            tasks.insertAdjacentElement("afterbegin", div);
         }
         else {
             (_a = document.querySelector(".no-data")) === null || _a === void 0 ? void 0 : _a.classList.add("hide");
@@ -226,7 +230,7 @@ LocalStorageDATA.getDataFromLocalStorage();
 /* clicking EVENT */
 btn.addEventListener('click', Actions.validiation);
 tasks.addEventListener("click", Actions.actionsFn);
-clr.addEventListener("click", Actions.clearAll);
+clearCont.addEventListener("click", Actions.clearAll);
 inp.addEventListener("focus", () => {
     isFocus = true;
     UI.handleInp();
@@ -236,5 +240,5 @@ inp.addEventListener("blur", () => {
     UI.handleInp();
     setTimeout(() => {
         inp.value = "";
-    }, 700);
+    }, 400);
 });

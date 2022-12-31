@@ -220,14 +220,6 @@
   }
 }
 
-.hide {
-  display: none;
-}
-
-#options #clr.block {
-  display: block;
-}
-
 .pop.danger {
   background-color: rgb(80, 2, 2);
 }
@@ -272,7 +264,7 @@
   color: rgb(5, 5, 139);
 }
 
-form span.focus {
+#form-section form #placeholder.focus {
   top: -10px;
   border-radius: 2px;
   background: wheat;
@@ -286,7 +278,7 @@ form span.focus {
   transform: translateY(-50%);
 }
 
-.pop, .task-cont .task .btns > *, .task-cont .task .btns, .task-cont #options, .container form, .container > *, .container {
+.pop, .bg-cont #tasks-section .task-cont .task #btns > *, .bg-cont #tasks-section .task-cont .task #btns, .bg-cont #form-section form, .bg-cont > * {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -300,12 +292,16 @@ body {
   position: relative;
 }
 
+.row {
+  width: 100%;
+}
+
 .bg-cont {
   position: absolute;
-  top: -5px;
-  left: -5px;
-  width: 105%;
-  height: 105%;
+  top: 0%;
+  left: 0%;
+  width: 104%;
+  height: 104%;
   display: flex;
   flex-wrap: wrap;
   gap: 3px;
@@ -341,66 +337,77 @@ body {
   background: rgba(212, 208, 208, 0.795);
   transition: 0s;
 }
-
-.row {
-  width: 100%;
-}
-
-.container {
+.bg-cont #head-section {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  width: fit-content;
   position: absolute;
-  flex-direction: column;
-  padding: 20px 0;
-  justify-content: space-evenly;
   top: 0;
-  left: 10%;
-  height: 100%;
-  width: 80%;
-  margin: 0 auto;
-  padding: 20px 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 80px;
+  z-index: 55;
 }
-.container p#head {
+.bg-cont #head-section p#head {
+  position: relative;
   color: white;
   font-size: 1.5rem;
   letter-spacing: 2px;
-  width: fit-content;
-  margin: 0 auto;
-  position: relative;
+  padding-bottom: 5px;
 }
-.container p#head:before {
+.bg-cont #head-section p#head:before {
   content: "";
   position: absolute;
-  top: 120%;
+  top: 100%;
   left: 20%;
   height: 2px;
   width: 60%;
   background: linear-gradient(135deg, wheat, rgb(51, 48, 230));
 }
-.container form {
-  position: relative;
-  gap: 0;
-  width: 100%;
-  height: 40px;
-  margin: 100px auto;
+.bg-cont #form-section {
+  position: absolute;
+  width: 80%;
+  top: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 100px;
+  z-index: 500;
 }
-.container form > * {
+.bg-cont #form-section #form-parent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+.bg-cont #form-section form {
+  position: absolute;
+  gap: 0;
+  width: 80%;
+  height: 40px;
+}
+.bg-cont #form-section form > * {
   outline: none;
   border: none;
   box-shadow: none;
 }
-.container form span {
+.bg-cont #form-section form span#placeholder {
   position: absolute;
   height: 20px;
   z-index: 50;
   padding: 0 5px;
-  transition: 0.15s;
+  transition: 0.2s;
   left: 40px;
 }
-.container form input {
+.bg-cont #form-section form input {
   height: 100%;
   padding-left: 10px;
   letter-spacing: 0.8px;
+  width: 80%;
 }
-.container form button {
+.bg-cont #form-section form button {
   background: rgb(6, 6, 139);
   color: white;
   transition: 0.3s;
@@ -408,24 +415,42 @@ body {
   border: none;
   box-shadow: none;
   height: 100%;
+  width: 15%;
 }
-.container form button:hover {
+.bg-cont #form-section form button:hover {
   background-color: rgb(71, 71, 170);
 }
-
-.task-cont {
-  background: rgba(255, 255, 255, 0.3);
-  min-height: 45px;
+.bg-cont #tasks-section {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 500;
+  width: 60%;
+  margin: 0 auto;
+  min-height: 80px;
   max-height: 200px;
-  width: 100%;
+}
+.bg-cont #tasks-section .task-cont {
+  min-height: 80px;
+  max-height: 200px;
+  background: rgba(255, 255, 255, 0.3);
+  width: 80%;
   border-radius: 8px;
+}
+.bg-cont #tasks-section .task-cont #tasks {
+  display: flex;
+  min-height: 80px;
+  max-height: 160px;
+  flex-direction: column;
   overflow: auto;
-  margin: 10px 0;
+  gap: 5px;
 }
-.task-cont #options {
-  justify-content: flex-end;
+.bg-cont #tasks-section .task-cont #options {
+  width: 100%;
+  height: 40px;
 }
-.task-cont button#clr {
+.bg-cont #tasks-section .task-cont #options #clr {
   background: rgb(97, 5, 5);
   color: white;
   transition: 0.3s;
@@ -434,15 +459,21 @@ body {
   box-shadow: none;
   height: 30px;
   width: 120px;
-  margin: 5px 0;
-  margin-right: 5px;
   border-radius: 8px;
-  display: none;
+  margin: 5px;
 }
-.task-cont button#clr:hover {
+.bg-cont #tasks-section .task-cont #options #clr:hover {
   background-color: rgb(243, 38, 38);
 }
-.task-cont .task {
+.bg-cont #tasks-section .task-cont #options.hide {
+  display: none;
+}
+.bg-cont #tasks-section .task-cont #options.block {
+  display: block;
+  display: flex;
+  justify-content: flex-end;
+}
+.bg-cont #tasks-section .task-cont .task {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template: "cont cont cont  btn" 25px "time time time  btn" 10px;
@@ -451,30 +482,36 @@ body {
   justify-content: space-between;
   padding: 0 15px;
   background: rgba(245, 222, 179, 0.858);
-  margin: 5px auto;
 }
-.task-cont .task #content {
+.bg-cont #tasks-section .task-cont .task:nth-child(1) {
+  margin-top: 20px;
+}
+.bg-cont #tasks-section .task-cont .task:last-child {
+  margin-bottom: 20px;
+}
+.bg-cont #tasks-section .task-cont .task #content {
   grid-area: cont;
   font-weight: bold;
 }
-.task-cont .task #time {
+.bg-cont #tasks-section .task-cont .task #time {
   grid-area: time;
-  font-size: 10px;
+  font-size: 11px;
+  font-weight: bold;
 }
-.task-cont .task #time .text {
+.bg-cont #tasks-section .task-cont .task #time .text {
   font-weight: bolder;
 }
-.task-cont .task .btns {
+.bg-cont #tasks-section .task-cont .task #btns {
+  gap: 3px;
   grid-area: btn;
   width: 100%;
   height: 100%;
-  gap: 3px;
 }
-.task-cont .task .btns > * {
+.bg-cont #tasks-section .task-cont .task #btns > * {
   border-radius: 2px;
   text-align: center;
 }
-.task-cont .update {
+.bg-cont #tasks-section .task-cont .update {
   background: rgb(4, 73, 4);
   color: white;
   transition: 0.3s;
@@ -487,10 +524,10 @@ body {
   transition: 0.3s;
   padding: 3px;
 }
-.task-cont .update:hover {
+.bg-cont #tasks-section .task-cont .update:hover {
   background-color: rgb(7, 145, 7);
 }
-.task-cont .check {
+.bg-cont #tasks-section .task-cont .check {
   background: rgba(8, 8, 124, 0.966);
   color: white;
   transition: 0.3s;
@@ -503,10 +540,10 @@ body {
   transition: 0.3s;
   padding: 3px;
 }
-.task-cont .check:hover {
+.bg-cont #tasks-section .task-cont .check:hover {
   background-color: rgba(7, 7, 194, 0.966);
 }
-.task-cont .del {
+.bg-cont #tasks-section .task-cont .del {
   background: rgb(97, 5, 5);
   color: white;
   transition: 0.3s;
@@ -519,14 +556,13 @@ body {
   transition: 0.3s;
   padding: 3px;
 }
-.task-cont .del:hover {
+.bg-cont #tasks-section .task-cont .del:hover {
   background-color: rgb(243, 38, 38);
 }
-
-p#content {
+.bg-cont #tasks-section p#content {
   padding: 5px;
 }
-p#content.checked {
+.bg-cont #tasks-section p#content.checked {
   text-decoration: line-through;
   opacity: 0.7;
   text-decoration-color: red;
@@ -543,6 +579,7 @@ p#content.checked {
   border-radius: 5px;
   margin: 10px 0;
   position: relative;
+  text-align: center;
 }
 .pop:before {
   content: "";
@@ -551,11 +588,11 @@ p#content.checked {
   left: 0;
   height: 3px;
   background: linear-gradient(210deg, black, white);
-  animation: animate2 1.8s linear;
+  animation: pop-up-animate 2.8s linear;
   width: 100%;
 }
 
-@keyframes animate2 {
+@keyframes pop-up-animate {
   0% {
     width: 0;
   }
@@ -576,21 +613,33 @@ p#content.checked {
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 45px;
+  height: 80px;
   color: white;
 }
 
-@media (width <= 800px) {
-  form .placeholder {
-    position: absolute;
-    height: 20px;
-    z-index: 50;
-    padding: 0 5px;
-    transition: 0.15s;
+@media (width <= 900px) {
+  .bg-cont #head-section {
+    width: 80%;
+    margin: 0 auto;
+  }
+  .bg-cont #head-section #head {
+    width: 100%;
+    text-align: center;
+  }
+  .bg-cont #form-section #form-parent form button {
+    padding: 0 10px;
+  }
+  .bg-cont #form-section #form-parent form #placeholder {
     left: 20px;
   }
-  input {
-    height: 200px;
+  .bg-cont #tasks-section {
+    width: 100%;
+  }
+  .bg-cont #tasks-section .task-cont {
+    width: 80%;
+  }
+  .bg-cont #head-section {
+    width: 70%;
   }
 }
 
