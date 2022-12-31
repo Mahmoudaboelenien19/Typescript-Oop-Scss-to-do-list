@@ -5,6 +5,8 @@ const btn = document.querySelector('#btn');
 const clr = document.querySelector('#clr');
 const tasks = document.querySelector('#tasks');
 const taskCont = document.querySelector(".task-cont");
+const placeholder = document.querySelector("form .placeholder");
+console.log(placeholder);
 // let cont= document.querySelector(".container")
 let isFocus = false;
 for (let i = 0; i < 300; i++) {
@@ -117,6 +119,15 @@ class UI {
             UI.handlePopUp("success", "task updated !");
         }
         inp.value = '';
+        UI.handlePlaceholderText();
+    }
+    static handlePlaceholderText() {
+        if (UI.Mode === "create") {
+            placeholder.innerHTML = "add a task";
+        }
+        else {
+            placeholder.innerHTML = "update this task";
+        }
     }
     static handlePopUp(clr, msg) {
         // const pop = `<div class='pop ${clr}'>${msg}</div>` as Element  ;
@@ -154,6 +165,7 @@ class Actions {
             UI.updateId = +parent.dataset.id;
             let updatedElementIndex = arr.findIndex(e => e.id == UI.updateId);
             inp.value = arr[updatedElementIndex].content;
+            UI.handlePlaceholderText();
         }
         if (e.target.classList.contains("check")) {
             Actions.newArr = arr.map(e => e.id == +(parent.dataset.id) && e.checked == false ? Object.assign(Object.assign({}, e), { checked: true, date: handelDate(), time: handelTime(), text: "checked" }) : e.id == +(parent.dataset.id) && e.checked == true ? Object.assign(Object.assign({}, e), { checked: false, date: handelDate(), time: handelTime(), text: "unchecked" }) : e);
@@ -222,4 +234,7 @@ inp.addEventListener("focus", () => {
 inp.addEventListener("blur", () => {
     isFocus = false;
     UI.handleInp();
+    setTimeout(() => {
+        inp.value = "";
+    }, 700);
 });

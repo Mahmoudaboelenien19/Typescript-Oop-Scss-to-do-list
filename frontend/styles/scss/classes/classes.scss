@@ -1,67 +1,66 @@
 .hide {
-    display: none;
-  }
+  display: none;
+}
 
-  #options #clr.block {
-    display: block;
-  }
-  
+#options #clr.block {
+  display: block;
+}
+
 .pop.danger {
-    background-color: rgb(80, 2, 2);
-  }
-  
-  .pop.success {
-    background-color: rgb(4, 91, 4);
-  }
+  background-color: rgb(80, 2, 2);
+}
+
+.pop.success {
+  background-color: rgb(4, 91, 4);
+}
+
 .no-data.hide {
-    display: none;
+  display: none;
 
 }
-  .task.created{
-    border-left: 4px solid rgb(5, 5, 139);
-  }
-  
-  .task.updated{
-    border-left: 4px solid rgb(0, 126, 0);
-  }
-  
-  .task.checked{
-    border-left: 4px solid rgb(138, 1, 1);
-  }
-  
-  .task.unchecked{
-    border-left: 4px solid rgb(5, 5, 139);
-  }
-  
-  .text.created{
-  color:rgb(5, 5, 139);
-  }
-  
-  .text.updated{
-  color: rgb(0, 126, 0);
-  }
-  
-  .text.checked{
-  color: rgb(138, 1, 1);
-  }
-  
-  .text.unchecked{
+
+.task.created {
+  border-left: 4px solid rgb(5, 5, 139);
+}
+
+.task.updated {
+  border-left: 4px solid rgb(0, 126, 0);
+}
+
+.task.checked {
+  border-left: 4px solid rgb(138, 1, 1);
+}
+
+.task.unchecked {
+  border-left: 4px solid rgb(5, 5, 139);
+}
+
+.text.created {
   color: rgb(5, 5, 139);
-  }
+}
 
-  .focus{
-    top: -10px; 
-   border-radius:2px ;
-  background: wheat;  
-    border-left: 3px solid rgb(6, 6, 139);
-    border-right: 3px solid rgb(6, 6, 139);
-left: 20px;
+.text.updated {
+  color: rgb(0, 126, 0);
+}
 
-  }
-  .blur{
-    top: 50%;
-    transform: translateY(-50%);
-left: 20px;
+.text.checked {
+  color: rgb(138, 1, 1);
+}
 
+.text.unchecked {
+  color: rgb(5, 5, 139);
+}
 
-  }
+form span.focus {
+  top: -10px;
+  border-radius: 2px;
+  background:wheat;
+  border-left: 3px solid rgb(6, 6, 139);
+  border-right: 3px solid rgb(6, 6, 139);
+  color:black;
+}
+
+.blur {
+  top: 50%;
+  transform: translateY(-50%);
+}

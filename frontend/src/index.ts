@@ -5,7 +5,9 @@ const btn = document.querySelector('#btn') as HTMLButtonElement;
 const clr = document.querySelector('#clr') as HTMLButtonElement;
 const tasks = document.querySelector('#tasks') as HTMLElement;
 const taskCont = document.querySelector(".task-cont") as HTMLElement;
+const placeholder = document.querySelector("form .placeholder") as HTMLElement;
 
+console.log(placeholder);
 
 // let cont= document.querySelector(".container")
 let isFocus=false;
@@ -172,10 +174,19 @@ class UI {
       UI.handlePopUp("success", "task updated !")
     }
     inp.value = '';
+    UI.handlePlaceholderText();
    
   }
 
+static handlePlaceholderText(){
+  if (UI.Mode ==="create"){
+placeholder.innerHTML="add a task"
+  }else{
+placeholder.innerHTML="update this task"
 
+  }
+
+}
   static handlePopUp(clr: string, msg: string): void {
     // const pop = `<div class='pop ${clr}'>${msg}</div>` as Element  ;
     const div = document.createElement("div") as Element;
@@ -231,7 +242,9 @@ Actions.checkData(arr)
       let updatedElementIndex: number = arr.findIndex(e => e.id == UI.updateId)
 
       inp.value = arr[updatedElementIndex].content
+      UI.handlePlaceholderText();
     }
+    
     if ((e.target as HTMLElement).classList.contains("check")) {
 
 
@@ -310,6 +323,7 @@ form.addEventListener('submit', (e) => {
 });
 
 UI.handleInp();
+
 /* get data from localstorge if there are data  */
 LocalStorageDATA.getDataFromLocalStorage()
 
@@ -329,6 +343,11 @@ inp.addEventListener("focus",()=>{
 })
 inp.addEventListener("blur",()=>{
   isFocus=false;
-  UI.handleInp()
+  UI.handleInp();
+
+  setTimeout(() => {
+    
+    inp.value=""
+  }, 700);
 
 })
