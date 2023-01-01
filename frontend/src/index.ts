@@ -7,11 +7,11 @@ const clear = document.querySelector('#clr') as HTMLButtonElement;
 const tasks = document.querySelector('#tasks') as HTMLElement;
 const taskCont = document.querySelector(".task-cont") as HTMLElement;
 const placeholder = document.querySelector("#placeholder") as HTMLElement;
-
+const filter = document.querySelectorAll("#filters span") as NodeListOf<HTMLElement>;
 
 // let cont= document.querySelector(".container")
 let isFocus = false;
-
+let x=0;
 
 
 for (let i = 0; i < 300; i++) {
@@ -35,6 +35,7 @@ const handelTime = () => new Date().toLocaleTimeString();
 const handelDate = () => new Date().toLocaleDateString();
 
 let arr: DATA[] = [];
+// let tempArr: DATA[] = [];
 
 
 class TASK implements DATA {
@@ -115,7 +116,6 @@ class UI {
 
     UI.handleCheck(arr)
     Actions.displayClearAllBtn(arr)
-    LocalStorageDATA.saveDataToLocalStorage(arr);
   }
 
   static handleInp() {
@@ -127,7 +127,7 @@ class UI {
 
       placeholder?.classList.remove("focus")
       placeholder?.classList.add("blur")
-     
+
       UI.handlePlaceholderText()
 
     }
@@ -166,13 +166,17 @@ class UI {
       UI.showData(arr);
 
       UI.Mode = "create"
-  
+
       UI.handlePopUp("success", "task updated !")
     }
     inp.value = '';
-
+    LocalStorageDATA.saveDataToLocalStorage(arr);
     UI.handlePlaceholderText();
-      UI.handleSubmitBtn();
+    UI.handleSubmitBtn();
+    Actions.handleFilterText(arr);
+    // Actions.removeActiveClass();
+    // document.querySelector("span.all")?.classList.add("active")
+    document.querySelector("#options")!.classList.remove("hide")
   }
 
   static handlePlaceholderText() {
@@ -216,24 +220,23 @@ class Actions {
   static newArr: DATA[];
 
   static actionsFn(e: MouseEvent): void {
-    //  console.log(e.target);
 
     const parent = (e.target as HTMLElement).parentElement?.parentElement as HTMLElement
 
-
     if ((e.target as HTMLElement).classList.contains("del")) {
-
+   
+      
       Actions.newArr = arr.filter((ele: DATA) => + (ele.id) !== + (parent.dataset.id!))
       arr = Actions.newArr
       UI.handlePopUp("success", "deleted")
-      Actions.checkData(arr)
+      Actions.checkData(arr);
+
     }
 
 
     if ((e.target as HTMLElement).classList.contains("update")) {
 
       inp.value = "";
-
       UI.Mode = "update"
 
 
@@ -252,43 +255,90 @@ class Actions {
       Actions.newArr = arr.map(e => e.id == + (parent.dataset.id!) && e.checked == false ?
         { ...e, checked: true, date: handelDate(), time: handelTime(), text: "checked" } : e.id == + (parent.dataset.id!) && e.checked == true ?
           { ...e, checked: false, date: handelDate(), time: handelTime(), text: "unchecked" } : e)
-
       arr = Actions.newArr
 
-      // UI.handleCheck(arr);
-
     }
-
-
     /* add data to UI */
-    UI.showData(arr);
+    Actions.checkData(arr);
+    Actions.handleFilterText(arr)
+    LocalStorageDATA.saveDataToLocalStorage(arr);
+    if(arr.length==0){
 
+      Actions.removeActiveClass()
+      document.querySelector("span.all")?.classList.add("active")
+    }
+    filter![x].click()
 
   }
-
+  static removeActiveClass() {
+    filter.forEach(e => {
+      e.classList.remove("active")
+    })
+  }
   static clearAll() {
     arr.splice(0);
     Actions.checkData(arr);
     UI.handlePopUp("success", "All cleard")
+    LocalStorageDATA.saveDataToLocalStorage(arr);
+    Actions.handleFilterText(arr);
 
   }
 
   static displayClearAllBtn(arr: DATA[]) {
-
-    if (arr.length <= 1) {
-      clearCont.classList.add("hide")
-      clearCont.classList.remove("block")
-    } else if (arr.length > 1) {
-      clearCont.classList.remove("hide")
-      clearCont.classList.add("block")
+   if (arr.length < 2) {
+      document.querySelector("#options")!.classList.remove("hide")
+      clear.classList.add("hide")
+      clear.classList.remove("block")
+    } else if (arr.length >= 2) {
+      clear.classList.remove("hide")
+      clear.classList.add("block")
     }
 
     clear.innerHTML = `Clear All (${arr.length})`
   }
+  static handleFilterText(arr: DATA[]): void {
 
+    let all = document.querySelector("span.all")
+    let updated = document.querySelector("span.updated")
+    let completed = document.querySelector("span.completed")
+    let pending = document.querySelector("span.pending")
+
+    all!.innerHTML = `All(${arr.length})`
+    updated!.innerHTML = `Updated(${arr.filter(e => e.text == "updated").length})`
+    completed!.innerHTML = `Completed(${arr.filter(e => e.text == "checked").length})`
+    pending!.innerHTML = `Pending(${arr.filter(e => e.text != "checked").length})`
+  }
+
+  static handleFilters(e: Event) {
+    
+    let tempArr:DATA[]=[];
+    if ((e.target as HTMLElement).classList.contains("all")) {
+      tempArr=arr
+      x=0
+      Actions.checkData(arr)
+    } else if ((e.target as HTMLElement).classList.contains("updated")) {
+      tempArr = arr.filter(ele => ele.text == "updated")
+      x=3
+
+      Actions.checkData(tempArr)
+    } else if ((e.target as HTMLElement).classList.contains("completed")) {
+      tempArr = arr.filter(ele => ele.text == "checked")
+      Actions.checkData(tempArr)
+      x=2
+
+    } else {
+      tempArr = arr.filter(ele => ele.text != "checked")
+      Actions.checkData(tempArr)
+      x=1
+    }
+    Actions.checkData(tempArr)
+    if (arr.length == 0) {
+      document.querySelector("#options")!.classList.add("hide")
+    } 
+
+  }
 
   static checkData(arr: DATA[]) {
-
     if (arr.length == 0) {
       Actions.displayClearAllBtn(arr)
       UI.showData(arr);
@@ -311,6 +361,7 @@ class Actions {
   static validiation() {
     if (inp.value.length > 0) {
       UI.addDataToArr();
+
     } else {
       UI.handlePopUp("danger", "add a task !")
     }
@@ -326,6 +377,7 @@ form.addEventListener('submit', (e) => {
 UI.handleInp();
 
 
+
 /* get data from localstorge if there are data  */
 LocalStorageDATA.getDataFromLocalStorage()
 
@@ -336,7 +388,7 @@ btn.addEventListener('click', Actions.validiation);
 tasks.addEventListener("click", Actions.actionsFn)
 
 
-clearCont.addEventListener("click", Actions.clearAll);
+clear.addEventListener("click", Actions.clearAll);
 
 
 inp.addEventListener("focus", () => {
@@ -347,8 +399,21 @@ inp.addEventListener("blur", () => {
   isFocus = false;
   UI.handleInp();
   setTimeout(() => {
-     inp.value = ""
+    inp.value = ""
   }, 400);
+
+
+})
+
+
+filter.forEach(ele => {
+  Actions.handleFilterText(arr);
+  ele.addEventListener("click", (e) => {
+    Actions.removeActiveClass();
+    ele.classList.add("active");
+    Actions.handleFilters(e);
+
+  })
 
 
 })

@@ -278,7 +278,7 @@
   transform: translateY(-50%);
 }
 
-.pop, .bg-cont #tasks-section .task-cont .task #btns > *, .bg-cont #tasks-section .task-cont .task #btns, .bg-cont #form-section form, .bg-cont > * {
+.pop, .bg-cont #tasks-section .task-cont .task #btns > *, .bg-cont #tasks-section .task-cont .task #btns, .bg-cont #tasks-section .task-cont #options #filters > *, .bg-cont #form-section form, .bg-cont > * {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -434,7 +434,7 @@ body {
 .bg-cont #tasks-section .task-cont {
   min-height: 80px;
   max-height: 200px;
-  background: rgba(255, 255, 255, 0.3);
+  background: grey;
   width: 80%;
   border-radius: 8px;
 }
@@ -447,8 +447,15 @@ body {
   gap: 5px;
 }
 .bg-cont #tasks-section .task-cont #options {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
   width: 100%;
   height: 40px;
+  border: 2px solid rgba(0, 0, 0, 0.096);
+}
+.bg-cont #tasks-section .task-cont #options.hide {
+  display: none;
 }
 .bg-cont #tasks-section .task-cont #options #clr {
   background: rgb(97, 5, 5);
@@ -465,13 +472,39 @@ body {
 .bg-cont #tasks-section .task-cont #options #clr:hover {
   background-color: rgb(243, 38, 38);
 }
-.bg-cont #tasks-section .task-cont #options.hide {
+.bg-cont #tasks-section .task-cont #options #clr.hide {
   display: none;
 }
-.bg-cont #tasks-section .task-cont #options.block {
+.bg-cont #tasks-section .task-cont #options #clr.block {
   display: block;
+}
+.bg-cont #tasks-section .task-cont #options #filters {
+  width: 80%;
+  height: 100%;
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
+  justify-content: space-evenly;
+  text-transform: capitalize;
+}
+.bg-cont #tasks-section .task-cont #options #filters.hide {
+  display: none;
+}
+.bg-cont #tasks-section .task-cont #options #filters > * {
+  cursor: pointer;
+  width: fit-content;
+  padding: 0 10px;
+  color: rgb(2, 92, 92);
+  height: 30px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  transition: 0.3s;
+}
+.bg-cont #tasks-section .task-cont #options #filters > *.active {
+  color: rgba(255, 255, 255, 0.571);
+  border-bottom: rgb(2, 92, 92) 3px solid;
+}
+.bg-cont #tasks-section .task-cont #options #filters > *:hover {
+  color: white;
 }
 .bg-cont #tasks-section .task-cont .task {
   display: grid;
@@ -482,6 +515,7 @@ body {
   justify-content: space-between;
   padding: 0 15px;
   background: rgba(245, 222, 179, 0.858);
+  margin: 0 auto;
 }
 .bg-cont #tasks-section .task-cont .task:nth-child(1) {
   margin-top: 20px;

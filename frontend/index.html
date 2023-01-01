@@ -1,41 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="images/logo-image.png" type="image/x-icon">
-    <link rel="stylesheet" href="fontawesome/all.css" />
-    <link rel="stylesheet" href="./styles/dist/main.css" />
-    <title>TYPESCRIPT OOP SCSS TO DO LIST</title>
-  </head>
-  <body>
-    <div class="bg-cont">
-  <div id="head-section">
-      <p id="head">TYPESCRIPT OOP SCSS TO DO LIST</p></div>
-      <div class="row" id="form-section">
-        <div class="col-lg-16 col-sm-16 col-md-14" id="form-parent" >
-          <form action="">
-            <span id="placeholder">add a task</span>
-            <input class="col-lg-13 col-sm-11 col-md-12" id="inp" type="text" />
-            <button class="col-lg-2 col-sm-4 col-md-3" id="btn">Add tasks</button>
-          </form>
-        </div>
-      </div>
-      <div class="row" id="tasks-section">
-        <div class="task-cont col-lg-10 col-md-12 col-sm-14">
-          <div id="options">
-            <button id="clr"></button>
-          </div>
-          <div id="tasks">
-           
-            </div>
-          </div>
-        </div>
-      </div>
-<span class="pop-cont"></span>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="images/logo-image.png" type="image/x-icon">
+  <link rel="stylesheet" href="fontawesome/all.css" />
+  <link rel="stylesheet" href="./styles/dist/main.css" />
+  <title>TO DO LIST</title>
+</head>
+
+<body>
+  <div class="bg-cont">
+    <div id="head-section">
+      <p id="head">TYPESCRIPT OOP SCSS TO DO LIST</p>
     </div>
-    <script src="fontawesome/all.js"></script>
-    <script src="./dist/index.js"></script>
-  </body>
+    <div class="row" id="form-section">
+      <div class="col-lg-16 col-sm-16 col-md-14" id="form-parent">
+        <form action="">
+          <span id="placeholder">add a task</span>
+          <input class="col-lg-13 col-sm-11 col-md-12" id="inp" type="text" />
+          <button class="col-lg-2 col-sm-4 col-md-3" id="btn">Add tasks</button>
+        </form>
+      </div>
+    </div>
+    <div class="row" id="tasks-section">
+      <div class="task-cont col-lg-10 col-md-12 col-sm-14">
+        <div id="options">
+       <div id="filters">
+        <span class="active all">all</span>
+        <span class="pending">pending</span>
+        <span class="completed">completed</span>
+        <span class="updated">updated</span>
+       </div>
+          <button id="clr"></button>
+         
+        </div>
+        <div id="tasks">
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="pop-cont"></span>
+  </div>
+  <script src="fontawesome/all.js"></script>
+  <script src="./dist/index.js"></script>
+</body>
+
 </html>

@@ -7,8 +7,10 @@ const clear = document.querySelector('#clr');
 const tasks = document.querySelector('#tasks');
 const taskCont = document.querySelector(".task-cont");
 const placeholder = document.querySelector("#placeholder");
+const filter = document.querySelectorAll("#filters span");
 // let cont= document.querySelector(".container")
 let isFocus = false;
+let x = 0;
 for (let i = 0; i < 300; i++) {
     // let span=`<span> </span>`;
     let span = document.createElement("span");
@@ -18,6 +20,7 @@ for (let i = 0; i < 300; i++) {
 const handelTime = () => new Date().toLocaleTimeString();
 const handelDate = () => new Date().toLocaleDateString();
 let arr = [];
+// let tempArr: DATA[] = [];
 class TASK {
     constructor(id, content, checked, text, date, time) {
         this.id = id;
@@ -82,7 +85,6 @@ class UI {
         }
         UI.handleCheck(arr);
         Actions.displayClearAllBtn(arr);
-        LocalStorageDATA.saveDataToLocalStorage(arr);
     }
     static handleInp() {
         let placeholder = document.querySelector("form span");
@@ -120,8 +122,13 @@ class UI {
             UI.handlePopUp("success", "task updated !");
         }
         inp.value = '';
+        LocalStorageDATA.saveDataToLocalStorage(arr);
         UI.handlePlaceholderText();
         UI.handleSubmitBtn();
+        Actions.handleFilterText(arr);
+        // Actions.removeActiveClass();
+        // document.querySelector("span.all")?.classList.add("active")
+        document.querySelector("#options").classList.remove("hide");
     }
     static handlePlaceholderText() {
         if (UI.Mode === "create") {
@@ -153,8 +160,7 @@ class UI {
 UI.Mode = "create";
 class Actions {
     static actionsFn(e) {
-        //  console.log(e.target);
-        var _a;
+        var _a, _b;
         const parent = (_a = e.target.parentElement) === null || _a === void 0 ? void 0 : _a.parentElement;
         if (e.target.classList.contains("del")) {
             Actions.newArr = arr.filter((ele) => +(ele.id) !== +(parent.dataset.id));
@@ -174,26 +180,77 @@ class Actions {
         if (e.target.classList.contains("check")) {
             Actions.newArr = arr.map(e => e.id == +(parent.dataset.id) && e.checked == false ? Object.assign(Object.assign({}, e), { checked: true, date: handelDate(), time: handelTime(), text: "checked" }) : e.id == +(parent.dataset.id) && e.checked == true ? Object.assign(Object.assign({}, e), { checked: false, date: handelDate(), time: handelTime(), text: "unchecked" }) : e);
             arr = Actions.newArr;
-            // UI.handleCheck(arr);
         }
         /* add data to UI */
-        UI.showData(arr);
+        Actions.checkData(arr);
+        Actions.handleFilterText(arr);
+        LocalStorageDATA.saveDataToLocalStorage(arr);
+        if (arr.length == 0) {
+            Actions.removeActiveClass();
+            (_b = document.querySelector("span.all")) === null || _b === void 0 ? void 0 : _b.classList.add("active");
+        }
+        filter[x].click();
+    }
+    static removeActiveClass() {
+        filter.forEach(e => {
+            e.classList.remove("active");
+        });
     }
     static clearAll() {
         arr.splice(0);
         Actions.checkData(arr);
         UI.handlePopUp("success", "All cleard");
+        LocalStorageDATA.saveDataToLocalStorage(arr);
+        Actions.handleFilterText(arr);
     }
     static displayClearAllBtn(arr) {
-        if (arr.length <= 1) {
-            clearCont.classList.add("hide");
-            clearCont.classList.remove("block");
+        if (arr.length < 2) {
+            document.querySelector("#options").classList.remove("hide");
+            clear.classList.add("hide");
+            clear.classList.remove("block");
         }
-        else if (arr.length > 1) {
-            clearCont.classList.remove("hide");
-            clearCont.classList.add("block");
+        else if (arr.length >= 2) {
+            clear.classList.remove("hide");
+            clear.classList.add("block");
         }
         clear.innerHTML = `Clear All (${arr.length})`;
+    }
+    static handleFilterText(arr) {
+        let all = document.querySelector("span.all");
+        let updated = document.querySelector("span.updated");
+        let completed = document.querySelector("span.completed");
+        let pending = document.querySelector("span.pending");
+        all.innerHTML = `All(${arr.length})`;
+        updated.innerHTML = `Updated(${arr.filter(e => e.text == "updated").length})`;
+        completed.innerHTML = `Completed(${arr.filter(e => e.text == "checked").length})`;
+        pending.innerHTML = `Pending(${arr.filter(e => e.text != "checked").length})`;
+    }
+    static handleFilters(e) {
+        let tempArr = [];
+        if (e.target.classList.contains("all")) {
+            tempArr = arr;
+            x = 0;
+            Actions.checkData(arr);
+        }
+        else if (e.target.classList.contains("updated")) {
+            tempArr = arr.filter(ele => ele.text == "updated");
+            x = 3;
+            Actions.checkData(tempArr);
+        }
+        else if (e.target.classList.contains("completed")) {
+            tempArr = arr.filter(ele => ele.text == "checked");
+            Actions.checkData(tempArr);
+            x = 2;
+        }
+        else {
+            tempArr = arr.filter(ele => ele.text != "checked");
+            Actions.checkData(tempArr);
+            x = 1;
+        }
+        Actions.checkData(tempArr);
+        if (arr.length == 0) {
+            document.querySelector("#options").classList.add("hide");
+        }
     }
     static checkData(arr) {
         var _a;
@@ -230,7 +287,7 @@ LocalStorageDATA.getDataFromLocalStorage();
 /* clicking EVENT */
 btn.addEventListener('click', Actions.validiation);
 tasks.addEventListener("click", Actions.actionsFn);
-clearCont.addEventListener("click", Actions.clearAll);
+clear.addEventListener("click", Actions.clearAll);
 inp.addEventListener("focus", () => {
     isFocus = true;
     UI.handleInp();
@@ -241,4 +298,12 @@ inp.addEventListener("blur", () => {
     setTimeout(() => {
         inp.value = "";
     }, 400);
+});
+filter.forEach(ele => {
+    Actions.handleFilterText(arr);
+    ele.addEventListener("click", (e) => {
+        Actions.removeActiveClass();
+        ele.classList.add("active");
+        Actions.handleFilters(e);
+    });
 });
