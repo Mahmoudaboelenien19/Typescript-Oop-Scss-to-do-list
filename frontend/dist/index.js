@@ -10,7 +10,7 @@ const placeholder = document.querySelector("#placeholder");
 const filter = document.querySelectorAll("#filters span");
 // let cont= document.querySelector(".container")
 let isFocus = false;
-let x = 0;
+let clickedFilterIndex = 0;
 for (let i = 0; i < 300; i++) {
     // let span=`<span> </span>`;
     let span = document.createElement("span");
@@ -110,7 +110,7 @@ class UI {
             const task = new TASK(id, content, checked, text, date, time);
             arr.unshift(task);
             Actions.checkData(arr);
-            UI.handlePopUp("success", "task added !");
+            UI.handlePopUp("success", "task sucessfully added !");
         }
         else {
             Actions.newArr = arr.map((ele) => {
@@ -119,16 +119,15 @@ class UI {
             arr = Actions.newArr;
             UI.showData(arr);
             UI.Mode = "create";
-            UI.handlePopUp("success", "task updated !");
+            UI.handlePopUp("success", "task sucessfully updated !");
         }
         inp.value = '';
         LocalStorageDATA.saveDataToLocalStorage(arr);
         UI.handlePlaceholderText();
         UI.handleSubmitBtn();
         Actions.handleFilterText(arr);
-        // Actions.removeActiveClass();
-        // document.querySelector("span.all")?.classList.add("active")
-        document.querySelector("#options").classList.remove("hide");
+        Actions.hideOptionsCont(arr);
+        Actions.autoClick();
     }
     static handlePlaceholderText() {
         if (UI.Mode === "create") {
@@ -153,7 +152,7 @@ class UI {
         popUps.forEach(ele => {
             setTimeout(() => {
                 ele === null || ele === void 0 ? void 0 : ele.remove();
-            }, 3000);
+            }, 4000);
         });
     }
 }
@@ -165,7 +164,7 @@ class Actions {
         if (e.target.classList.contains("del")) {
             Actions.newArr = arr.filter((ele) => +(ele.id) !== +(parent.dataset.id));
             arr = Actions.newArr;
-            UI.handlePopUp("success", "deleted");
+            UI.handlePopUp("success", "task sucessfully deleted");
             Actions.checkData(arr);
         }
         if (e.target.classList.contains("update")) {
@@ -189,7 +188,10 @@ class Actions {
             Actions.removeActiveClass();
             (_b = document.querySelector("span.all")) === null || _b === void 0 ? void 0 : _b.classList.add("active");
         }
-        filter[x].click();
+        Actions.autoClick();
+    }
+    static autoClick() {
+        filter[clickedFilterIndex].click();
     }
     static removeActiveClass() {
         filter.forEach(e => {
@@ -199,13 +201,13 @@ class Actions {
     static clearAll() {
         arr.splice(0);
         Actions.checkData(arr);
-        UI.handlePopUp("success", "All cleard");
+        UI.handlePopUp("success", "All sucessfully cleard");
         LocalStorageDATA.saveDataToLocalStorage(arr);
         Actions.handleFilterText(arr);
+        Actions.hideOptionsCont(arr);
     }
     static displayClearAllBtn(arr) {
         if (arr.length < 2) {
-            document.querySelector("#options").classList.remove("hide");
             clear.classList.add("hide");
             clear.classList.remove("block");
         }
@@ -229,27 +231,33 @@ class Actions {
         let tempArr = [];
         if (e.target.classList.contains("all")) {
             tempArr = arr;
-            x = 0;
+            clickedFilterIndex = 0;
             Actions.checkData(arr);
         }
         else if (e.target.classList.contains("updated")) {
             tempArr = arr.filter(ele => ele.text == "updated");
-            x = 3;
+            clickedFilterIndex = 3;
             Actions.checkData(tempArr);
         }
         else if (e.target.classList.contains("completed")) {
             tempArr = arr.filter(ele => ele.text == "checked");
             Actions.checkData(tempArr);
-            x = 2;
+            clickedFilterIndex = 2;
         }
         else {
             tempArr = arr.filter(ele => ele.text != "checked");
             Actions.checkData(tempArr);
-            x = 1;
+            clickedFilterIndex = 1;
         }
         Actions.checkData(tempArr);
+        Actions.hideOptionsCont(arr);
+    }
+    static hideOptionsCont(arr) {
         if (arr.length == 0) {
             document.querySelector("#options").classList.add("hide");
+        }
+        else {
+            document.querySelector("#options").classList.remove("hide");
         }
     }
     static checkData(arr) {
@@ -267,13 +275,14 @@ class Actions {
             (_a = document.querySelector(".no-data")) === null || _a === void 0 ? void 0 : _a.classList.add("hide");
             UI.showData(arr);
         }
+        Actions.hideOptionsCont(arr);
     }
     static validiation() {
         if (inp.value.length > 0) {
             UI.addDataToArr();
         }
         else {
-            UI.handlePopUp("danger", "add a task !");
+            UI.handlePopUp("danger", "add a task please !");
         }
     }
 }

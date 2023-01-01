@@ -1,9 +1,9 @@
 .pop.danger {
-  background-color: rgb(80, 2, 2);
+  background-color: rgba(80, 2, 2, 0.6);
 }
 
 .pop.success {
-  background-color: rgb(4, 91, 4);
+  background-color: rgba(4, 91, 4, 0.6);
 }
 
 .no-data.hide {
