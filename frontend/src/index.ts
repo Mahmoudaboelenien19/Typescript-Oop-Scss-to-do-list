@@ -13,7 +13,8 @@ const filter = document.querySelectorAll("#filters span") as NodeListOf<HTMLElem
 let isFocus = false;
 let clickedFilterIndex=0;
 
-
+const doneIcon  =`<i class="fa-solid fa-check-double"></i>` as unknown as HTMLElement
+const undoneIcon=`<i class="fa-solid fa-circle-xmark"></i>` as unknown as HTMLElement
 for (let i = 0; i < 300; i++) {
   // let span=`<span> </span>`;
   let span = document.createElement("span")
@@ -149,7 +150,7 @@ class UI {
 
       arr.unshift(task);
       Actions.checkData(arr)
-      UI.handlePopUp("success", "task sucessfully added !")
+      UI.handlePopUp("success", "task sucessfully added !",doneIcon)
     } else {
       Actions.newArr = arr.map((ele: DATA) => {
         return +(ele.id) === UI.updateId ?
@@ -167,7 +168,7 @@ class UI {
 
       UI.Mode = "create"
 
-      UI.handlePopUp("success", "task sucessfully updated !")
+      UI.handlePopUp("success", "task sucessfully updated !",doneIcon)
     }
     inp.value = '';
     LocalStorageDATA.saveDataToLocalStorage(arr);
@@ -192,12 +193,13 @@ Actions.hideOptionsCont(arr)
   static handleSubmitBtn() {
     btn.innerHTML = UI.Mode === "create" ? "add tasks" : "update";
   }
-  static handlePopUp(clr: string, msg: string): void {
+  static handlePopUp(clr: string, msg: string,icon:HTMLElement): void {
     // const pop = `<div class='pop ${clearCont}'>${msg}</div>` as Element  ;
-    const div = document.createElement("div") as Element;
+    const div = document.createElement("span") as Element;
     div.setAttribute("class", `pop ${clr}`)
-    const text = document.createTextNode(msg)
-    div.appendChild(text)
+    // const text = document.createTextNode(msg)
+    // div.appendChild(text)
+    div.innerHTML=`${icon} ${msg}`
     let parent: Element | null = document.querySelector(".pop-cont")
     parent!.insertAdjacentElement("afterbegin", div)
     let popUps = document.querySelectorAll(".pop")
@@ -228,7 +230,7 @@ class Actions {
       
       Actions.newArr = arr.filter((ele: DATA) => + (ele.id) !== + (parent.dataset.id!))
       arr = Actions.newArr
-      UI.handlePopUp("success", "task sucessfully deleted")
+      UI.handlePopUp("success", "task sucessfully deleted" ,doneIcon)
       Actions.checkData(arr);
 
     }
@@ -282,7 +284,7 @@ class Actions {
   static clearAll() {
     arr.splice(0);
     Actions.checkData(arr);
-    UI.handlePopUp("success", "All sucessfully cleard")
+    UI.handlePopUp("success", "All sucessfully cleard" ,doneIcon)
     LocalStorageDATA.saveDataToLocalStorage(arr);
     Actions.handleFilterText(arr);
   Actions.hideOptionsCont(arr)
@@ -374,7 +376,7 @@ class Actions {
       UI.addDataToArr();
 
     } else {
-      UI.handlePopUp("danger", "add a task please !")
+      UI.handlePopUp("danger", "add a task please !",undoneIcon)
     }
 
   }

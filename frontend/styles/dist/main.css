@@ -605,6 +605,7 @@ body {
 
 /* pop up styling */
 .pop {
+  gap: 5px;
   color: white;
   letter-spacing: 1px;
   font-size: 12px;
