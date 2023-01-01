@@ -270,8 +270,7 @@ class Actions {
             UI.showData(arr);
             const div = document.createElement("div");
             div.setAttribute("class", `no-data`);
-            const text = document.createTextNode(" No tasks to show ");
-            div.appendChild(text);
+            div.innerHTML = `No ${filter[clickedFilterIndex].dataset.state}tasks to show`;
             tasks.insertAdjacentElement("afterbegin", div);
         }
         else {
