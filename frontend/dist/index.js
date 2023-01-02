@@ -133,10 +133,10 @@ class UI {
     }
     static handlePlaceholderText() {
         if (UI.Mode === "create") {
-            placeholder.innerHTML = "add a task";
+            placeholder.innerHTML = "add a task ..";
         }
         else {
-            placeholder.innerHTML = "update task";
+            placeholder.innerHTML = "update task ..";
         }
     }
     static handleSubmitBtn() {
