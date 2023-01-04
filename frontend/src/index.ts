@@ -412,7 +412,10 @@ inp.addEventListener("blur", () => {
   isFocus = false;
   UI.handleInp();
   setTimeout(() => {
-    inp.value = ""
+    inp.value = "";
+    UI.Mode="create";
+    UI.handlePlaceholderText()
+    UI.handleSubmitBtn()
   }, 400);
 
 

@@ -308,6 +308,9 @@ inp.addEventListener("blur", () => {
     UI.handleInp();
     setTimeout(() => {
         inp.value = "";
+        UI.Mode = "create";
+        UI.handlePlaceholderText();
+        UI.handleSubmitBtn();
     }, 400);
 });
 filter.forEach(ele => {
