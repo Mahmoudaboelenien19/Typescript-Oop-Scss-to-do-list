@@ -241,7 +241,7 @@
 }
 
 .task.checked {
-  border-left: 4px solid rgb(138, 1, 1);
+  border-left: 4px solid rgb(89, 4, 4);
 }
 
 .task.unchecked {
@@ -257,7 +257,7 @@
 }
 
 .text.checked {
-  color: rgb(138, 1, 1);
+  color: rgb(89, 4, 4);
 }
 
 .text.unchecked {
@@ -434,7 +434,7 @@ body {
 .bg-cont #tasks-section .task-cont {
   min-height: 80px;
   max-height: 200px;
-  background: grey;
+  background: rgb(91, 88, 88);
   width: 80%;
   border-radius: 8px;
 }
@@ -493,7 +493,7 @@ body {
   cursor: pointer;
   width: fit-content;
   padding: 0 10px;
-  color: rgb(2, 92, 92);
+  color: rgb(1, 161, 161);
   height: 30px;
   font-weight: 700;
   letter-spacing: 1px;
@@ -501,7 +501,7 @@ body {
 }
 .bg-cont #tasks-section .task-cont #options #filters > *.active {
   color: rgba(255, 255, 255, 0.571);
-  border-bottom: rgb(2, 92, 92) 3px solid;
+  border-bottom: rgb(1, 161, 161) 3px solid;
 }
 .bg-cont #tasks-section .task-cont #options #filters > *:hover {
   color: white;
@@ -522,6 +522,10 @@ body {
 }
 .bg-cont #tasks-section .task-cont .task:last-child {
   margin-bottom: 20px;
+}
+.bg-cont #tasks-section .task-cont .task:nth-child(even) {
+  background: #78886a;
+  color: white;
 }
 .bg-cont #tasks-section .task-cont .task #content {
   grid-area: cont;
@@ -599,7 +603,7 @@ body {
 .bg-cont #tasks-section p#content.checked {
   text-decoration: line-through;
   opacity: 0.7;
-  text-decoration-color: red;
+  text-decoration-color: rgb(89, 4, 4);
   text-decoration-thickness: 3px;
 }
 
@@ -615,7 +619,7 @@ body {
   margin: 10px 0;
   position: relative;
   text-align: center;
-  animation: pop-animate 4s linear;
+  animation: pop-animate 4.5s linear;
 }
 @keyframes pop-animate {
   100%, 0% {

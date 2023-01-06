@@ -1,10 +1,10 @@
 "use strict";
-const inp = document.querySelector('#inp');
-const form = document.querySelector('form');
-const btn = document.querySelector('#btn');
-const clearCont = document.querySelector('#options');
-const clear = document.querySelector('#clr');
-const tasks = document.querySelector('#tasks');
+const inp = document.querySelector("#inp");
+const form = document.querySelector("form");
+const btn = document.querySelector("#btn");
+const clearCont = document.querySelector("#options");
+const clear = document.querySelector("#clr");
+const tasks = document.querySelector("#tasks");
 const taskCont = document.querySelector(".task-cont");
 const placeholder = document.querySelector("#placeholder");
 const filter = document.querySelectorAll("#filters span");
@@ -31,12 +31,12 @@ class TASK {
         this.text = text;
         this.date = date;
         this.time = time;
-        this.id = id,
-            this.content = content,
-            this.checked = checked,
-            this.text = text,
-            this.date = date,
-            this.time = time;
+        (this.id = id),
+            (this.content = content),
+            (this.checked = checked),
+            (this.text = text),
+            (this.date = date),
+            (this.time = time);
     }
 }
 class LocalStorageDATA {
@@ -67,7 +67,7 @@ class UI {
         }
     }
     static showData(arr) {
-        tasks.innerHTML = '';
+        tasks.innerHTML = "";
         for (let i = 0; i < arr.length; i++) {
             tasks.innerHTML += `
       <div class="task ${arr[i].text}" data-id=${arr[i].id}>
@@ -116,14 +116,15 @@ class UI {
         }
         else {
             Actions.newArr = arr.map((ele) => {
-                return +(ele.id) === UI.updateId ? Object.assign(Object.assign({}, ele), { content: inp.value, date: handelDate(), time: handelTime(), text: "updated", checked: false }) : ele;
+                return +ele.id === UI.updateId
+                    ? Object.assign(Object.assign({}, ele), { content: inp.value, date: handelDate(), time: handelTime(), text: "updated", checked: false }) : ele;
             });
             arr = Actions.newArr;
             UI.showData(arr);
             UI.Mode = "create";
             UI.handlePopUp("success", "task sucessfully updated !", doneIcon);
         }
-        inp.value = '';
+        inp.value = "";
         LocalStorageDATA.saveDataToLocalStorage(arr);
         UI.handlePlaceholderText();
         UI.handleSubmitBtn();
@@ -152,10 +153,10 @@ class UI {
         let parent = document.querySelector(".pop-cont");
         parent.insertAdjacentElement("afterbegin", div);
         let popUps = document.querySelectorAll(".pop");
-        popUps.forEach(ele => {
+        popUps.forEach((ele) => {
             setTimeout(() => {
                 ele === null || ele === void 0 ? void 0 : ele.remove();
-            }, 4000);
+            }, 4500);
         });
     }
 }
@@ -165,7 +166,7 @@ class Actions {
         var _a, _b;
         const parent = (_a = e.target.parentElement) === null || _a === void 0 ? void 0 : _a.parentElement;
         if (e.target.classList.contains("del")) {
-            Actions.newArr = arr.filter((ele) => +(ele.id) !== +(parent.dataset.id));
+            Actions.newArr = arr.filter((ele) => +ele.id !== +parent.dataset.id);
             arr = Actions.newArr;
             UI.handlePopUp("success", "task sucessfully deleted", doneIcon);
             Actions.checkData(arr);
@@ -175,12 +176,14 @@ class Actions {
             UI.Mode = "update";
             inp.focus();
             UI.updateId = +parent.dataset.id;
-            let updatedElementIndex = arr.findIndex(e => e.id == UI.updateId);
+            let updatedElementIndex = arr.findIndex((e) => e.id == UI.updateId);
             inp.value = arr[updatedElementIndex].content;
             UI.handlePlaceholderText();
         }
         if (e.target.classList.contains("check")) {
-            Actions.newArr = arr.map(e => e.id == +(parent.dataset.id) && e.checked == false ? Object.assign(Object.assign({}, e), { checked: true, date: handelDate(), time: handelTime(), text: "checked" }) : e.id == +(parent.dataset.id) && e.checked == true ? Object.assign(Object.assign({}, e), { checked: false, date: handelDate(), time: handelTime(), text: "unchecked" }) : e);
+            Actions.newArr = arr.map((e) => e.id == +parent.dataset.id && e.checked == false
+                ? Object.assign(Object.assign({}, e), { checked: true, date: handelDate(), time: handelTime(), text: "checked" }) : e.id == +parent.dataset.id && e.checked == true
+                ? Object.assign(Object.assign({}, e), { checked: false, date: handelDate(), time: handelTime(), text: "unchecked" }) : e);
             arr = Actions.newArr;
         }
         /* add data to UI */
@@ -197,7 +200,7 @@ class Actions {
         filter[clickedFilterIndex].click();
     }
     static removeActiveClass() {
-        filter.forEach(e => {
+        filter.forEach((e) => {
             e.classList.remove("active");
         });
     }
@@ -226,9 +229,9 @@ class Actions {
         let completed = document.querySelector("span.completed");
         let pending = document.querySelector("span.pending");
         all.innerHTML = `All(${arr.length})`;
-        updated.innerHTML = `Updated(${arr.filter(e => e.text == "updated").length})`;
-        completed.innerHTML = `Completed(${arr.filter(e => e.text == "checked").length})`;
-        pending.innerHTML = `Pending(${arr.filter(e => e.text != "checked").length})`;
+        updated.innerHTML = `Updated(${arr.filter((e) => e.text == "updated").length})`;
+        completed.innerHTML = `Completed(${arr.filter((e) => e.text == "checked").length})`;
+        pending.innerHTML = `Pending(${arr.filter((e) => e.text != "checked").length})`;
     }
     static handleFilters(e) {
         let tempArr = [];
@@ -238,17 +241,17 @@ class Actions {
             Actions.checkData(arr);
         }
         else if (e.target.classList.contains("updated")) {
-            tempArr = arr.filter(ele => ele.text == "updated");
+            tempArr = arr.filter((ele) => ele.text == "updated");
             clickedFilterIndex = 3;
             Actions.checkData(tempArr);
         }
         else if (e.target.classList.contains("completed")) {
-            tempArr = arr.filter(ele => ele.text == "checked");
+            tempArr = arr.filter((ele) => ele.text == "checked");
             Actions.checkData(tempArr);
             clickedFilterIndex = 2;
         }
         else {
-            tempArr = arr.filter(ele => ele.text != "checked");
+            tempArr = arr.filter((ele) => ele.text != "checked");
             Actions.checkData(tempArr);
             clickedFilterIndex = 1;
         }
@@ -289,14 +292,14 @@ class Actions {
     }
 }
 /* prevent reloading */
-form.addEventListener('submit', (e) => {
+form.addEventListener("submit", (e) => {
     e.preventDefault();
 });
 UI.handleInp();
 /* get data from localstorge if there are data  */
 LocalStorageDATA.getDataFromLocalStorage();
 /* clicking EVENT */
-btn.addEventListener('click', Actions.validiation);
+btn.addEventListener("click", Actions.validiation);
 tasks.addEventListener("click", Actions.actionsFn);
 clear.addEventListener("click", Actions.clearAll);
 inp.addEventListener("focus", () => {
@@ -313,7 +316,7 @@ inp.addEventListener("blur", () => {
         UI.handleSubmitBtn();
     }, 400);
 });
-filter.forEach(ele => {
+filter.forEach((ele) => {
     Actions.handleFilterText(arr);
     ele.addEventListener("click", (e) => {
         Actions.removeActiveClass();

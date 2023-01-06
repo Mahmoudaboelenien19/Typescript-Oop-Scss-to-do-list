@@ -1,5 +1,3 @@
-
-
 .pop.danger {
   background-color: rgba(80, 2, 2, 0.6);
 }
@@ -10,7 +8,6 @@
 
 .no-data.hide {
   display: none;
-
 }
 
 .task.created {
@@ -22,7 +19,7 @@
 }
 
 .task.checked {
-  border-left: 4px solid rgb(138, 1, 1);
+  border-left: 4px solid rgb(89, 4, 4);
 }
 
 .task.unchecked {
@@ -38,7 +35,7 @@
 }
 
 .text.checked {
-  color: rgb(138, 1, 1);
+  color: rgb(89, 4, 4);
 }
 
 .text.unchecked {
@@ -48,14 +45,13 @@
 #form-section form #placeholder.focus {
   top: -10px;
   border-radius: 2px;
-  background:wheat;
+  background: wheat;
   border-left: 3px solid rgb(6, 6, 139);
   border-right: 3px solid rgb(6, 6, 139);
-  color:black;
+  color: black;
 }
 
 .blur {
   top: 50%;
   transform: translateY(-50%);
 }
-

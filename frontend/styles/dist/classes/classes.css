@@ -19,7 +19,7 @@
 }
 
 .task.checked {
-  border-left: 4px solid rgb(138, 1, 1);
+  border-left: 4px solid rgb(89, 4, 4);
 }
 
 .task.unchecked {
@@ -35,7 +35,7 @@
 }
 
 .text.checked {
-  color: rgb(138, 1, 1);
+  color: rgb(89, 4, 4);
 }
 
 .text.unchecked {
