@@ -279,7 +279,7 @@
   transform: translateY(-50%);
 }
 
-.pop, .bg-cont #tasks-section .task-cont .task #btns > *, .bg-cont #tasks-section .task-cont .task #btns, .bg-cont #tasks-section .task-cont #options #filters > *, .bg-cont #form-section form, .bg-cont > * {
+.pop, .bg-cont #tasks-section .task-cont .task #btns > *, .bg-cont #tasks-section .task-cont .task #btns, .bg-cont #tasks-section .task-cont #options #filters > *, .bg-cont #form-section form button, .bg-cont #form-section form, .bg-cont > * {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -415,6 +415,7 @@ body {
   outline: none;
   border: none;
   box-shadow: none;
+  gap: 5px;
   height: 100%;
   width: 15%;
 }
@@ -680,6 +681,7 @@ body {
     text-align: center;
   }
   .bg-cont #form-section #form-parent form button {
+    width: 25%;
     padding: 0 10px;
   }
   .bg-cont #form-section #form-parent form #placeholder {
@@ -694,6 +696,91 @@ body {
   .bg-cont #head-section {
     width: 70%;
   }
+}
+.updateIcon {
+  width: fit-content;
+  height: fit-content;
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+.updateIcon::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 50%;
+  width: 100%;
+  background: rgb(6, 6, 139);
+  color: white;
+  transition: 0.3s;
+  outline: none;
+  border: none;
+  box-shadow: none;
+  animation: to-right 1s linear forwards;
+}
+.updateIcon::before:hover {
+  background-color: rgb(71, 71, 170);
+}
+@keyframes to-right {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(50px);
+  }
+}
+.updateIcon::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 50%;
+  width: 100%;
+  background: rgb(6, 6, 139);
+  color: white;
+  transition: 0.3s;
+  outline: none;
+  border: none;
+  box-shadow: none;
+  animation: to-left 1s linear forwards 1s;
+}
+.updateIcon::after:hover {
+  background-color: rgb(71, 71, 170);
+}
+@keyframes to-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50px);
+  }
+}
+
+.createIcon {
+  width: fit-content;
+  height: fit-content;
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+.createIcon::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgb(6, 6, 139);
+  color: white;
+  transition: 0.3s;
+  outline: none;
+  border: none;
+  box-shadow: none;
+  animation: to-right 2s linear forwards;
+}
+.createIcon::before:hover {
+  background-color: rgb(71, 71, 170);
 }
 
 /*# sourceMappingURL=main.css.map */

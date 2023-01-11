@@ -181,7 +181,11 @@ class UI {
   }
 
   static handleSubmitBtn() {
-    btn.innerHTML = UI.Mode === "create" ? "add tasks" : "update";
+    let updateIcon = `<div class="updateIcon">
+    <i class="fa-solid fa-arrow-right-arrow-left"></i></div>`;
+    let createIcon = `<div class="createIcon"><i class="fa-solid fa-arrow-right-to-bracket"></i></div>`;
+    btn.innerHTML =
+      UI.Mode === "create" ? `add tasks ${createIcon}` : `update ${updateIcon}`;
   }
   static handlePopUp(clr: string, msg: string, icon: HTMLElement): void {
     // const pop = `<div class='pop ${clearCont}'>${msg}</div>` as Element  ;
@@ -397,7 +401,7 @@ inp.addEventListener("blur", () => {
   UI.handleInp();
   setTimeout(() => {
     inp.value = "";
-    UI.Mode = "create";
+    // UI.Mode = "create";
     UI.handlePlaceholderText();
     UI.handleSubmitBtn();
   }, 400);

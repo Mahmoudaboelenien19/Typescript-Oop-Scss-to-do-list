@@ -151,6 +151,8 @@ body {
 
       button {
         @include button(rgb(6, 6, 139), (rgb(71, 71, 170)));
+        @extend %centered;
+        gap: 5px;
         height: 100%;
         width: 15%;
       }
@@ -410,6 +412,7 @@ body {
 
     #form-section #form-parent form {
       button {
+        width: 25%;
         padding: 0 10px;
       }
 
@@ -429,5 +432,67 @@ body {
     #head-section {
       width: 70%;
     }
+  }
+}
+
+.updateIcon {
+  width: fit-content;
+  height: fit-content;
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 50%;
+    width: 100%;
+    @include button(rgb(6, 6, 139), (rgb(71, 71, 170)));
+    animation: to-right 1s linear forwards;
+  }
+  @keyframes to-right {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(50px);
+    }
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 50%;
+    width: 100%;
+    @include button(rgb(6, 6, 139), (rgb(71, 71, 170)));
+    animation: to-left 1s linear forwards 1s;
+  }
+  @keyframes to-left {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50px);
+    }
+  }
+}
+
+.createIcon {
+  width: fit-content;
+  height: fit-content;
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    @include button(rgb(6, 6, 139), (rgb(71, 71, 170)));
+    animation: to-right 2s linear forwards;
   }
 }
