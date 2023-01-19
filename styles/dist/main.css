@@ -279,7 +279,7 @@
   transform: translateY(-50%);
 }
 
-.pop, .bg-cont #tasks-section .task-cont .task #btns > *, .bg-cont #tasks-section .task-cont .task #btns, .bg-cont #tasks-section .task-cont #options #filters > *, .bg-cont #form-section form button, .bg-cont #form-section form, .bg-cont > * {
+.pop, .bg-cont #tasks-section .task-cont .task #btns > *, .bg-cont #tasks-section .task-cont .task #btns, .bg-cont #tasks-section .task-cont #options #filters > *, .bg-cont #form-section form button#btn, .bg-cont #form-section form, .bg-cont > * {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -394,33 +394,21 @@ body {
   border: none;
   box-shadow: none;
 }
-.bg-cont #form-section form span#placeholder {
-  position: absolute;
-  height: 20px;
-  z-index: 50;
-  padding: 0 5px;
-  transition: 0.2s;
-  left: 40px;
-}
 .bg-cont #form-section form input {
   height: 100%;
   padding-left: 10px;
   letter-spacing: 0.8px;
   width: 80%;
 }
-.bg-cont #form-section form button {
+.bg-cont #form-section form button#btn {
   background: rgb(6, 6, 139);
   color: white;
-  transition: 0.3s;
-  outline: none;
-  border: none;
-  box-shadow: none;
   gap: 5px;
   height: 100%;
   width: 15%;
 }
-.bg-cont #form-section form button:hover {
-  background-color: rgb(71, 71, 170);
+.bg-cont #form-section form button#btn:hover {
+  color: wheat;
 }
 .bg-cont #tasks-section {
   position: absolute;
@@ -512,7 +500,7 @@ body {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template: "cont cont cont  btn" 25px "time time time  btn" 10px;
-  height: 35px;
+  min-height: 40px;
   width: calc(100% - 10px);
   justify-content: space-between;
   padding: 0 15px;
@@ -772,15 +760,28 @@ body {
   height: 100%;
   width: 100%;
   background: rgb(6, 6, 139);
-  color: white;
-  transition: 0.3s;
-  outline: none;
-  border: none;
-  box-shadow: none;
   animation: to-right 2s linear forwards;
 }
-.createIcon::before:hover {
-  background-color: rgb(71, 71, 170);
+
+#placeholder {
+  position: absolute;
+  height: 20px;
+  z-index: 50;
+  padding: 0 5px;
+  transition: 0.3s;
+  left: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#form-section form input:focus ~ #placeholder,
+#form-section form input:valid ~ #placeholder {
+  top: 0;
+  border-radius: 2px;
+  background: wheat;
+  border-left: 3px solid rgb(6, 6, 139);
+  border-right: 3px solid rgb(6, 6, 139);
+  color: black;
 }
 
 /*# sourceMappingURL=main.css.map */

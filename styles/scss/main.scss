@@ -133,15 +133,6 @@ body {
         box-shadow: none;
       }
 
-      span#placeholder {
-        position: absolute;
-        height: 20px;
-        z-index: 50;
-        padding: 0 5px;
-        transition: 0.2s;
-        left: 40px;
-      }
-
       input {
         height: 100%;
         padding-left: 10px;
@@ -149,12 +140,16 @@ body {
         width: 80%;
       }
 
-      button {
-        @include button(rgb(6, 6, 139), (rgb(71, 71, 170)));
+      button#btn {
         @extend %centered;
+        background: rgb(6, 6, 139);
+        color: white;
         gap: 5px;
         height: 100%;
         width: 15%;
+        &:hover {
+          color: wheat;
+        }
       }
     }
   }
@@ -249,7 +244,7 @@ body {
         grid-template:
           "cont cont cont  btn" 25px
           "time time time  btn" 10px;
-        height: 35px;
+        min-height: 40px;
         width: calc(100% - 10px);
         justify-content: space-between;
         padding: 0 15px;
@@ -492,7 +487,31 @@ body {
     left: 0;
     height: 100%;
     width: 100%;
-    @include button(rgb(6, 6, 139), (rgb(71, 71, 170)));
+    background: rgb(6, 6, 139);
     animation: to-right 2s linear forwards;
   }
+}
+
+#placeholder {
+  position: absolute;
+  height: 20px;
+  z-index: 50;
+  padding: 0 5px;
+  transition: 0.3s;
+  left: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#form-section form input:focus ~ #placeholder,
+#form-section form input:valid ~ #placeholder {
+  // top: -10px;
+  // transform: translateY(0);
+  //or
+  top: 0;
+  border-radius: 2px;
+  background: wheat;
+  border-left: 3px solid rgb(6, 6, 139);
+  border-right: 3px solid rgb(6, 6, 139);
+  color: black;
 }

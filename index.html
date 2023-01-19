@@ -19,10 +19,10 @@
     </div>
     <div class="row" id="form-section">
       <div class="col-lg-16 col-sm-16 col-md-14" id="form-parent">
-        <form action="">
-          <span id="placeholder">add a task</span>
-          <input class="col-lg-13 col-sm-11 col-md-12" id="inp" type="text" />
+        <form action="" novalidate >
+          <input class="col-lg-13 col-sm-11 col-md-12" id="inp" type="text" required  />
           <button class="col-lg-2 col-sm-4 col-md-3" id="btn">Add tasks</button>
+          <span id="placeholder">add a task</span>
         </form>
       </div>
     </div>
@@ -47,7 +47,11 @@
   <div class="pop-cont"></div>
   </div>
   <script src="./fontawesome/all.js"></script>
-  <script src="./dist/index.js"></script>
+
+  <script type="module" src="./dist/index.js" ></script>
+
+
+
 </body>
 
 </html>
