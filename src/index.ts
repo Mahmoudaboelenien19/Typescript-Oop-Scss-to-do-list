@@ -26,12 +26,6 @@ tasks.addEventListener("click", action.actionFn.bind(action));
 
 clear.addEventListener("click", action.clearAll.bind(action));
 
-inp.addEventListener("blur", () => {
-  ui.handlePlaceholderText();
-  ui.handleSubmitBtn();
-  // action.resetMode();
-});
-
 filter.forEach((ele) => {
   action.handleFilterText(arr);
   ele.addEventListener("click", (e) => {
@@ -39,4 +33,15 @@ filter.forEach((ele) => {
     ele.classList.add("active");
     action.handleFilters(e);
   });
+});
+
+inp.addEventListener("blur", () => {
+  ui.handlePlaceholderText();
+  ui.handleSubmitBtn();
+  // action.resetMode();
+  /* *FIXME - 
+  * when i have update mode and make inp blur 
+  it still on update mode
+  *i want to make at blur to be at create mode 
+  */
 });

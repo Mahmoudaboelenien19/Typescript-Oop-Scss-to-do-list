@@ -1,4 +1,4 @@
-import { DATA } from "./../index.js";
+import { DATA } from "./Actions";
 export class TASK implements DATA {
   constructor(
     public id: number,

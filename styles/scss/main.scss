@@ -73,7 +73,7 @@ body {
   #head-section {
     display: flex;
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
     width: fit-content;
     position: absolute;
     top: 0;
@@ -84,10 +84,15 @@ body {
     height: 80px;
     z-index: 55;
 
+    img {
+      width: 40px;
+      height: 40px;
+      color: antiquewhite;
+    }
     p#head {
       position: relative;
       color: white;
-      font-size: 1.5rem;
+      font-size: 1.25rem;
       letter-spacing: 2px;
       padding-bottom: 5px;
 
@@ -95,9 +100,9 @@ body {
         content: "";
         position: absolute;
         top: 100%;
-        left: 20%;
+        left: 15%;
         height: 2px;
-        width: 60%;
+        width: 70%;
         background: linear-gradient(135deg, wheat, rgb(51, 48, 230));
       }
     }
@@ -223,6 +228,7 @@ body {
             width: fit-content;
             padding: 0 10px;
             color: rgb(1, 161, 161);
+            font-size: 0.75em;
             height: 30px;
             font-weight: 700;
             letter-spacing: 1px;

@@ -23,6 +23,7 @@ class Actions {
         Actions.instance = this;
     }
     addDataToArr() {
+        console.log("2 ", Mode);
         if (Mode === "create") {
             const id = Math.random() * 100;
             const content = inp.value;
@@ -72,7 +73,7 @@ class Actions {
             inp.value = arr[updatedElementIndex].content;
             ui.handlePlaceholderText();
             ui.handleSubmitBtn();
-            console.log("mode" + Mode);
+            console.log("1" + Mode);
         }
         if (e.target.classList.contains("check")) {
             newArr = arr.map((e) => e.id == +parent.dataset.id && e.checked == false
@@ -186,7 +187,6 @@ class Actions {
     }
     resetMode() {
         Mode = "create";
-        ui.handleSubmitBtn();
     }
 }
 export const action = new Actions();

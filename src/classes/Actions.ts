@@ -46,6 +46,8 @@ class Actions {
   }
 
   addDataToArr(): void {
+    console.log("2 ", Mode);
+
     if (Mode === "create") {
       const id = Math.random() * 100;
       const content = inp.value;
@@ -113,7 +115,7 @@ class Actions {
       inp.value = arr[updatedElementIndex].content;
       ui.handlePlaceholderText();
       ui.handleSubmitBtn();
-      console.log("mode" + Mode);
+      console.log("1" + Mode);
     }
 
     if ((e.target as HTMLElement).classList.contains("check")) {
@@ -260,7 +262,6 @@ class Actions {
 
   resetMode() {
     Mode = "create";
-    ui.handleSubmitBtn();
   }
 }
 
