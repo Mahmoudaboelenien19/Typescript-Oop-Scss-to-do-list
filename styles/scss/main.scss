@@ -3,11 +3,18 @@
 @use "./classes/classes.scss";
 @import "./helpers/mixins";
 
+$Mode: dark;
+
+$bg-clr: rgb(9, 9, 10);
 body {
   height: 100vh;
   width: 100%;
   overflow: hidden;
-  background: rgb(9, 9, 10);
+  @if $Mode==dark {
+    background: $bg-clr;
+  } @else {
+    background: white;
+  }
 
   position: relative;
 }
@@ -26,6 +33,22 @@ body {
   flex-wrap: wrap;
   gap: 3px;
 
+  #mode {
+    @extend %centered;
+    justify-content: if($Mode==dark, start, end);
+
+    position: absolute;
+    top: 10px;
+    left: 5px;
+    background: rgba(46, 46, 160, 0.819);
+    width: 40px;
+    height: 20px;
+    z-index: 100;
+    padding: 0 4px;
+    .fa-gear {
+      color: if($Mode==dark, rgba(255, 255, 255, 0.628), $bg-clr);
+    }
+  }
   &:before {
     content: "";
     width: 100%;
@@ -274,6 +297,18 @@ body {
         padding: 0 15px;
         background: rgba(245, 222, 179, 0.858);
         margin: 0 auto;
+        &.created-animation {
+          animation: task-animate 1s linear forwards;
+        }
+
+        @keyframes task-animate {
+          0% {
+            transform: translateY(-100px);
+          }
+          100% {
+            transform: translateY(0);
+          }
+        }
 
         &:nth-child(1) {
           margin-top: 20px;
@@ -284,6 +319,19 @@ body {
         &:nth-child(even) {
           background: #78886a;
           color: white;
+        }
+
+        &.deleted {
+          animation: delete-animate 4s linear forwards;
+        }
+
+        @keyframes delete-animate {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-400px);
+          }
         }
 
         #content {

@@ -4,6 +4,7 @@ import { action, DATA, Mode, tasks } from "./Actions.js";
 export const placeholder = document.querySelector(
   "#placeholder"
 ) as HTMLElement;
+
 class UI {
   static instance: any;
 
@@ -34,7 +35,7 @@ class UI {
     tasks.innerHTML = "";
     for (let i = 0; i < arr.length; i++) {
       tasks.innerHTML += `
-      <div class="task ${arr[i].text}" data-id=${arr[i].id}>
+      <div class="task  ${arr[i].text}" data-id=${arr[i].id}>
       <div id=content >
       <p id="content"  >${arr[i].content}</p></div>
       <div id="time">
@@ -52,6 +53,7 @@ class UI {
 
     this.handleCheck(arr);
     action.displayClearAllBtn(arr);
+    // action.removeCreatedClass();
   }
 
   handlePlaceholderText() {

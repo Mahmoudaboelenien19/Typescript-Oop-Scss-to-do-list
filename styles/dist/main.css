@@ -279,7 +279,7 @@
   transform: translateY(-50%);
 }
 
-.pop, .bg-cont #tasks-section .task-cont .task #btns > *, .bg-cont #tasks-section .task-cont .task #btns, .bg-cont #tasks-section .task-cont #options #filters > *, .bg-cont #form-section form button#btn, .bg-cont #form-section form, .bg-cont > * {
+.pop, .bg-cont #tasks-section .task-cont .task #btns > *, .bg-cont #tasks-section .task-cont .task #btns, .bg-cont #tasks-section .task-cont #options #filters > *, .bg-cont #form-section form button#btn, .bg-cont #form-section form, .bg-cont > *, .bg-cont #mode {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -306,6 +306,20 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 3px;
+}
+.bg-cont #mode {
+  justify-content: start;
+  position: absolute;
+  top: 10px;
+  left: 5px;
+  background: rgba(46, 46, 160, 0.819);
+  width: 40px;
+  height: 20px;
+  z-index: 100;
+  padding: 0 4px;
+}
+.bg-cont #mode .fa-gear {
+  color: rgba(255, 255, 255, 0.628);
 }
 .bg-cont:before {
   content: "";
@@ -529,6 +543,17 @@ body {
   background: rgba(245, 222, 179, 0.858);
   margin: 0 auto;
 }
+.bg-cont #tasks-section .task-cont .task.created-animation {
+  animation: task-animate 1s linear forwards;
+}
+@keyframes task-animate {
+  0% {
+    transform: translateY(-100px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
 .bg-cont #tasks-section .task-cont .task:nth-child(1) {
   margin-top: 20px;
 }
@@ -538,6 +563,17 @@ body {
 .bg-cont #tasks-section .task-cont .task:nth-child(even) {
   background: #78886a;
   color: white;
+}
+.bg-cont #tasks-section .task-cont .task.deleted {
+  animation: delete-animate 4s linear forwards;
+}
+@keyframes delete-animate {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-400px);
+  }
 }
 .bg-cont #tasks-section .task-cont .task #content {
   grid-area: cont;

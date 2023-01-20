@@ -60,7 +60,9 @@ class Actions {
       arr.unshift(task);
 
       this.checkData(arr);
+
       ui.handlePopUp("success", "task sucessfully added !", doneIcon);
+      console.log(document.querySelector(".task"));
     } else {
       newArr = arr.map((ele: DATA) => {
         return +ele.id === updateId
@@ -98,10 +100,14 @@ class Actions {
       ?.parentElement as HTMLElement;
 
     if ((e.target as HTMLElement).classList.contains("del")) {
-      newArr = arr.filter((ele: DATA) => +ele.id !== +parent.dataset.id!);
-      arr = newArr;
-      ui.handlePopUp("success", "task sucessfully deleted", doneIcon);
-      this.checkData(arr);
+      (e.target as HTMLElement).classList.add("deleted");
+
+      setTimeout(() => {
+        newArr = arr.filter((ele: DATA) => +ele.id !== +parent.dataset.id!);
+        arr = newArr;
+        ui.handlePopUp("success", "task sucessfully deleted", doneIcon);
+        this.checkData(arr);
+      }, 100000);
     }
 
     if ((e.target as HTMLElement).classList.contains("update")) {
@@ -236,6 +242,7 @@ class Actions {
   checkData(arr: DATA[]) {
     if (arr.length == 0) {
       this.displayClearAllBtn(arr);
+
       ui.showData(arr);
 
       const div = document.createElement("div") as HTMLDivElement;
@@ -281,9 +288,18 @@ class Actions {
       inp.classList.remove("invalid");
     }
   }
+
   resetMode() {
     Mode = "create";
   }
+
+  handleeCreatedClass() {
+    const tasksAdded = document.querySelector(
+      ".task"
+    ) as unknown as NodeListOf<HTMLElement>;
+    tasksAdded.forEach((e) => e.classList.remove("created"));
+  }
+  // tasksAdded[0].classList.add("created")
 }
 
 export const action = new Actions();

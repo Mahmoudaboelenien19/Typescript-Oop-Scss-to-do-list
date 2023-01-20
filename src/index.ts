@@ -4,6 +4,7 @@ import { ui } from "./classes/UI.js";
 const form = document.querySelector("form") as HTMLFormElement;
 
 export const btn = document.querySelector("#btn") as HTMLButtonElement;
+const modeCont = document.querySelector("#mode ") as unknown as HTMLElement;
 
 for (let i = 0; i < 300; i++) {
   let span = document.createElement("span");
@@ -48,3 +49,13 @@ inp.addEventListener("blur", () => {
 });
 
 inp.addEventListener("input", action.handleInpBorder.bind(action));
+modeCont.addEventListener("click", (e: Event) => {
+  if ((e.target as HTMLElement).classList.contains("fa-gear")) {
+    document.documentElement.style.setProperty("--Mode", "light");
+    console.log("clicked");
+    console.log(
+      getComputedStyle(document.documentElement).getPropertyValue("--Mode")
+    );
+  }
+  ui.showData(arr);
+});
