@@ -29,6 +29,7 @@ filter.forEach((ele) => {
 inp.addEventListener("blur", () => {
     ui.handlePlaceholderText();
     ui.handleSubmitBtn();
+    action.removeInpBorder();
     // action.resetMode();
     /* *FIXME -
     * when i have update mode and make inp blur
@@ -36,3 +37,4 @@ inp.addEventListener("blur", () => {
     *i want to make at blur to be at create mode
     */
 });
+inp.addEventListener("input", action.handleInpBorder.bind(action));

@@ -89,6 +89,7 @@ class Actions {
     this.hideOptionsCont(arr);
     this.autoClick();
     inp.value = "";
+    this.removeInpBorder();
     inp.focus();
   }
 
@@ -253,13 +254,33 @@ class Actions {
   }
 
   validiation() {
-    if (inp.value.length > 0) {
+    if (inp.value.length === 0) {
+      ui.handlePopUp("danger", "add a task please !", undoneIcon);
+    } else if (inp.value.length >= 1 && inp.value.length <= 24) {
       this.addDataToArr();
     } else {
-      ui.handlePopUp("danger", "add a task please !", undoneIcon);
+      ui.handlePopUp("danger", "you can't exceed 25 letters", undoneIcon);
     }
   }
 
+  handleInpBorder(e: Event) {
+    if (inp.value.length === 0) {
+      this.removeInpBorder();
+    } else if (inp.value.length < 25 && inp.value.length >= 1) {
+      inp.classList.add("valid");
+      inp.classList.remove("invalid");
+    } else {
+      inp.classList.add("invalid");
+      inp.classList.remove("valid");
+    }
+  }
+
+  removeInpBorder() {
+    if (inp.value.length === 0) {
+      inp.classList.remove("valid");
+      inp.classList.remove("invalid");
+    }
+  }
   resetMode() {
     Mode = "create";
   }

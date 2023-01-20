@@ -143,6 +143,12 @@ body {
         padding-left: 10px;
         letter-spacing: 0.8px;
         width: 80%;
+        &.valid {
+          border-bottom: 3px solid rgb(38, 131, 38);
+        }
+        &.invalid {
+          border-bottom: 3px solid rgb(170, 46, 46);
+        }
       }
 
       button#btn {

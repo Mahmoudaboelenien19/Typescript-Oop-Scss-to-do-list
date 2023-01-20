@@ -405,6 +405,12 @@ body {
   letter-spacing: 0.8px;
   width: 80%;
 }
+.bg-cont #form-section form input.valid {
+  border-bottom: 3px solid rgb(38, 131, 38);
+}
+.bg-cont #form-section form input.invalid {
+  border-bottom: 3px solid rgb(170, 46, 46);
+}
 .bg-cont #form-section form button#btn {
   background: rgb(6, 6, 139);
   color: white;
