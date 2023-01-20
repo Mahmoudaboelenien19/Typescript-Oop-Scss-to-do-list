@@ -1,5 +1,4 @@
-import { arr, DATA } from "../index.js";
-import { action } from "./Actions.js";
+import { action, arr, DATA } from "./Actions.js";
 import { ui } from "./UI.js";
 
 class LocalStorageDATA {

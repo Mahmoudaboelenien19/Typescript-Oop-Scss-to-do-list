@@ -1,24 +1,39 @@
 import { TASK } from "./Task.js";
-import {
-  arr,
-  DATA,
-  inp,
-  tasks,
-  filter,
-  undoneIcon,
-  clear,
-  handelTime,
-  handelDate,
-  doneIcon,
-} from "../index.js";
+
 import local from "./localStorage.js";
 import { ui } from "./UI.js";
+export const inp = document.querySelector("#inp") as HTMLInputElement;
+export const clear = document.querySelector("#clr") as HTMLButtonElement;
+export const tasks = document.querySelector("#tasks") as HTMLElement;
+export const filter = document.querySelectorAll(
+  "#filters span"
+) as NodeListOf<HTMLElement>;
+
+const doneIcon =
+  `<i class="fa-solid fa-check-double"></i>` as unknown as HTMLElement;
+const undoneIcon =
+  `<i class="fa-solid fa-circle-xmark"></i>` as unknown as HTMLElement;
 
 export let newArr: DATA[];
 export let updateId: number;
 export let clickedFilterIndex = 0;
 
 export let Mode: string = "create";
+
+export interface DATA {
+  id: number;
+  content: string;
+  checked: boolean;
+  text: string;
+  date: string;
+  time: string;
+}
+
+export let arr: DATA[] = [];
+
+const handelTime = () => new Date().toLocaleTimeString();
+
+const handelDate = () => new Date().toLocaleDateString();
 
 class Actions {
   static instance: any;
@@ -57,8 +72,8 @@ class Actions {
             }
           : ele;
       });
-      arr.splice(0);
-      arr.push(...newArr);
+
+      arr = newArr;
       ui.showData(arr);
 
       Mode = "create";
@@ -72,6 +87,7 @@ class Actions {
     this.hideOptionsCont(arr);
     this.autoClick();
     inp.value = "";
+    inp.focus();
   }
 
   actionFn(e: MouseEvent): void {
@@ -80,15 +96,14 @@ class Actions {
 
     if ((e.target as HTMLElement).classList.contains("del")) {
       newArr = arr.filter((ele: DATA) => +ele.id !== +parent.dataset.id!);
-      arr.splice(0);
-      arr.push(...newArr);
+      arr = newArr;
       ui.handlePopUp("success", "task sucessfully deleted", doneIcon);
       this.checkData(arr);
     }
 
     if ((e.target as HTMLElement).classList.contains("update")) {
-      inp.value = "";
       Mode = "update";
+      inp.value = "";
       inp.focus();
 
       updateId = +parent.dataset.id!;
@@ -98,6 +113,7 @@ class Actions {
       inp.value = arr[updatedElementIndex].content;
       ui.handlePlaceholderText();
       ui.handleSubmitBtn();
+      console.log("mode" + Mode);
     }
 
     if ((e.target as HTMLElement).classList.contains("check")) {
@@ -120,8 +136,7 @@ class Actions {
             }
           : e
       );
-      arr.splice(0);
-      arr.push(...newArr);
+      arr = newArr;
     }
     /* add data to ui */
     this.checkData(arr);

@@ -1,5 +1,6 @@
-import { btn, placeholder, tasks } from "../index.js";
-import { action, Mode } from "./Actions.js";
+import { btn } from "../index.js";
+import { action, Mode, tasks } from "./Actions.js";
+export const placeholder = document.querySelector("#placeholder");
 class UI {
     constructor() {
         if (UI.instance) {

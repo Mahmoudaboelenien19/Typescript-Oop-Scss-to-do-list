@@ -10,8 +10,7 @@ var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
 var _a, _LocalStorageDATA_count;
-import { arr } from "../index.js";
-import { action } from "./Actions.js";
+import { action, arr } from "./Actions.js";
 import { ui } from "./UI.js";
 class LocalStorageDATA {
     constructor() {

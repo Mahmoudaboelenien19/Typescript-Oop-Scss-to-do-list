@@ -1,11 +1,19 @@
 import { TASK } from "./Task.js";
-import { arr, inp, tasks, filter, undoneIcon, clear, handelTime, handelDate, doneIcon, } from "../index.js";
 import local from "./localStorage.js";
 import { ui } from "./UI.js";
+export const inp = document.querySelector("#inp");
+export const clear = document.querySelector("#clr");
+export const tasks = document.querySelector("#tasks");
+export const filter = document.querySelectorAll("#filters span");
+const doneIcon = `<i class="fa-solid fa-check-double"></i>`;
+const undoneIcon = `<i class="fa-solid fa-circle-xmark"></i>`;
 export let newArr;
 export let updateId;
 export let clickedFilterIndex = 0;
 export let Mode = "create";
+export let arr = [];
+const handelTime = () => new Date().toLocaleTimeString();
+const handelDate = () => new Date().toLocaleDateString();
 class Actions {
     constructor() {
         if (Actions.instance) {
@@ -32,8 +40,7 @@ class Actions {
                 return +ele.id === updateId
                     ? Object.assign(Object.assign({}, ele), { content: inp.value, date: handelDate(), time: handelTime(), text: "updated", checked: false }) : ele;
             });
-            arr.splice(0);
-            arr.push(...newArr);
+            arr = newArr;
             ui.showData(arr);
             Mode = "create";
             ui.handlePopUp("success", "task sucessfully updated !", doneIcon);
@@ -45,33 +52,33 @@ class Actions {
         this.hideOptionsCont(arr);
         this.autoClick();
         inp.value = "";
+        inp.focus();
     }
     actionFn(e) {
         var _a, _b;
         const parent = (_a = e.target.parentElement) === null || _a === void 0 ? void 0 : _a.parentElement;
         if (e.target.classList.contains("del")) {
             newArr = arr.filter((ele) => +ele.id !== +parent.dataset.id);
-            arr.splice(0);
-            arr.push(...newArr);
+            arr = newArr;
             ui.handlePopUp("success", "task sucessfully deleted", doneIcon);
             this.checkData(arr);
         }
         if (e.target.classList.contains("update")) {
-            inp.value = "";
             Mode = "update";
+            inp.value = "";
             inp.focus();
             updateId = +parent.dataset.id;
             let updatedElementIndex = arr.findIndex((e) => e.id == updateId);
             inp.value = arr[updatedElementIndex].content;
             ui.handlePlaceholderText();
             ui.handleSubmitBtn();
+            console.log("mode" + Mode);
         }
         if (e.target.classList.contains("check")) {
             newArr = arr.map((e) => e.id == +parent.dataset.id && e.checked == false
                 ? Object.assign(Object.assign({}, e), { checked: true, date: handelDate(), time: handelTime(), text: "checked" }) : e.id == +parent.dataset.id && e.checked == true
                 ? Object.assign(Object.assign({}, e), { checked: false, date: handelDate(), time: handelTime(), text: "unchecked" }) : e);
-            arr.splice(0);
-            arr.push(...newArr);
+            arr = newArr;
         }
         /* add data to ui */
         this.checkData(arr);

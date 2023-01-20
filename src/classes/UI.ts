@@ -1,6 +1,9 @@
-import { btn, DATA, placeholder, tasks } from "../index.js";
-import { action, Mode } from "./Actions.js";
+import { btn } from "../index.js";
+import { action, DATA, Mode, tasks } from "./Actions.js";
 
+export const placeholder = document.querySelector(
+  "#placeholder"
+) as HTMLElement;
 class UI {
   static instance: any;
 
