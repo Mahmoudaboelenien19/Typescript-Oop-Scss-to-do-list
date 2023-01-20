@@ -95,7 +95,18 @@ body {
       font-size: 1.25rem;
       letter-spacing: 2px;
       padding-bottom: 5px;
-
+      span {
+        &:nth-child(1) {
+          // color: #6bcf14;
+          color: #1481cf;
+        }
+        &:nth-child(2) {
+          color: #a15dbc;
+        }
+        &:nth-child(3) {
+          color: #1481cf;
+        }
+      }
       &:before {
         content: "";
         position: absolute;
@@ -143,6 +154,7 @@ body {
         padding-left: 10px;
         letter-spacing: 0.8px;
         width: 80%;
+        transition: 0.3s;
         &.valid {
           border-bottom: 3px solid rgb(38, 131, 38);
         }

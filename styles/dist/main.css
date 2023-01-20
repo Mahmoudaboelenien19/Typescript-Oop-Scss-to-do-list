@@ -363,6 +363,15 @@ body {
   letter-spacing: 2px;
   padding-bottom: 5px;
 }
+.bg-cont #head-section p#head span:nth-child(1) {
+  color: #1481cf;
+}
+.bg-cont #head-section p#head span:nth-child(2) {
+  color: #a15dbc;
+}
+.bg-cont #head-section p#head span:nth-child(3) {
+  color: #1481cf;
+}
 .bg-cont #head-section p#head:before {
   content: "";
   position: absolute;
@@ -404,6 +413,7 @@ body {
   padding-left: 10px;
   letter-spacing: 0.8px;
   width: 80%;
+  transition: 0.3s;
 }
 .bg-cont #form-section form input.valid {
   border-bottom: 3px solid rgb(38, 131, 38);
