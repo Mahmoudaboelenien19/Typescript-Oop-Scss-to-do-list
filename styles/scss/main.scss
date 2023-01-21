@@ -3,16 +3,17 @@
 @use "./classes/classes.scss";
 @import "./helpers/mixins";
 
-$bg-clr: rgb(9, 9, 10);
-$bg-animate-clr: rgba(0, 0, 0, 0.74);
-
+:root {
+  --main: rgb(9, 9, 10);
+  --secondary: rgb(197, 195, 195);
+}
 body {
   height: 100vh;
   width: 100%;
   overflow: hidden;
-  background: $bg-clr;
+  background: var(--main);
   &.light {
-    background: rgb(197, 195, 195);
+    background: var(--main);
   }
 
   position: relative;
@@ -47,7 +48,7 @@ body {
       color: rgba(255, 255, 255, 0.628);
       transition: 0.5s;
       &.light {
-        color: $bg-clr;
+        color: rgb(197, 195, 195);
         animation: toggle-animate 1s linear forwards;
         @keyframes toggle-animate {
           0% {
@@ -60,8 +61,7 @@ body {
       }
     }
   }
-  &:before {
-    content: "";
+  #background {
     width: 100%;
     height: 100%;
     position: absolute;
@@ -70,11 +70,7 @@ body {
     transition: 0.3s;
     z-index: -5;
     animation: animate-bg 5s linear infinite;
-    background: linear-gradient(
-      $bg-animate-clr,
-      rgba(18, 19, 18, 0.384),
-      $bg-animate-clr
-    );
+    background: linear-gradient(var(--main), var(--secondary), var(--main));
   }
 
   @keyframes animate-bg {
@@ -101,7 +97,7 @@ body {
   }
 
   .bg-span:hover {
-    background: rgba(212, 208, 208, 0.795);
+    background: var(--secondary);
     transition: 0s;
   }
 
@@ -611,5 +607,6 @@ body {
   background: wheat;
   border-left: 3px solid rgb(6, 6, 139);
   border-right: 3px solid rgb(6, 6, 139);
-  color: black;
+  // color: black;
+  color: var(--secondary);
 }

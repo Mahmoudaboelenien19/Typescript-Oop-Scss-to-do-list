@@ -51,15 +51,33 @@ inp.addEventListener("blur", () => {
 inp.addEventListener("input", action.handleInpBorder.bind(action));
 modeCont.addEventListener("click", (e: Event) => {
   if ((e.target as HTMLElement).classList.contains("fa-gear")) {
+    let mode: string = "light";
+    let clr1 = "rgb(197, 195, 195)";
+    let clr2 = "rgb(9, 9, 10)";
+
+    if ((e.target as HTMLElement).classList.contains("light")) {
+      mode = "dark";
+    }
+
     document.body.classList.toggle("light");
     (e.target as HTMLElement).classList.toggle("light");
 
     (document.querySelectorAll(".bg-span") as NodeListOf<HTMLElement>).forEach(
       (e) => e.classList.toggle("light")
-    );
-    document.documentElement.style.setProperty("$bg-animate-clr", "black");
+ 
+    if (mode == "light") {
+
+      document.documentElement.style.setProperty("--main", clr1);
+      document.documentElement.style.setProperty("--secondary", clr2);
+    } else {
+
+      document.documentElement.style.setProperty("--main", clr2);
+      document.documentElement.style.setProperty("--secondary", clr1);
+    }
+
     (document.querySelectorAll("span#dark") as NodeListOf<HTMLElement>).forEach(
       (e) => e.classList.toggle("light")
     );
+    // mode = "dark";
   }
 });
