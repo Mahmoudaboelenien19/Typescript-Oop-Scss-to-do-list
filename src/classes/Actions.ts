@@ -62,7 +62,6 @@ class Actions {
       this.checkData(arr);
 
       ui.handlePopUp("success", "task sucessfully added !", doneIcon);
-      console.log(document.querySelector(".task"));
     } else {
       newArr = arr.map((ele: DATA) => {
         return +ele.id === updateId
@@ -102,12 +101,35 @@ class Actions {
     if ((e.target as HTMLElement).classList.contains("del")) {
       (e.target as HTMLElement).classList.add("deleted");
 
+      const deleted = arr.find(
+        (e) => +e.id == +parent.dataset.id!
+      ) as unknown as Element;
+      console.log(deleted);
+      console.log(deleted!.id);
+
+      document.getElementById(deleted!.id)?.classList.add("deleted");
+      console.log(document.getElementById(deleted!.id));
+      (document.querySelectorAll(".task") as NodeListOf<HTMLElement>).forEach(
+        (e) => {
+          e.dataset.id! == deleted!.id ? e.classList.add("task-deleted") : null;
+          console.log(e);
+        }
+      );
+
+      ui.handlePopUp("success", "task sucessfully deleted", doneIcon);
+
+      newArr = arr.filter((ele: DATA) => +ele.id !== +parent.dataset.id!);
+      arr = newArr;
+      local.saveDataToLocalStorage(arr);
       setTimeout(() => {
-        newArr = arr.filter((ele: DATA) => +ele.id !== +parent.dataset.id!);
-        arr = newArr;
-        ui.handlePopUp("success", "task sucessfully deleted", doneIcon);
         this.checkData(arr);
-      }, 100000);
+        this.handleFilterText(arr);
+        if (arr.length == 0) {
+          this.removeActiveClass();
+          document.querySelector("span.all")?.classList.add("active");
+        }
+        this.autoClick();
+      }, 550);
     }
 
     if ((e.target as HTMLElement).classList.contains("update")) {
@@ -123,6 +145,11 @@ class Actions {
       ui.handlePlaceholderText();
       ui.handleSubmitBtn();
       console.log("1" + Mode);
+      this.checkData(arr);
+      local.saveDataToLocalStorage(arr);
+
+      this.autoClick();
+      this.handleFilterText(arr);
     }
 
     if ((e.target as HTMLElement).classList.contains("check")) {
@@ -146,17 +173,21 @@ class Actions {
           : e
       );
       arr = newArr;
+      this.checkData(arr);
+      local.saveDataToLocalStorage(arr);
+      this.autoClick();
     }
-    /* add data to ui */
-    this.checkData(arr);
+
     this.handleFilterText(arr);
-    local.saveDataToLocalStorage(arr);
+
+    // this.checkData(arr);
+    // local.saveDataToLocalStorage(arr);
+    // this.autoClick();
 
     if (arr.length == 0) {
       this.removeActiveClass();
       document.querySelector("span.all")?.classList.add("active");
     }
-    this.autoClick();
   }
 
   autoClick() {
@@ -244,7 +275,6 @@ class Actions {
       this.displayClearAllBtn(arr);
 
       ui.showData(arr);
-
       const div = document.createElement("div") as HTMLDivElement;
       div.setAttribute("class", `no-data`);
 
@@ -254,7 +284,6 @@ class Actions {
       tasks!.insertAdjacentElement("afterbegin", div);
     } else {
       document.querySelector(".no-data")?.classList.add("hide");
-
       ui.showData(arr);
     }
     this.hideOptionsCont(arr);

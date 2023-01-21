@@ -35,7 +35,6 @@ class Actions {
             arr.unshift(task);
             this.checkData(arr);
             ui.handlePopUp("success", "task sucessfully added !", doneIcon);
-            console.log(document.querySelector(".task"));
         }
         else {
             newArr = arr.map((ele) => {
@@ -58,16 +57,33 @@ class Actions {
         inp.focus();
     }
     actionFn(e) {
-        var _a, _b;
+        var _a, _b, _c;
         const parent = (_a = e.target.parentElement) === null || _a === void 0 ? void 0 : _a.parentElement;
         if (e.target.classList.contains("del")) {
             e.target.classList.add("deleted");
+            const deleted = arr.find((e) => +e.id == +parent.dataset.id);
+            console.log(deleted);
+            console.log(deleted.id);
+            (_b = document.getElementById(deleted.id)) === null || _b === void 0 ? void 0 : _b.classList.add("deleted");
+            console.log(document.getElementById(deleted.id));
+            document.querySelectorAll(".task").forEach((e) => {
+                e.dataset.id == deleted.id ? e.classList.add("task-deleted") : null;
+                console.log(e);
+            });
+            ui.handlePopUp("success", "task sucessfully deleted", doneIcon);
+            newArr = arr.filter((ele) => +ele.id !== +parent.dataset.id);
+            arr = newArr;
+            local.saveDataToLocalStorage(arr);
             setTimeout(() => {
-                newArr = arr.filter((ele) => +ele.id !== +parent.dataset.id);
-                arr = newArr;
-                ui.handlePopUp("success", "task sucessfully deleted", doneIcon);
+                var _a;
                 this.checkData(arr);
-            }, 100000);
+                this.handleFilterText(arr);
+                if (arr.length == 0) {
+                    this.removeActiveClass();
+                    (_a = document.querySelector("span.all")) === null || _a === void 0 ? void 0 : _a.classList.add("active");
+                }
+                this.autoClick();
+            }, 550);
         }
         if (e.target.classList.contains("update")) {
             Mode = "update";
@@ -79,22 +95,28 @@ class Actions {
             ui.handlePlaceholderText();
             ui.handleSubmitBtn();
             console.log("1" + Mode);
+            this.checkData(arr);
+            local.saveDataToLocalStorage(arr);
+            this.autoClick();
+            this.handleFilterText(arr);
         }
         if (e.target.classList.contains("check")) {
             newArr = arr.map((e) => e.id == +parent.dataset.id && e.checked == false
                 ? Object.assign(Object.assign({}, e), { checked: true, date: handelDate(), time: handelTime(), text: "checked" }) : e.id == +parent.dataset.id && e.checked == true
                 ? Object.assign(Object.assign({}, e), { checked: false, date: handelDate(), time: handelTime(), text: "unchecked" }) : e);
             arr = newArr;
+            this.checkData(arr);
+            local.saveDataToLocalStorage(arr);
+            this.autoClick();
         }
-        /* add data to ui */
-        this.checkData(arr);
         this.handleFilterText(arr);
-        local.saveDataToLocalStorage(arr);
+        // this.checkData(arr);
+        // local.saveDataToLocalStorage(arr);
+        // this.autoClick();
         if (arr.length == 0) {
             this.removeActiveClass();
-            (_b = document.querySelector("span.all")) === null || _b === void 0 ? void 0 : _b.classList.add("active");
+            (_c = document.querySelector("span.all")) === null || _c === void 0 ? void 0 : _c.classList.add("active");
         }
-        this.autoClick();
     }
     autoClick() {
         filter[clickedFilterIndex].click();

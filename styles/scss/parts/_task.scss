@@ -1,0 +1,192 @@
+@import "../helpers/mixins";
+
+#tasks-section {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%);
+  z-index: 500;
+  width: 80%;
+  margin: 0 auto;
+  min-height: 80px;
+  max-height: 200px;
+
+  .task-cont {
+    min-height: 80px;
+    max-height: 200px;
+    background: rgb(91, 88, 88);
+    width: 100%;
+    border-radius: 8px;
+
+    #tasks {
+      display: flex;
+      min-height: 80px;
+      max-height: 160px;
+      flex-direction: column;
+      overflow: auto;
+      gap: 5px;
+    }
+
+    #options {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 10px;
+
+      width: 100%;
+      height: calc(30px + 5px * 2);
+      border: 2px solid rgba(0, 0, 0, 0.096);
+      &.hide {
+        display: none;
+      }
+      #clr {
+        @include button(rgb(97, 5, 5), (rgb(243, 38, 38)));
+        height: 30px;
+        width: 120px;
+        border-radius: 8px;
+        margin: 5px;
+        &.hide {
+          display: none;
+        }
+
+        &.block {
+          display: block;
+        }
+      }
+
+      #filters {
+        width: 80%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        text-transform: capitalize;
+        &.hide {
+          display: none;
+        }
+        > * {
+          @extend %centered;
+          cursor: pointer;
+          width: fit-content;
+          padding: 0 10px;
+          color: rgb(1, 161, 161);
+          font-size: 0.75em;
+          height: 30px;
+          font-weight: 700;
+          letter-spacing: 1px;
+          transition: 0.3s;
+          &.active {
+            color: rgba(255, 255, 255, 0.571);
+            border-bottom: rgb(1, 161, 161) 3px solid;
+          }
+          &:hover {
+            color: white;
+          }
+        }
+      }
+    }
+
+    .task {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template:
+        "cont cont cont  btn" 25px
+        "time time time  btn" 10px;
+      min-height: 40px;
+      width: calc(100% - 10px);
+      justify-content: space-between;
+      padding: 0 15px;
+      background: rgba(245, 222, 179, 0.858);
+      margin: 0 auto;
+      &.created-animation {
+        animation: task-animate 1s linear forwards;
+      }
+
+      @keyframes task-animate {
+        0% {
+          transform: translateY(-100px);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+
+      &.task-deleted {
+        animation: delete 0.5s linear forwards;
+      }
+      @keyframes delete {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-500px);
+        }
+      }
+      &:nth-child(1) {
+        margin-top: 20px;
+      }
+      &:last-child {
+        margin-bottom: 20px;
+      }
+      &:nth-child(even) {
+        background: #78886a;
+        color: white;
+      }
+
+      #content {
+        grid-area: cont;
+        font-weight: bold;
+      }
+
+      #time {
+        grid-area: time;
+        font-size: 11px;
+        font-weight: bold;
+
+        .text {
+          font-weight: bolder;
+        }
+      }
+
+      #btns {
+        @extend %centered;
+        gap: 3px;
+        grid-area: btn;
+        width: 100%;
+        height: 100%;
+
+        > * {
+          @extend %centered;
+          border-radius: 2px;
+          text-align: center;
+        }
+      }
+    }
+
+    $classes: "update" rgb(4, 73, 4) rgb(7, 145, 7),
+      "check" rgba(8, 8, 124, 0.966) rgba(7, 7, 194, 0.966),
+      "del" rgb(97, 5, 5) rgb(243, 38, 38);
+
+    @each $class, $clr, $hvr in $classes {
+      .#{$class } {
+        @include button($clr, $hvr);
+
+        color: white;
+        width: 15px;
+        height: 15px;
+        transition: 0.3s;
+        padding: 3px;
+      }
+    }
+  }
+
+  p#content {
+    padding: 5px;
+
+    &.checked {
+      text-decoration: line-through;
+      opacity: 0.7;
+      text-decoration-color: rgb(89, 4, 4);
+      text-decoration-thickness: 3px;
+    }
+  }
+}
