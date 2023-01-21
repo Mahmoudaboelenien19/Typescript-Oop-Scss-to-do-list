@@ -97,7 +97,7 @@
       padding: 0 15px;
       background: rgba(245, 222, 179, 0.858);
       margin: 0 auto;
-      &.created-animation {
+      &.task-created {
         animation: task-animate 1s linear forwards;
       }
 
@@ -111,14 +111,14 @@
       }
 
       &.task-deleted {
-        animation: delete 0.5s linear forwards;
+        animation: delete 1s linear forwards;
       }
       @keyframes delete {
         0% {
           transform: translateX(0);
         }
         100% {
-          transform: translateX(-500px);
+          transform: translateX(-105%);
         }
       }
       &:nth-child(1) {

@@ -4,6 +4,13 @@ import local from "./localStorage.js";
 import { ui } from "./UI.js";
 export const inp = document.querySelector("#inp") as HTMLInputElement;
 export const clear = document.querySelector("#clr") as HTMLButtonElement;
+export const clearPopCont = document.querySelector(
+  ".pop-del-cont "
+) as HTMLElement;
+export const clearPopup = document.querySelector(".pop-del ") as HTMLElement;
+const clrPopBtn = document.querySelector(".clr-pop") as HTMLButtonElement;
+
+const cancel = document.querySelector(".cancel") as HTMLButtonElement;
 export const tasks = document.querySelector("#tasks") as HTMLElement;
 export const filter = document.querySelectorAll(
   "#filters span"
@@ -33,7 +40,7 @@ export let arr: DATA[] = [];
 
 const handelTime = () => new Date().toLocaleTimeString();
 
-const handelDate = () => new Date().toLocaleDateString();
+export const handelDate = () => new Date().toLocaleDateString();
 
 class Actions {
   static instance: any;
@@ -129,7 +136,7 @@ class Actions {
           document.querySelector("span.all")?.classList.add("active");
         }
         this.autoClick();
-      }, 550);
+      }, 1000);
     }
 
     if ((e.target as HTMLElement).classList.contains("update")) {
@@ -198,6 +205,9 @@ class Actions {
       e.classList.remove("active");
     });
   }
+  handleClearAllPop() {
+    clearPopCont.classList.remove("hide");
+  }
 
   clearAll() {
     arr.splice(0);
@@ -206,6 +216,21 @@ class Actions {
     local.saveDataToLocalStorage(arr);
     this.handleFilterText(arr);
     this.hideOptionsCont(arr);
+  }
+  hideClrPop() {
+    clearPopCont.classList.add("hide");
+    clearPopup.classList.remove("hide");
+  }
+
+  handleClearing(e: Event) {
+    if ((e.target as HTMLElement).classList.contains("clr-pop")) {
+      this.clearAll();
+      this.hideClrPop();
+    } else if ((e.target as HTMLElement).classList.contains("cancel")) {
+      clearPopup.classList.add("hide");
+
+      this.hideClrPop();
+    }
   }
 
   displayClearAllBtn(arr: DATA[]) {

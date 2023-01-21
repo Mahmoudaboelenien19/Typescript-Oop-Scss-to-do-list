@@ -279,7 +279,7 @@
   transform: translateY(-50%);
 }
 
-.bg-cont > *, .pop, #head-section nav#head #mode, #head-section nav#head #logo, #head-section nav#head {
+.bg-cont > *, .pop, .pop-del-cont, .pop-del-cont .pop-del, .pop-del-cont .pop-btns, #head-section nav#head #mode, #head-section nav#head #logo, #head-section nav#head {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -341,7 +341,7 @@
   }
 }
 
-.bg-cont > *, .pop, #form-section form button#btn, #form-section form {
+.bg-cont > *, .pop, .pop-del-cont, .pop-del-cont .pop-del, .pop-del-cont .pop-btns, #form-section form button#btn, #form-section form {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -497,7 +497,7 @@
   color: var(--main);
 }
 
-.bg-cont > *, .pop, #tasks-section .task-cont .task #btns > *, #tasks-section .task-cont .task #btns, #tasks-section .task-cont #options #filters > * {
+.bg-cont > *, .pop, .pop-del-cont, .pop-del-cont .pop-del, .pop-del-cont .pop-btns, #tasks-section .task-cont .task #btns > *, #tasks-section .task-cont .task #btns, #tasks-section .task-cont #options #filters > * {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -601,7 +601,7 @@
   background: rgba(245, 222, 179, 0.858);
   margin: 0 auto;
 }
-#tasks-section .task-cont .task.created-animation {
+#tasks-section .task-cont .task.task-created {
   animation: task-animate 1s linear forwards;
 }
 @keyframes task-animate {
@@ -613,14 +613,14 @@
   }
 }
 #tasks-section .task-cont .task.task-deleted {
-  animation: delete 0.5s linear forwards;
+  animation: delete 1s linear forwards;
 }
 @keyframes delete {
   0% {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-500px);
+    transform: translateX(-105%);
   }
 }
 #tasks-section .task-cont .task:nth-child(1) {
@@ -713,7 +713,7 @@
   text-decoration-thickness: 3px;
 }
 
-.pop, .bg-cont > * {
+.pop-del-cont .pop-btns, .pop-del-cont .pop-del, .pop-del-cont, .pop, .bg-cont > * {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -876,6 +876,68 @@ body.light {
   .bg-cont #head-section {
     width: 70%;
   }
+}
+.pop-del-cont {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.1);
+  z-index: 1000;
+}
+.pop-del-cont.hide {
+  display: none;
+}
+.pop-del-cont .pop-del {
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 220px;
+  height: 150px;
+  background: rgb(23, 11, 78);
+  border-radius: 5px;
+  animation: clr-pop 1s linear forwards;
+}
+@keyframes clr-pop {
+  0% {
+    transform: translateY(-400px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+.pop-del-cont p {
+  color: white;
+}
+.pop-del-cont .pop-btns {
+  gap: 20px;
+}
+.pop-del-cont button {
+  padding: 10px;
+  color: white;
+  border-radius: 2px;
+}
+.pop-del-cont .clr-pop {
+  background: rgb(97, 5, 5);
+  color: white;
+  transition: 0.3s;
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+.pop-del-cont .clr-pop:hover {
+  background-color: rgb(243, 38, 38);
+}
+.pop-del-cont .cancel {
+  background: grey;
+  color: white;
+  transition: 0.3s;
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+.pop-del-cont .cancel:hover {
+  background-color: rgb(200, 193, 193);
 }
 
 /*# sourceMappingURL=main.css.map */

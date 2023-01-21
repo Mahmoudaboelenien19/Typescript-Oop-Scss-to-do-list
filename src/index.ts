@@ -1,6 +1,15 @@
-import { action, arr, clear, filter, inp, tasks } from "./classes/Actions.js";
+import {
+  action,
+  arr,
+  clear,
+  clearPopup,
+  filter,
+  inp,
+  tasks,
+} from "./classes/Actions.js";
 import local from "./classes/localStorage.js";
 import { ui } from "./classes/UI.js";
+
 const form = document.querySelector("form") as HTMLFormElement;
 
 export const btn = document.querySelector("#btn") as HTMLButtonElement;
@@ -24,8 +33,8 @@ local.getDataFromLocalStorage();
 btn.addEventListener("click", action.validiation.bind(action));
 
 tasks.addEventListener("click", action.actionFn.bind(action));
-
-clear.addEventListener("click", action.clearAll.bind(action));
+//  action.clearAll.bind(action)
+clear.addEventListener("click", action.handleClearAllPop);
 
 filter.forEach((ele) => {
   action.handleFilterText(arr);
@@ -78,3 +87,5 @@ modeCont.addEventListener("click", (e: Event) => {
     }
   }
 });
+
+clearPopup.addEventListener("click", action.handleClearing.bind(action));

@@ -3,6 +3,10 @@ import local from "./localStorage.js";
 import { ui } from "./UI.js";
 export const inp = document.querySelector("#inp");
 export const clear = document.querySelector("#clr");
+export const clearPopCont = document.querySelector(".pop-del-cont ");
+export const clearPopup = document.querySelector(".pop-del ");
+const clrPopBtn = document.querySelector(".clr-pop");
+const cancel = document.querySelector(".cancel");
 export const tasks = document.querySelector("#tasks");
 export const filter = document.querySelectorAll("#filters span");
 const doneIcon = `<i class="fa-solid fa-check-double"></i>`;
@@ -13,7 +17,7 @@ export let clickedFilterIndex = 0;
 export let Mode = "create";
 export let arr = [];
 const handelTime = () => new Date().toLocaleTimeString();
-const handelDate = () => new Date().toLocaleDateString();
+export const handelDate = () => new Date().toLocaleDateString();
 class Actions {
     constructor() {
         if (Actions.instance) {
@@ -83,7 +87,7 @@ class Actions {
                     (_a = document.querySelector("span.all")) === null || _a === void 0 ? void 0 : _a.classList.add("active");
                 }
                 this.autoClick();
-            }, 550);
+            }, 1000);
         }
         if (e.target.classList.contains("update")) {
             Mode = "update";
@@ -126,6 +130,9 @@ class Actions {
             e.classList.remove("active");
         });
     }
+    handleClearAllPop() {
+        clearPopCont.classList.remove("hide");
+    }
     clearAll() {
         arr.splice(0);
         this.checkData(arr);
@@ -133,6 +140,20 @@ class Actions {
         local.saveDataToLocalStorage(arr);
         this.handleFilterText(arr);
         this.hideOptionsCont(arr);
+    }
+    hideClrPop() {
+        clearPopCont.classList.add("hide");
+        clearPopup.classList.remove("hide");
+    }
+    handleClearing(e) {
+        if (e.target.classList.contains("clr-pop")) {
+            this.clearAll();
+            this.hideClrPop();
+        }
+        else if (e.target.classList.contains("cancel")) {
+            clearPopup.classList.add("hide");
+            this.hideClrPop();
+        }
     }
     displayClearAllBtn(arr) {
         if (arr.length < 2) {
