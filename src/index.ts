@@ -62,22 +62,19 @@ modeCont.addEventListener("click", (e: Event) => {
     document.body.classList.toggle("light");
     (e.target as HTMLElement).classList.toggle("light");
 
+    (document.querySelector(".fa-gear") as Element).classList.toggle("light");
+    (e.target as HTMLElement).classList.toggle("light");
+
     (document.querySelectorAll(".bg-span") as NodeListOf<HTMLElement>).forEach(
       (e) => e.classList.toggle("light")
- 
-    if (mode == "light") {
+    );
 
+    if (mode == "light") {
       document.documentElement.style.setProperty("--main", clr1);
       document.documentElement.style.setProperty("--secondary", clr2);
     } else {
-
       document.documentElement.style.setProperty("--main", clr2);
       document.documentElement.style.setProperty("--secondary", clr1);
     }
-
-    (document.querySelectorAll("span#dark") as NodeListOf<HTMLElement>).forEach(
-      (e) => e.classList.toggle("light")
-    );
-    // mode = "dark";
   }
 });

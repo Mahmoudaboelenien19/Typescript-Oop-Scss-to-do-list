@@ -1,11 +1,13 @@
 @use "./helpers/globals";
 @use "./helpers/grid-system";
 @use "./classes/classes.scss";
+@use "./parts/navbar.scss";
+@use "./parts/form.scss";
 @import "./helpers/mixins";
 
 :root {
   --main: rgb(9, 9, 10);
-  --secondary: rgb(197, 195, 195);
+  --secondary: rgb(191, 190, 190);
 }
 body {
   height: 100vh;
@@ -15,17 +17,20 @@ body {
   &.light {
     background: var(--main);
   }
-
-  position: relative;
 }
 
 .row {
   width: 100%;
 }
 
+.container {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+}
 .bg-cont {
   position: absolute;
-  top: 0%;
+  top: 40px;
   left: 0%;
   width: 104%;
   height: 104%;
@@ -33,39 +38,11 @@ body {
   flex-wrap: wrap;
   gap: 3px;
 
-  #mode {
-    @extend %centered;
-    justify-content: start;
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    background: rgba(46, 46, 160, 0.819);
-    width: 40px;
-    height: 20px;
-    z-index: 100;
-    .fa-gear {
-      width: 16px;
-      color: rgba(255, 255, 255, 0.628);
-      transition: 0.5s;
-      &.light {
-        color: rgb(197, 195, 195);
-        animation: toggle-animate 1s linear forwards;
-        @keyframes toggle-animate {
-          0% {
-            transform: translateX(0) rotate(0);
-          }
-          100% {
-            transform: translateX(calc(40px - 16px)) rotate(360deg);
-          }
-        }
-      }
-    }
-  }
   #background {
     width: 100%;
     height: 100%;
     position: absolute;
-    top: 0;
+    top: 40px;
     left: 0;
     transition: 0.3s;
     z-index: -5;
@@ -104,314 +81,196 @@ body {
   > * {
     @extend %centered;
   }
+}
+#tasks-section {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 500;
+  width: 60%;
+  margin: 0 auto;
+  min-height: 80px;
+  max-height: 200px;
 
-  #head-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: fit-content;
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-
-    width: 60%;
-    height: 80px;
-    z-index: 55;
-
-    img {
-      width: 25px;
-      height: 25px;
-      color: antiquewhite;
-    }
-    p#head {
-      @extend %centered;
-      gap: 4px;
-
-      align-items: center;
-      position: relative;
-      color: white;
-      font-size: 1.25rem;
-      letter-spacing: 2px;
-      padding-bottom: 5px;
-      background-color: #0a070474;
-      span {
-        &:nth-child(2) {
-          // color: #6bcf14;
-          color: #1481cf;
-        }
-        &:nth-child(4) {
-          color: #a15dbc;
-        }
-        &:nth-child(6) {
-          color: #1481cf;
-        }
-      }
-      span#dark {
-        &.light {
-          color: #0a0704;
-        }
-      }
-      &:before {
-        content: "";
-        position: absolute;
-        top: 100%;
-        left: 15%;
-        height: 2px;
-        width: 70%;
-        background: linear-gradient(135deg, wheat, rgb(51, 48, 230));
-      }
-    }
-  }
-
-  #form-section {
-    position: absolute;
-    width: 80%;
-    top: 25%;
-    left: 50%;
-    transform: translateX(-50%);
-    height: 100px;
-    z-index: 500;
-
-    #form-parent {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      height: 100%;
-    }
-
-    form {
-      @extend %centered;
-      position: absolute;
-      gap: 0;
-      width: 80%;
-      height: 40px;
-
-      > * {
-        outline: none;
-        border: none;
-        box-shadow: none;
-      }
-
-      input {
-        height: 100%;
-        padding-left: 10px;
-        letter-spacing: 0.8px;
-        width: 80%;
-        transition: 0.3s;
-        &.valid {
-          border-bottom: 3px solid rgb(38, 131, 38);
-        }
-        &.invalid {
-          border-bottom: 3px solid rgb(170, 46, 46);
-        }
-      }
-
-      button#btn {
-        @extend %centered;
-        background: rgb(6, 6, 139);
-        color: white;
-        gap: 5px;
-        height: 100%;
-        width: 15%;
-        &:hover {
-          color: wheat;
-        }
-      }
-    }
-  }
-
-  #tasks-section {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 500;
-    width: 60%;
-    margin: 0 auto;
+  .task-cont {
     min-height: 80px;
     max-height: 200px;
+    background: rgb(91, 88, 88);
+    width: 80%;
+    border-radius: 8px;
 
-    .task-cont {
+    #tasks {
+      display: flex;
       min-height: 80px;
-      max-height: 200px;
-      background: rgb(91, 88, 88);
-      width: 80%;
-      border-radius: 8px;
+      max-height: 160px;
+      flex-direction: column;
+      overflow: auto;
+      gap: 5px;
+    }
 
-      #tasks {
-        display: flex;
-        min-height: 80px;
-        max-height: 160px;
-        flex-direction: column;
-        overflow: auto;
-        gap: 5px;
+    #options {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 10px;
+
+      width: 100%;
+      height: calc(30px + 5px * 2);
+      border: 2px solid rgba(0, 0, 0, 0.096);
+      &.hide {
+        display: none;
       }
-
-      #options {
-        display: flex;
-        justify-content: space-between;
-        padding: 0 10px;
-
-        width: 100%;
-        height: calc(30px + 5px * 2);
-        border: 2px solid rgba(0, 0, 0, 0.096);
+      #clr {
+        @include button(rgb(97, 5, 5), (rgb(243, 38, 38)));
+        height: 30px;
+        width: 120px;
+        border-radius: 8px;
+        margin: 5px;
         &.hide {
           display: none;
         }
-        #clr {
-          @include button(rgb(97, 5, 5), (rgb(243, 38, 38)));
-          height: 30px;
-          width: 120px;
-          border-radius: 8px;
-          margin: 5px;
-          &.hide {
-            display: none;
-          }
 
-          &.block {
-            display: block;
-          }
-        }
-
-        #filters {
-          width: 80%;
-          height: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: space-evenly;
-          text-transform: capitalize;
-          &.hide {
-            display: none;
-          }
-          > * {
-            @extend %centered;
-            cursor: pointer;
-            width: fit-content;
-            padding: 0 10px;
-            color: rgb(1, 161, 161);
-            font-size: 0.75em;
-            height: 30px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            transition: 0.3s;
-            &.active {
-              color: rgba(255, 255, 255, 0.571);
-              border-bottom: rgb(1, 161, 161) 3px solid;
-            }
-            &:hover {
-              color: white;
-            }
-          }
+        &.block {
+          display: block;
         }
       }
 
-      .task {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        grid-template:
-          "cont cont cont  btn" 25px
-          "time time time  btn" 10px;
-        min-height: 40px;
-        width: calc(100% - 10px);
-        justify-content: space-between;
-        padding: 0 15px;
-        background: rgba(245, 222, 179, 0.858);
-        margin: 0 auto;
-        &.created-animation {
-          animation: task-animate 1s linear forwards;
+      #filters {
+        width: 80%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        text-transform: capitalize;
+        &.hide {
+          display: none;
         }
-
-        @keyframes task-animate {
-          0% {
-            transform: translateY(-100px);
-          }
-          100% {
-            transform: translateY(0);
-          }
-        }
-
-        &:nth-child(1) {
-          margin-top: 20px;
-        }
-        &:last-child {
-          margin-bottom: 20px;
-        }
-        &:nth-child(even) {
-          background: #78886a;
-          color: white;
-        }
-
-        &.deleted {
-          animation: delete-animate 4s linear forwards;
-        }
-
-        @keyframes delete-animate {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-400px);
-          }
-        }
-
-        #content {
-          grid-area: cont;
-          font-weight: bold;
-        }
-
-        #time {
-          grid-area: time;
-          font-size: 11px;
-          font-weight: bold;
-
-          .text {
-            font-weight: bolder;
-          }
-        }
-
-        #btns {
+        > * {
           @extend %centered;
-          gap: 3px;
-          grid-area: btn;
-          width: 100%;
-          height: 100%;
-
-          > * {
-            @extend %centered;
-            border-radius: 2px;
-            text-align: center;
-          }
-        }
-      }
-
-      $classes: "update" rgb(4, 73, 4) rgb(7, 145, 7),
-        "check" rgba(8, 8, 124, 0.966) rgba(7, 7, 194, 0.966),
-        "del" rgb(97, 5, 5) rgb(243, 38, 38);
-
-      @each $class, $clr, $hvr in $classes {
-        .#{$class } {
-          @include button($clr, $hvr);
-
-          color: white;
-          width: 15px;
-          height: 15px;
+          cursor: pointer;
+          width: fit-content;
+          padding: 0 10px;
+          color: rgb(1, 161, 161);
+          font-size: 0.75em;
+          height: 30px;
+          font-weight: 700;
+          letter-spacing: 1px;
           transition: 0.3s;
-          padding: 3px;
+          &.active {
+            color: rgba(255, 255, 255, 0.571);
+            border-bottom: rgb(1, 161, 161) 3px solid;
+          }
+          &:hover {
+            color: white;
+          }
         }
       }
     }
 
-    p#content {
-      padding: 5px;
-
-      &.checked {
-        text-decoration: line-through;
-        opacity: 0.7;
-        text-decoration-color: rgb(89, 4, 4);
-        text-decoration-thickness: 3px;
+    .task {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template:
+        "cont cont cont  btn" 25px
+        "time time time  btn" 10px;
+      min-height: 40px;
+      width: calc(100% - 10px);
+      justify-content: space-between;
+      padding: 0 15px;
+      background: rgba(245, 222, 179, 0.858);
+      margin: 0 auto;
+      &.created-animation {
+        animation: task-animate 1s linear forwards;
       }
+
+      @keyframes task-animate {
+        0% {
+          transform: translateY(-100px);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+
+      &:nth-child(1) {
+        margin-top: 20px;
+      }
+      &:last-child {
+        margin-bottom: 20px;
+      }
+      &:nth-child(even) {
+        background: #78886a;
+        color: white;
+      }
+
+      &.deleted {
+        animation: delete-animate 4s linear forwards;
+      }
+
+      @keyframes delete-animate {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-400px);
+        }
+      }
+
+      #content {
+        grid-area: cont;
+        font-weight: bold;
+      }
+
+      #time {
+        grid-area: time;
+        font-size: 11px;
+        font-weight: bold;
+
+        .text {
+          font-weight: bolder;
+        }
+      }
+
+      #btns {
+        @extend %centered;
+        gap: 3px;
+        grid-area: btn;
+        width: 100%;
+        height: 100%;
+
+        > * {
+          @extend %centered;
+          border-radius: 2px;
+          text-align: center;
+        }
+      }
+    }
+
+    $classes: "update" rgb(4, 73, 4) rgb(7, 145, 7),
+      "check" rgba(8, 8, 124, 0.966) rgba(7, 7, 194, 0.966),
+      "del" rgb(97, 5, 5) rgb(243, 38, 38);
+
+    @each $class, $clr, $hvr in $classes {
+      .#{$class } {
+        @include button($clr, $hvr);
+
+        color: white;
+        width: 15px;
+        height: 15px;
+        transition: 0.3s;
+        padding: 3px;
+      }
+    }
+  }
+
+  p#content {
+    padding: 5px;
+
+    &.checked {
+      text-decoration: line-through;
+      opacity: 0.7;
+      text-decoration-color: rgb(89, 4, 4);
+      text-decoration-thickness: 3px;
     }
   }
 }
@@ -595,6 +454,7 @@ body {
   left: 40px;
   top: 50%;
   transform: translateY(-50%);
+  color: var(--main);
 }
 
 #form-section form input:focus ~ #placeholder,
@@ -604,9 +464,9 @@ body {
   //or
   top: 0;
   border-radius: 2px;
-  background: wheat;
-  border-left: 3px solid rgb(6, 6, 139);
-  border-right: 3px solid rgb(6, 6, 139);
-  // color: black;
-  color: var(--secondary);
+  background: rgb(156, 125, 66);
+  border: {
+    left: 3px solid rgb(6, 6, 139);
+    right: 3px solid rgb(6, 6, 139);
+  }
 }

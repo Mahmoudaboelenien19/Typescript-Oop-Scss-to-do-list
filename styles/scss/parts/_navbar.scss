@@ -1,0 +1,64 @@
+@import "../helpers/mixins";
+
+#head-section {
+  position: absolute;
+  top: 0;
+  min-width: 100%;
+  height: 40px;
+  z-index: 55;
+
+  nav#head {
+    @extend %centered;
+    justify-content: space-between;
+    gap: 4px;
+    padding: 0 20px;
+    width: 100%;
+    height: 100%;
+    text-shadow: 2px 4px 10px grey;
+    background: rgb(11, 101, 117);
+    #logo {
+      @extend %centered;
+      height: 100%;
+      font-weight: bolder;
+
+      span#t-letter {
+        color: white;
+      }
+      span#l-letter {
+        color: white;
+      }
+    }
+    img {
+      width: 25px;
+      height: 25px;
+      color: antiquewhite;
+      margin-right: 5px;
+    }
+
+    #mode {
+      @extend %centered;
+      justify-content: start;
+
+      width: 40px;
+      height: 20px;
+      .fa-gear {
+        width: 16px;
+        color: rgba(255, 255, 255, 0.628);
+        transition: 0.5s;
+        animation: toggle-animate 1s linear forwards reverse;
+        &.light {
+          color: black;
+          animation: toggle-animate 1s linear forwards;
+          @keyframes toggle-animate {
+            0% {
+              transform: translateX(0) rotate(0);
+            }
+            100% {
+              transform: translateX(calc(40px - 16px)) rotate(360deg);
+            }
+          }
+        }
+      }
+    }
+  }
+}

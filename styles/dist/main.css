@@ -279,59 +279,57 @@
   transform: translateY(-50%);
 }
 
-.pop, .bg-cont #tasks-section .task-cont .task #btns > *, .bg-cont #tasks-section .task-cont .task #btns, .bg-cont #tasks-section .task-cont #options #filters > *, .bg-cont #form-section form button#btn, .bg-cont #form-section form, .bg-cont #head-section p#head, .bg-cont > *, .bg-cont #mode {
+.bg-cont > *, #tasks-section .task-cont #options #filters > *, #tasks-section .task-cont .task #btns, #tasks-section .task-cont .task #btns > *, .pop, #head-section nav#head #mode, #head-section nav#head #logo, #head-section nav#head {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-:root {
-  --main: rgb(9, 9, 10);
-  --secondary: rgb(197, 195, 195);
-}
-
-body {
-  height: 100vh;
-  width: 100%;
-  overflow: hidden;
-  background: var(--main);
-  position: relative;
-}
-body.light {
-  background: var(--main);
-}
-
-.row {
-  width: 100%;
-}
-
-.bg-cont {
+#head-section {
   position: absolute;
-  top: 0%;
-  left: 0%;
-  width: 104%;
-  height: 104%;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 3px;
+  top: 0;
+  min-width: 100%;
+  height: 40px;
+  z-index: 55;
 }
-.bg-cont #mode {
+#head-section nav#head {
+  justify-content: space-between;
+  gap: 4px;
+  padding: 0 20px;
+  width: 100%;
+  height: 100%;
+  text-shadow: 2px 4px 10px grey;
+  background: rgb(11, 101, 117);
+}
+#head-section nav#head #logo {
+  height: 100%;
+  font-weight: bolder;
+}
+#head-section nav#head #logo span#t-letter {
+  color: white;
+}
+#head-section nav#head #logo span#l-letter {
+  color: white;
+}
+#head-section nav#head img {
+  width: 25px;
+  height: 25px;
+  color: antiquewhite;
+  margin-right: 5px;
+}
+#head-section nav#head #mode {
   justify-content: start;
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  background: rgba(46, 46, 160, 0.819);
   width: 40px;
   height: 20px;
-  z-index: 100;
 }
-.bg-cont #mode .fa-gear {
+#head-section nav#head #mode .fa-gear {
   width: 16px;
   color: rgba(255, 255, 255, 0.628);
   transition: 0.5s;
+  animation: toggle-animate 1s linear forwards reverse;
 }
-.bg-cont #mode .fa-gear.light {
-  color: rgb(197, 195, 195);
+#head-section nav#head #mode .fa-gear.light {
+  color: black;
   animation: toggle-animate 1s linear forwards;
 }
 @keyframes toggle-animate {
@@ -342,11 +340,112 @@ body.light {
     transform: translateX(24px) rotate(360deg);
   }
 }
+
+.bg-cont > *, #tasks-section .task-cont #options #filters > *, #tasks-section .task-cont .task #btns, #tasks-section .task-cont .task #btns > *, .pop, #form-section form button#btn, #form-section form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#form-section {
+  position: absolute;
+  width: 80%;
+  top: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 100px;
+  z-index: 500;
+}
+#form-section #form-parent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+#form-section form {
+  position: absolute;
+  gap: 0;
+  width: 80%;
+  height: 40px;
+}
+#form-section form > * {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+#form-section form input {
+  height: 100%;
+  padding-left: 10px;
+  letter-spacing: 0.8px;
+  width: 80%;
+  transition: 0.3s;
+  background-color: var(--secondary);
+  color: var(--main);
+}
+#form-section form input.valid {
+  border-bottom: 3px solid rgb(38, 131, 38);
+}
+#form-section form input.invalid {
+  border-bottom: 3px solid rgb(170, 46, 46);
+}
+#form-section form button#btn {
+  background: rgb(6, 6, 139);
+  color: white;
+  gap: 5px;
+  height: 100%;
+  width: 15%;
+}
+#form-section form button#btn:hover {
+  color: wheat;
+}
+
+.pop, #tasks-section .task-cont .task #btns > *, #tasks-section .task-cont .task #btns, #tasks-section .task-cont #options #filters > *, .bg-cont > * {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+:root {
+  --main: rgb(9, 9, 10);
+  --secondary: rgb(191, 190, 190);
+}
+
+body {
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background: var(--main);
+}
+body.light {
+  background: var(--main);
+}
+
+.row {
+  width: 100%;
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+}
+
+.bg-cont {
+  position: absolute;
+  top: 40px;
+  left: 0%;
+  width: 104%;
+  height: 104%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+}
 .bg-cont #background {
   width: 100%;
   height: 100%;
   position: absolute;
-  top: 0;
+  top: 40px;
   left: 0;
   transition: 0.3s;
   z-index: -5;
@@ -377,106 +476,7 @@ body.light {
   background: var(--secondary);
   transition: 0s;
 }
-.bg-cont #head-section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: fit-content;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60%;
-  height: 80px;
-  z-index: 55;
-}
-.bg-cont #head-section img {
-  width: 25px;
-  height: 25px;
-  color: antiquewhite;
-}
-.bg-cont #head-section p#head {
-  gap: 4px;
-  align-items: center;
-  position: relative;
-  color: white;
-  font-size: 1.25rem;
-  letter-spacing: 2px;
-  padding-bottom: 5px;
-  background-color: rgba(10, 7, 4, 0.4549019608);
-}
-.bg-cont #head-section p#head span:nth-child(2) {
-  color: #1481cf;
-}
-.bg-cont #head-section p#head span:nth-child(4) {
-  color: #a15dbc;
-}
-.bg-cont #head-section p#head span:nth-child(6) {
-  color: #1481cf;
-}
-.bg-cont #head-section p#head span#dark.light {
-  color: #0a0704;
-}
-.bg-cont #head-section p#head:before {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 15%;
-  height: 2px;
-  width: 70%;
-  background: linear-gradient(135deg, wheat, rgb(51, 48, 230));
-}
-.bg-cont #form-section {
-  position: absolute;
-  width: 80%;
-  top: 25%;
-  left: 50%;
-  transform: translateX(-50%);
-  height: 100px;
-  z-index: 500;
-}
-.bg-cont #form-section #form-parent {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-}
-.bg-cont #form-section form {
-  position: absolute;
-  gap: 0;
-  width: 80%;
-  height: 40px;
-}
-.bg-cont #form-section form > * {
-  outline: none;
-  border: none;
-  box-shadow: none;
-}
-.bg-cont #form-section form input {
-  height: 100%;
-  padding-left: 10px;
-  letter-spacing: 0.8px;
-  width: 80%;
-  transition: 0.3s;
-}
-.bg-cont #form-section form input.valid {
-  border-bottom: 3px solid rgb(38, 131, 38);
-}
-.bg-cont #form-section form input.invalid {
-  border-bottom: 3px solid rgb(170, 46, 46);
-}
-.bg-cont #form-section form button#btn {
-  background: rgb(6, 6, 139);
-  color: white;
-  gap: 5px;
-  height: 100%;
-  width: 15%;
-}
-.bg-cont #form-section form button#btn:hover {
-  color: wheat;
-}
-.bg-cont #tasks-section {
+#tasks-section {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -487,14 +487,14 @@ body.light {
   min-height: 80px;
   max-height: 200px;
 }
-.bg-cont #tasks-section .task-cont {
+#tasks-section .task-cont {
   min-height: 80px;
   max-height: 200px;
   background: rgb(91, 88, 88);
   width: 80%;
   border-radius: 8px;
 }
-.bg-cont #tasks-section .task-cont #tasks {
+#tasks-section .task-cont #tasks {
   display: flex;
   min-height: 80px;
   max-height: 160px;
@@ -502,7 +502,7 @@ body.light {
   overflow: auto;
   gap: 5px;
 }
-.bg-cont #tasks-section .task-cont #options {
+#tasks-section .task-cont #options {
   display: flex;
   justify-content: space-between;
   padding: 0 10px;
@@ -510,10 +510,10 @@ body.light {
   height: 40px;
   border: 2px solid rgba(0, 0, 0, 0.096);
 }
-.bg-cont #tasks-section .task-cont #options.hide {
+#tasks-section .task-cont #options.hide {
   display: none;
 }
-.bg-cont #tasks-section .task-cont #options #clr {
+#tasks-section .task-cont #options #clr {
   background: rgb(97, 5, 5);
   color: white;
   transition: 0.3s;
@@ -525,16 +525,16 @@ body.light {
   border-radius: 8px;
   margin: 5px;
 }
-.bg-cont #tasks-section .task-cont #options #clr:hover {
+#tasks-section .task-cont #options #clr:hover {
   background-color: rgb(243, 38, 38);
 }
-.bg-cont #tasks-section .task-cont #options #clr.hide {
+#tasks-section .task-cont #options #clr.hide {
   display: none;
 }
-.bg-cont #tasks-section .task-cont #options #clr.block {
+#tasks-section .task-cont #options #clr.block {
   display: block;
 }
-.bg-cont #tasks-section .task-cont #options #filters {
+#tasks-section .task-cont #options #filters {
   width: 80%;
   height: 100%;
   display: flex;
@@ -542,10 +542,10 @@ body.light {
   justify-content: space-evenly;
   text-transform: capitalize;
 }
-.bg-cont #tasks-section .task-cont #options #filters.hide {
+#tasks-section .task-cont #options #filters.hide {
   display: none;
 }
-.bg-cont #tasks-section .task-cont #options #filters > * {
+#tasks-section .task-cont #options #filters > * {
   cursor: pointer;
   width: fit-content;
   padding: 0 10px;
@@ -556,14 +556,14 @@ body.light {
   letter-spacing: 1px;
   transition: 0.3s;
 }
-.bg-cont #tasks-section .task-cont #options #filters > *.active {
+#tasks-section .task-cont #options #filters > *.active {
   color: rgba(255, 255, 255, 0.571);
   border-bottom: rgb(1, 161, 161) 3px solid;
 }
-.bg-cont #tasks-section .task-cont #options #filters > *:hover {
+#tasks-section .task-cont #options #filters > *:hover {
   color: white;
 }
-.bg-cont #tasks-section .task-cont .task {
+#tasks-section .task-cont .task {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template: "cont cont cont  btn" 25px "time time time  btn" 10px;
@@ -574,7 +574,7 @@ body.light {
   background: rgba(245, 222, 179, 0.858);
   margin: 0 auto;
 }
-.bg-cont #tasks-section .task-cont .task.created-animation {
+#tasks-section .task-cont .task.created-animation {
   animation: task-animate 1s linear forwards;
 }
 @keyframes task-animate {
@@ -585,17 +585,17 @@ body.light {
     transform: translateY(0);
   }
 }
-.bg-cont #tasks-section .task-cont .task:nth-child(1) {
+#tasks-section .task-cont .task:nth-child(1) {
   margin-top: 20px;
 }
-.bg-cont #tasks-section .task-cont .task:last-child {
+#tasks-section .task-cont .task:last-child {
   margin-bottom: 20px;
 }
-.bg-cont #tasks-section .task-cont .task:nth-child(even) {
+#tasks-section .task-cont .task:nth-child(even) {
   background: #78886a;
   color: white;
 }
-.bg-cont #tasks-section .task-cont .task.deleted {
+#tasks-section .task-cont .task.deleted {
   animation: delete-animate 4s linear forwards;
 }
 @keyframes delete-animate {
@@ -606,29 +606,29 @@ body.light {
     transform: translateX(-400px);
   }
 }
-.bg-cont #tasks-section .task-cont .task #content {
+#tasks-section .task-cont .task #content {
   grid-area: cont;
   font-weight: bold;
 }
-.bg-cont #tasks-section .task-cont .task #time {
+#tasks-section .task-cont .task #time {
   grid-area: time;
   font-size: 11px;
   font-weight: bold;
 }
-.bg-cont #tasks-section .task-cont .task #time .text {
+#tasks-section .task-cont .task #time .text {
   font-weight: bolder;
 }
-.bg-cont #tasks-section .task-cont .task #btns {
+#tasks-section .task-cont .task #btns {
   gap: 3px;
   grid-area: btn;
   width: 100%;
   height: 100%;
 }
-.bg-cont #tasks-section .task-cont .task #btns > * {
+#tasks-section .task-cont .task #btns > * {
   border-radius: 2px;
   text-align: center;
 }
-.bg-cont #tasks-section .task-cont .update {
+#tasks-section .task-cont .update {
   background: rgb(4, 73, 4);
   color: white;
   transition: 0.3s;
@@ -641,10 +641,10 @@ body.light {
   transition: 0.3s;
   padding: 3px;
 }
-.bg-cont #tasks-section .task-cont .update:hover {
+#tasks-section .task-cont .update:hover {
   background-color: rgb(7, 145, 7);
 }
-.bg-cont #tasks-section .task-cont .check {
+#tasks-section .task-cont .check {
   background: rgba(8, 8, 124, 0.966);
   color: white;
   transition: 0.3s;
@@ -657,10 +657,10 @@ body.light {
   transition: 0.3s;
   padding: 3px;
 }
-.bg-cont #tasks-section .task-cont .check:hover {
+#tasks-section .task-cont .check:hover {
   background-color: rgba(7, 7, 194, 0.966);
 }
-.bg-cont #tasks-section .task-cont .del {
+#tasks-section .task-cont .del {
   background: rgb(97, 5, 5);
   color: white;
   transition: 0.3s;
@@ -673,13 +673,13 @@ body.light {
   transition: 0.3s;
   padding: 3px;
 }
-.bg-cont #tasks-section .task-cont .del:hover {
+#tasks-section .task-cont .del:hover {
   background-color: rgb(243, 38, 38);
 }
-.bg-cont #tasks-section p#content {
+#tasks-section p#content {
   padding: 5px;
 }
-.bg-cont #tasks-section p#content.checked {
+#tasks-section p#content.checked {
   text-decoration: line-through;
   opacity: 0.7;
   text-decoration-color: rgb(89, 4, 4);
@@ -861,16 +861,16 @@ body.light {
   left: 40px;
   top: 50%;
   transform: translateY(-50%);
+  color: var(--main);
 }
 
 #form-section form input:focus ~ #placeholder,
 #form-section form input:valid ~ #placeholder {
   top: 0;
   border-radius: 2px;
-  background: wheat;
+  background: rgb(156, 125, 66);
   border-left: 3px solid rgb(6, 6, 139);
   border-right: 3px solid rgb(6, 6, 139);
-  color: var(--secondary);
 }
 
 /*# sourceMappingURL=main.css.map */
