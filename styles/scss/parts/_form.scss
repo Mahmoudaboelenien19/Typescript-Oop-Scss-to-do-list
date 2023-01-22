@@ -1,4 +1,5 @@
 @import "../helpers/mixins";
+@import "../helpers/variables";
 
 #form-section {
   position: absolute;
@@ -30,6 +31,17 @@
       box-shadow: none;
     }
 
+    #placeholder {
+      position: absolute;
+      height: 20px;
+      z-index: 50;
+      padding: 0 5px;
+      transition: 0.3s;
+      left: 6%;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--main);
+    }
     input {
       height: 100%;
       padding-left: 10px;
@@ -52,98 +64,86 @@
         //or
         top: 0;
         border-radius: 2px;
-        background: rgb(156, 125, 66);
+        background: var(--form-clr);
         border: {
-          left: 3px solid rgb(6, 6, 139);
-          right: 3px solid rgb(6, 6, 139);
+          left: 3px solid darkblue;
+          right: 3px solid darkblue;
         }
       }
     }
 
     button#btn {
       @extend %centered;
-      background: rgb(6, 6, 139);
-      color: white;
+      background: var(--form-clr);
+      color: var(--main);
+      transition: 0.3s;
       gap: 5px;
       height: 100%;
       width: 100px;
       &:hover {
-        color: wheat;
+        color: var(--secondary);
       }
     }
   }
-}
+  .createIcon {
+    width: fit-content;
+    height: fit-content;
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: var(--form-clr);
+      animation: to-right 2s linear forwards;
+    }
+  }
 
-.updateIcon {
-  width: fit-content;
-  height: fit-content;
-  position: relative;
-  overflow: hidden;
-  display: inline-block;
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 50%;
-    width: 100%;
-    @include button(rgb(6, 6, 139), (rgb(71, 71, 170)));
-    animation: to-right 1s linear forwards;
-  }
-  @keyframes to-right {
-    0% {
-      transform: translateX(0);
+  .updateIcon {
+    width: fit-content;
+    height: fit-content;
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 50%;
+      width: 100%;
+      background: var(--form-clr);
+      animation: to-right 1s linear forwards;
     }
-    100% {
-      transform: translateX(50px);
+    @keyframes to-right {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(50px);
+      }
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      height: 50%;
+      width: 100%;
+      background: var(--form-clr);
+      animation: to-left 1s linear forwards 1s;
+    }
+    @keyframes to-left {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50px);
+      }
     }
   }
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    height: 50%;
-    width: 100%;
-    @include button(rgb(6, 6, 139), (rgb(71, 71, 170)));
-    animation: to-left 1s linear forwards 1s;
-  }
-  @keyframes to-left {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-50px);
-    }
-  }
-}
-
-.createIcon {
-  width: fit-content;
-  height: fit-content;
-  position: relative;
-  overflow: hidden;
-  display: inline-block;
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background: rgb(6, 6, 139);
-    animation: to-right 2s linear forwards;
-  }
-}
-
-#placeholder {
-  position: absolute;
-  height: 20px;
-  z-index: 50;
-  padding: 0 5px;
-  transition: 0.3s;
-  left: 6%;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--main);
 }

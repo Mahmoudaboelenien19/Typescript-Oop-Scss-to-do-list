@@ -290,6 +290,7 @@
   --secondary: rgb(191, 190, 190);
   --mode-icon-title-pos: calc(100% - 20px);
   --mode-icon-title-display: "block";
+  --form-clr: rgb(100, 99, 99);
 }
 
 #head-section {
@@ -380,6 +381,14 @@
   justify-content: center;
 }
 
+:root {
+  --main: rgb(9, 9, 10);
+  --secondary: rgb(191, 190, 190);
+  --mode-icon-title-pos: calc(100% - 20px);
+  --mode-icon-title-display: "block";
+  --form-clr: rgb(100, 99, 99);
+}
+
 #form-section {
   position: absolute;
   width: 80%;
@@ -407,6 +416,17 @@
   border: none;
   box-shadow: none;
 }
+#form-section form #placeholder {
+  position: absolute;
+  height: 20px;
+  z-index: 50;
+  padding: 0 5px;
+  transition: 0.3s;
+  left: 6%;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--main);
+}
 #form-section form input {
   height: 100%;
   padding-left: 10px;
@@ -425,45 +445,54 @@
 #form-section form input:focus ~ #placeholder, #form-section form input:valid ~ #placeholder {
   top: 0;
   border-radius: 2px;
-  background: rgb(156, 125, 66);
-  border-left: 3px solid rgb(6, 6, 139);
-  border-right: 3px solid rgb(6, 6, 139);
+  background: var(--form-clr);
+  border-left: 3px solid darkblue;
+  border-right: 3px solid darkblue;
 }
 #form-section form button#btn {
-  background: rgb(6, 6, 139);
-  color: white;
+  background: var(--form-clr);
+  color: var(--main);
+  transition: 0.3s;
   gap: 5px;
   height: 100%;
   width: 100px;
 }
 #form-section form button#btn:hover {
-  color: wheat;
+  color: var(--secondary);
 }
-
-.updateIcon {
+#form-section .createIcon {
   width: fit-content;
   height: fit-content;
   position: relative;
   overflow: hidden;
   display: inline-block;
 }
-.updateIcon::before {
+#form-section .createIcon::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: var(--form-clr);
+  animation: to-right 2s linear forwards;
+}
+#form-section .updateIcon {
+  width: fit-content;
+  height: fit-content;
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+#form-section .updateIcon::before {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
   height: 50%;
   width: 100%;
-  background: rgb(6, 6, 139);
-  color: white;
-  transition: 0.3s;
-  outline: none;
-  border: none;
-  box-shadow: none;
+  background: var(--form-clr);
   animation: to-right 1s linear forwards;
-}
-.updateIcon::before:hover {
-  background-color: rgb(71, 71, 170);
 }
 @keyframes to-right {
   0% {
@@ -473,23 +502,15 @@
     transform: translateX(50px);
   }
 }
-.updateIcon::after {
+#form-section .updateIcon::after {
   content: "";
   position: absolute;
   bottom: 0;
   right: 0;
   height: 50%;
   width: 100%;
-  background: rgb(6, 6, 139);
-  color: white;
-  transition: 0.3s;
-  outline: none;
-  border: none;
-  box-shadow: none;
+  background: var(--form-clr);
   animation: to-left 1s linear forwards 1s;
-}
-.updateIcon::after:hover {
-  background-color: rgb(71, 71, 170);
 }
 @keyframes to-left {
   0% {
@@ -498,36 +519,6 @@
   100% {
     transform: translateX(-50px);
   }
-}
-
-.createIcon {
-  width: fit-content;
-  height: fit-content;
-  position: relative;
-  overflow: hidden;
-  display: inline-block;
-}
-.createIcon::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background: rgb(6, 6, 139);
-  animation: to-right 2s linear forwards;
-}
-
-#placeholder {
-  position: absolute;
-  height: 20px;
-  z-index: 50;
-  padding: 0 5px;
-  transition: 0.3s;
-  left: 6%;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--main);
 }
 
 .bg-cont > *, .pop, .pop-del-cont .pop-btns, .pop-del-cont .pop-del, .pop-del-cont {
@@ -826,6 +817,7 @@
   --secondary: rgb(191, 190, 190);
   --mode-icon-title-pos: calc(100% - 20px);
   --mode-icon-title-display: "block";
+  --form-clr: rgb(100, 99, 99);
 }
 
 body {
