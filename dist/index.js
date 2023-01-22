@@ -48,18 +48,28 @@ modeCont.addEventListener("click", (e) => {
         if (e.target.classList.contains("light")) {
             mode = "dark";
         }
+        document.documentElement.style.setProperty("--mode-icon-title-display", "none");
+        setTimeout(() => {
+            document.documentElement.style.setProperty("--mode-icon-title-display", "block");
+        }, 1000);
         document.body.classList.toggle("light");
         e.target.classList.toggle("light");
         document.querySelector(".fa-gear").classList.toggle("light");
         e.target.classList.toggle("light");
+        document.documentElement.style.setProperty("--mode-icon-title-pos", "0");
         document.querySelectorAll(".bg-span").forEach((e) => e.classList.toggle("light"));
         if (mode == "light") {
+            document.querySelector("#title").innerHTML =
+                "apply dark mode";
             document.documentElement.style.setProperty("--main", clr1);
             document.documentElement.style.setProperty("--secondary", clr2);
         }
         else {
+            document.querySelector("#title").innerHTML =
+                "apply light mode";
             document.documentElement.style.setProperty("--main", clr2);
             document.documentElement.style.setProperty("--secondary", clr1);
+            document.documentElement.style.setProperty("--mode-icon-title-pos", " calc(100% - 20px)");
         }
     }
 });
