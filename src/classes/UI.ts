@@ -34,7 +34,9 @@ class UI {
     tasks.innerHTML = "";
     for (let i = 0; i < arr.length; i++) {
       tasks.innerHTML += `
-      <div class="task ${arr[i].text} "
+      <div class="task ${arr[i].text} ${
+        localStorage.getItem("iscreated") && i == 0 ? "task-created" : null
+      }"
 
    data-id=${arr[i].id}>
       <div id=content >
@@ -42,7 +44,9 @@ class UI {
       <div id="time">
       <span  class="text ${arr[i].text}">${arr[i].text} in</span>
       <span class="time"  >Time : ${arr[i].time}</span>
-      <span class="date"  ><span style="color:black">&&</span> Date : ${arr[i].date}</span>
+      <span class="date"  ><span style="color:black">&&</span> Date : ${
+        arr[i].date
+      }</span>
       
       </div>
 <div id="btns">

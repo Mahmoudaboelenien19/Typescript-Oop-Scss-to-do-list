@@ -312,17 +312,17 @@
 #head-section nav#head #logo {
   height: 100%;
   font-weight: bolder;
+  color: var(--main);
 }
-#head-section nav#head #logo span#t-letter {
-  color: white;
+#head-section nav#head #logo span {
+  transition: 0.5s;
 }
-#head-section nav#head #logo span#l-letter {
-  color: white;
+#head-section nav#head #logo .letter {
+  color: var(--secondary);
 }
 #head-section nav#head img {
   width: 25px;
   height: 25px;
-  color: antiquewhite;
   margin-right: 5px;
 }
 #head-section nav#head #mode {

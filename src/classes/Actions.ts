@@ -52,6 +52,17 @@ class Actions {
     Actions.instance = this;
   }
 
+  removeCreatedclass() {
+    if (localStorage.getItem("iscreated")) {
+      setTimeout(() => {
+        (document.querySelector(".task") as HTMLElement).classList.remove(
+          "task-created"
+        );
+        localStorage.removeItem("iscreated");
+      }, 1000);
+    }
+  }
+
   addDataToArr(): void {
     console.log("2 ", Mode);
 
@@ -66,8 +77,9 @@ class Actions {
 
       arr.unshift(task);
 
-      this.checkData(arr);
+      localStorage.setItem("iscreated", "true");
 
+      this.checkData(arr);
       ui.handlePopUp("success", "task sucessfully added !", doneIcon);
     } else {
       newArr = arr.map((ele: DATA) => {
@@ -298,7 +310,6 @@ class Actions {
   checkData(arr: DATA[]) {
     if (arr.length == 0) {
       this.displayClearAllBtn(arr);
-
       ui.showData(arr);
       const div = document.createElement("div") as HTMLDivElement;
       div.setAttribute("class", `no-data`);
@@ -308,6 +319,7 @@ class Actions {
       }tasks to show`;
       tasks!.insertAdjacentElement("afterbegin", div);
     } else {
+      this.removeCreatedclass();
       document.querySelector(".no-data")?.classList.add("hide");
       ui.showData(arr);
     }

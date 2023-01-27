@@ -21,18 +21,17 @@
       @extend %centered;
       height: 100%;
       font-weight: bolder;
-
-      span#t-letter {
-        color: white;
+      color: var(--main);
+      span {
+        transition: 0.5s;
       }
-      span#l-letter {
-        color: white;
+      .letter {
+        color: var(--secondary);
       }
     }
     img {
       width: 25px;
       height: 25px;
-      color: antiquewhite;
       margin-right: 5px;
     }
 

@@ -26,7 +26,7 @@ class UI {
         tasks.innerHTML = "";
         for (let i = 0; i < arr.length; i++) {
             tasks.innerHTML += `
-      <div class="task ${arr[i].text} "
+      <div class="task ${arr[i].text} ${localStorage.getItem("iscreated") && i == 0 ? "task-created" : null}"
 
    data-id=${arr[i].id}>
       <div id=content >

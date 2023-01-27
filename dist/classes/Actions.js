@@ -26,6 +26,14 @@ class Actions {
         Object.freeze(this);
         Actions.instance = this;
     }
+    removeCreatedclass() {
+        if (localStorage.getItem("iscreated")) {
+            setTimeout(() => {
+                document.querySelector(".task").classList.remove("task-created");
+                localStorage.removeItem("iscreated");
+            }, 1000);
+        }
+    }
     addDataToArr() {
         console.log("2 ", Mode);
         if (Mode === "create") {
@@ -37,6 +45,7 @@ class Actions {
             const time = handelTime();
             const task = new TASK(id, content, checked, text, date, time);
             arr.unshift(task);
+            localStorage.setItem("iscreated", "true");
             this.checkData(arr);
             ui.handlePopUp("success", "task sucessfully added !", doneIcon);
         }
@@ -220,6 +229,7 @@ class Actions {
             tasks.insertAdjacentElement("afterbegin", div);
         }
         else {
+            this.removeCreatedclass();
             (_a = document.querySelector(".no-data")) === null || _a === void 0 ? void 0 : _a.classList.add("hide");
             ui.showData(arr);
         }
