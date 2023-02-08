@@ -13,9 +13,7 @@ class UI {
         let checked = document.querySelectorAll("#content p");
         for (let i = 0; i < arr.length; i++) {
             if (arr[i].checked == true) {
-                console.log("checked");
                 checked[i].classList.add("checked");
-                console.log(checked[i]);
             }
             else {
                 checked[i].classList.remove("checked");

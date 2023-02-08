@@ -4,7 +4,14 @@ import { ui } from "./classes/UI.js";
 const form = document.querySelector("form");
 export const btn = document.querySelector("#btn");
 const modeCont = document.querySelector("#mode ");
-for (let i = 0; i < 300; i++) {
+window.addEventListener("load", () => {
+    setTimeout(() => {
+        var _a, _b;
+        (_a = document.querySelector(".loading")) === null || _a === void 0 ? void 0 : _a.classList.add("hide");
+        (_b = document.querySelector(".container")) === null || _b === void 0 ? void 0 : _b.classList.remove("hide");
+    }, 5000);
+});
+for (let i = 0; i < 400; i++) {
     let span = document.createElement("span");
     span.setAttribute("class", "bg-span");
     document.querySelector(".bg-cont").insertAdjacentElement("afterbegin", span);
@@ -74,3 +81,8 @@ modeCont.addEventListener("click", (e) => {
     }
 });
 clearPopup.addEventListener("click", action.handleClearing.bind(action));
+inp.addEventListener("change", () => {
+    if (inp.value == "") {
+        action.resetMode();
+    }
+});

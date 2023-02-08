@@ -6,7 +6,6 @@
   left: 50%;
   transform: translate(-50%);
   z-index: 500;
-  width: 80%;
   margin: 0 auto;
   min-height: 80px;
   max-height: 200px;
@@ -14,10 +13,9 @@
   .task-cont {
     min-height: 80px;
     max-height: 200px;
-    background: rgb(91, 88, 88);
-    width: 100%;
+    background: var(--main-container);
     border-radius: 8px;
-
+    margin: 0 auto;
     #tasks {
       display: flex;
       min-height: 80px;
@@ -169,12 +167,11 @@
     @each $class, $clr, $hvr in $classes {
       .#{$class } {
         @include button($clr, $hvr);
-
+        padding: 4px;
         color: white;
         width: 15px;
         height: 15px;
         transition: 0.3s;
-        padding: 3px;
       }
     }
   }
@@ -188,5 +185,19 @@
       text-decoration-color: rgb(89, 4, 4);
       text-decoration-thickness: 3px;
     }
+  }
+}
+
+@media (width<=800px) {
+  * {
+    margin: 0;
+  }
+  div#time > * {
+    font-size: 10px;
+  }
+  button#clr {
+    font-size: 12px;
+    padding: 5px;
+    border-radius: 5px;
   }
 }

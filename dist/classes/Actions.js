@@ -107,7 +107,6 @@ class Actions {
             inp.value = arr[updatedElementIndex].content;
             ui.handlePlaceholderText();
             ui.handleSubmitBtn();
-            console.log("1" + Mode);
             this.checkData(arr);
             local.saveDataToLocalStorage(arr);
             this.autoClick();

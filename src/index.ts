@@ -13,9 +13,16 @@ import { ui } from "./classes/UI.js";
 const form = document.querySelector("form") as HTMLFormElement;
 
 export const btn = document.querySelector("#btn") as HTMLButtonElement;
-const modeCont = document.querySelector("#mode ") as unknown as HTMLElement;
+const modeCont = document.querySelector("#mode ") as HTMLElement;
 
-for (let i = 0; i < 300; i++) {
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    document.querySelector(".loading")?.classList.add("hide");
+    document.querySelector(".container")?.classList.remove("hide");
+  }, 5000);
+});
+
+for (let i = 0; i < 400; i++) {
   let span = document.createElement("span");
   span.setAttribute("class", "bg-span");
   document.querySelector(".bg-cont")!.insertAdjacentElement("afterbegin", span);
@@ -49,12 +56,6 @@ inp.addEventListener("blur", () => {
   ui.handlePlaceholderText();
   ui.handleSubmitBtn();
   action.removeInpBorder();
-  // action.resetMode();
-  /* *FIXME - 
-  * when i have update mode and make inp blur 
-  it still on update mode
-  *i want to make at blur to be at create mode 
-  */
 });
 
 inp.addEventListener("input", action.handleInpBorder.bind(action));
@@ -109,3 +110,9 @@ modeCont.addEventListener("click", (e: Event) => {
 });
 
 clearPopup.addEventListener("click", action.handleClearing.bind(action));
+
+inp.addEventListener("change", () => {
+  if (inp.value == "") {
+    action.resetMode();
+  }
+});

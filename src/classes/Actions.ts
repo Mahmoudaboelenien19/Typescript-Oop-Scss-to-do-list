@@ -16,10 +16,8 @@ export const filter = document.querySelectorAll(
   "#filters span"
 ) as NodeListOf<HTMLElement>;
 
-const doneIcon =
-  `<i class="fa-solid fa-check-double"></i>` as unknown as HTMLElement;
-const undoneIcon =
-  `<i class="fa-solid fa-circle-xmark"></i>` as unknown as HTMLElement;
+const doneIcon = `<i class="fa-solid fa-check-double"></i>` as string;
+const undoneIcon = `<i class="fa-solid fa-circle-xmark"></i>` as string;
 
 export let newArr: DATA[];
 export let updateId: number;
@@ -78,7 +76,6 @@ class Actions {
       arr.unshift(task);
 
       localStorage.setItem("iscreated", "true");
-
       this.checkData(arr);
       ui.handlePopUp("success", "task sucessfully added !", doneIcon);
     } else {
@@ -163,7 +160,6 @@ class Actions {
       inp.value = arr[updatedElementIndex].content;
       ui.handlePlaceholderText();
       ui.handleSubmitBtn();
-      console.log("1" + Mode);
       this.checkData(arr);
       local.saveDataToLocalStorage(arr);
 

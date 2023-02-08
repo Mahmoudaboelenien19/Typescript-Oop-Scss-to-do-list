@@ -20,10 +20,7 @@ class UI {
     ) as NodeListOf<HTMLDivElement>;
     for (let i = 0; i < arr.length; i++) {
       if (arr[i].checked == true) {
-        console.log("checked");
-
         checked[i].classList.add("checked");
-        console.log(checked[i]);
       } else {
         checked[i].classList.remove("checked");
       }
@@ -77,7 +74,7 @@ class UI {
       Mode === "create" ? `add tasks ${createIcon}` : `update ${updateIcon}`;
   }
 
-  handlePopUp(clr: string, msg: string, icon: HTMLElement): void {
+  handlePopUp(clr: string, msg: string, icon: string): void {
     // const pop = `<div class='pop ${clearCont}'>${msg}</div>` as Element  ;
     const div = document.createElement("span") as Element;
     div.setAttribute("class", `pop ${clr}`);
