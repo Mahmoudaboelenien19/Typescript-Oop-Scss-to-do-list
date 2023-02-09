@@ -6,13 +6,25 @@
   justify-content: center;
   align-items: center;
   span {
+    position: relative;
     font-size: 40px;
     color: darkcyan;
     letter-spacing: 2px;
     animation: loading 2s linear infinite;
+    margin: 0 1px;
 
+    &:before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background: var(--secondary);
+      height: 4px;
+      animation: before-animation 2s linear infinite;
+    }
     @for $i from 1 through 10 {
-      &:nth-child(#{$i}) {
+      &:nth-child(#{$i}),
+      &:nth-child(#{$i}):before {
         animation-delay: calc((#{$i} - 1) * 0.2s);
       }
     }
@@ -53,5 +65,47 @@
 
   100% {
     transform: translateY(0);
+  }
+}
+
+@keyframes before-animation {
+  0% {
+    bottom: 0;
+    height: 4px;
+  }
+
+  10% {
+    bottom: -30px;
+    height: 34px;
+  }
+
+  15% {
+    bottom: 0;
+    height: 4px;
+  }
+
+  25% {
+    bottom: -20px;
+    height: 24px;
+  }
+
+  30% {
+    bottom: 0;
+    height: 4px;
+  }
+
+  40% {
+    bottom: -10px;
+    height: 14px;
+  }
+
+  45% {
+    bottom: 0;
+    height: 4px;
+  }
+
+  100% {
+    bottom: 0;
+    height: 4px;
   }
 }

@@ -39,12 +39,6 @@ inp.addEventListener("blur", () => {
     ui.handlePlaceholderText();
     ui.handleSubmitBtn();
     action.removeInpBorder();
-    // action.resetMode();
-    /* *FIXME -
-    * when i have update mode and make inp blur
-    it still on update mode
-    *i want to make at blur to be at create mode
-    */
 });
 inp.addEventListener("input", action.handleInpBorder.bind(action));
 modeCont.addEventListener("click", (e) => {

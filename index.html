@@ -1,98 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./assets/images/new-logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="./fontawesome/all.css" />
+    <link rel="stylesheet" href="./styles/dist/main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@1,700&display=swap"
+      rel="stylesheet"
+    />
+    <title>TodoList</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="./assets/images/new-logo.png" type="image/x-icon">
-  <link rel="stylesheet" href="./fontawesome/all.css" />
-  <link rel="stylesheet" href="./styles/dist/main.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@1,700&display=swap" rel="stylesheet">  
-  <title>TO DO LIST</title>
-</head>
-
-<body>
-
-<div class="loading">
-
-    <span  class="letter">T</span>
-  <span> o</span>
-  <span> d</span>
-  <span> o</span>
-  <span class="letter"> &nbsp; L</span>
-  <span> i</span>
-  <span> s</span>
-  <span> t</span>
-</div>
-
-
-
-
-  <div  class="container hide">
-  <div class="bg-cont"><div id="background"></div>  </div>
- 
-    <div id="head-section">
-      <nav id="head">  
-   
-      <div id="logo">
-         <img src="./assets/images/new-logo.png" alt="icon"> 
-         <span  class="letter">T</span>odo<span class="letter"> &nbsp; L</span>ist
-      </div> 
-      
-      <div id="mode"><i class="fa-solid fa-gear"></i> 
-        <span id="title"> apply dark mode</span>
-      </div>
-    </nav>
-   
-   
+  <body>
+    <div class="loading">
+      <span class="letter">T</span>
+      <span> o</span>
+      <span> d</span>
+      <span> o</span>
+      <span class="letter">L</span>
+      <span> i</span>
+      <span> s</span>
+      <span> t</span>
     </div>
-    <div class="row" id="form-section">
-      <!-- <div class="col-md-12 col-sm-10" id="form-parent"> -->
-        <form action="" novalidate class="col-sm-14  col-10  ">
-          <input class="" id="inp" type="text" required  />
+
+    <div class="container hide">
+      <div class="bg-cont"><div id="background"></div></div>
+
+      <div id="head-section">
+        <nav id="head">
+          <div id="logo">
+            <img src="./assets/images/new-logo.png" alt="icon" />
+            <span class="letter">T</span>odo<span class="letter">L</span>ist
+          </div>
+
+          <div id="mode">
+            <i class="fa-solid fa-gear"></i>
+            <span id="title"> apply dark mode</span>
+          </div>
+        </nav>
+      </div>
+      <div class="row" id="form-section">
+        <!-- <div class="col-md-12 col-sm-10" id="form-parent"> -->
+        <form action="" novalidate class="col-sm-14 col-10">
+          <input class="" id="inp" type="text" required />
           <button class="" id="btn">Add tasks</button>
           <span id="placeholder">add a task</span>
         </form>
-      <!-- </div> -->
-    </div>
-    <div class="row" id="tasks-section">
-      <div class="task-cont col-lg-10 col-md-12 col-sm-15">
-        <div id="options" class="hide">
-       <div id="filters">
-        <span class="active all" data-state="">all</span>
-        <span class="pending" data-state="pending ">pending</span>
-        <span class="completed" data-state="completed ">completed</span>
-        <span class="updated" data-state="updated ">updated</span>
-       </div>
-          <button id="clr"></button>
-         
+        <!-- </div> -->
+      </div>
+      <div class="row" id="tasks-section">
+        <div class="task-cont col-lg-10 col-md-12 col-sm-15">
+          <div id="options" class="hide">
+            <div id="filters">
+              <span class="active all" data-state="">all</span>
+              <span class="pending" data-state="pending ">pending</span>
+              <span class="completed" data-state="completed ">completed</span>
+              <span class="updated" data-state="updated ">updated</span>
+            </div>
+            <button id="clr"></button>
+          </div>
+          <div id="tasks"></div>
         </div>
-        <div id="tasks">
+      </div>
 
+      <div class="pop-cont"></div>
+      <div class="pop-del-cont hide">
+        <div class="pop-del">
+          <p>are you sure to clear all ?</p>
+          <div class="pop-btns">
+            <button class="clr-pop">clear</button>
+            <button class="cancel">cancel</button>
+          </div>
         </div>
       </div>
     </div>
 
-  <div class="pop-cont"></div>
-  <div class="pop-del-cont hide">
-    <div class="pop-del">
-      <p>are you sure to clear all  ?</p>
-      <div class="pop-btns">
-        
-        <button class="clr-pop">clear</button>
-        <button class="cancel">cancel</button>
-      </div>
-    </div>
-  </div>
-  </div>
-  </div>
-  <script src="./fontawesome/all.js"></script>
+    <script src="./fontawesome/all.js"></script>
 
-  <script type="module" src="./dist/index.js" ></script>
-
-
-
-</body>
-
+    <script type="module" src="./dist/index.js"></script>
+  </body>
 </html>

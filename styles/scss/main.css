@@ -625,39 +625,50 @@
   align-items: center;
 }
 .loading span {
+  position: relative;
   font-size: 40px;
   color: darkcyan;
   letter-spacing: 2px;
   animation: loading 2s linear infinite;
+  margin: 0 1px;
 }
-.loading span:nth-child(1) {
+.loading span:before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: var(--secondary);
+  height: 4px;
+  animation: before-animation 2s linear infinite;
+}
+.loading span:nth-child(1), .loading span:nth-child(1):before {
   animation-delay: calc((1 - 1) * 0.2s);
 }
-.loading span:nth-child(2) {
+.loading span:nth-child(2), .loading span:nth-child(2):before {
   animation-delay: calc((2 - 1) * 0.2s);
 }
-.loading span:nth-child(3) {
+.loading span:nth-child(3), .loading span:nth-child(3):before {
   animation-delay: calc((3 - 1) * 0.2s);
 }
-.loading span:nth-child(4) {
+.loading span:nth-child(4), .loading span:nth-child(4):before {
   animation-delay: calc((4 - 1) * 0.2s);
 }
-.loading span:nth-child(5) {
+.loading span:nth-child(5), .loading span:nth-child(5):before {
   animation-delay: calc((5 - 1) * 0.2s);
 }
-.loading span:nth-child(6) {
+.loading span:nth-child(6), .loading span:nth-child(6):before {
   animation-delay: calc((6 - 1) * 0.2s);
 }
-.loading span:nth-child(7) {
+.loading span:nth-child(7), .loading span:nth-child(7):before {
   animation-delay: calc((7 - 1) * 0.2s);
 }
-.loading span:nth-child(8) {
+.loading span:nth-child(8), .loading span:nth-child(8):before {
   animation-delay: calc((8 - 1) * 0.2s);
 }
-.loading span:nth-child(9) {
+.loading span:nth-child(9), .loading span:nth-child(9):before {
   animation-delay: calc((9 - 1) * 0.2s);
 }
-.loading span:nth-child(10) {
+.loading span:nth-child(10), .loading span:nth-child(10):before {
   animation-delay: calc((10 - 1) * 0.2s);
 }
 .loading .letter {
@@ -688,6 +699,40 @@
   }
   100% {
     transform: translateY(0);
+  }
+}
+@keyframes before-animation {
+  0% {
+    bottom: 0;
+    height: 4px;
+  }
+  10% {
+    bottom: -30px;
+    height: 34px;
+  }
+  15% {
+    bottom: 0;
+    height: 4px;
+  }
+  25% {
+    bottom: -20px;
+    height: 24px;
+  }
+  30% {
+    bottom: 0;
+    height: 4px;
+  }
+  40% {
+    bottom: -10px;
+    height: 14px;
+  }
+  45% {
+    bottom: 0;
+    height: 4px;
+  }
+  100% {
+    bottom: 0;
+    height: 4px;
   }
 }
 .bg-cont > *, .pop, #tasks-section .task-cont .task #btns > *, #tasks-section .task-cont .task #btns, #tasks-section .task-cont #options #filters > * {
@@ -786,7 +831,7 @@
 #tasks-section .task-cont .task {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template: "cont cont cont  btn" 25px "time time time  btn" 10px;
+  grid-template: "cont cont cont  btn" 25px "time time time  btn" 15px;
   min-height: 40px;
   width: calc(100% - 10px);
   justify-content: space-between;
@@ -847,6 +892,78 @@
 #tasks-section .task-cont .task #btns > * {
   border-radius: 2px;
   text-align: center;
+}
+#tasks-section .task-cont .task #btns .arrows {
+  margin-left: 5px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+#tasks-section .task-cont .task #btns .arrows .up {
+  animation: arrow-up 2s linear infinite;
+  padding: 2px;
+}
+#tasks-section .task-cont .task #btns .arrows .up:hover {
+  animation-play-state: paused;
+}
+#tasks-section .task-cont .task #btns .arrows .down {
+  animation: arrow-down 2s linear infinite;
+}
+#tasks-section .task-cont .task #btns .arrows .down:hover {
+  animation-play-state: paused;
+}
+@keyframes arrow-up {
+  0% {
+    transform: translateY(0);
+  }
+  10% {
+    transform: translateY(-4px);
+  }
+  15% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(-3px);
+  }
+  30% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-2px);
+  }
+  45% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+@keyframes arrow-down {
+  0% {
+    transform: translateY(0);
+  }
+  10% {
+    transform: translateY(4px);
+  }
+  15% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(3px);
+  }
+  30% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(2px);
+  }
+  45% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 #tasks-section .task-cont .update {
   background: rgb(4, 73, 4);

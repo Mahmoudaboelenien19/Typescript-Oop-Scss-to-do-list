@@ -110,6 +110,17 @@ class Actions {
     inp.focus();
   }
 
+  handleIndex(index: number): number {
+    let num = arr.length;
+    if (index >= num) {
+      return 0;
+    } else if (index < 0) {
+      return arr.length - 1;
+    } else {
+      return index;
+    }
+  }
+
   actionFn(e: MouseEvent): void {
     const parent = (e.target as HTMLElement).parentElement
       ?.parentElement as HTMLElement;
@@ -167,6 +178,36 @@ class Actions {
       this.handleFilterText(arr);
     }
 
+    if ((e.target as HTMLElement).classList.contains("up")) {
+      updateId = +parent.parentElement?.dataset.id!;
+
+      let upElementIndex: number = arr.findIndex((e) => e.id == updateId);
+      [arr[this.handleIndex(upElementIndex - 1)], arr[upElementIndex]] = [
+        arr[upElementIndex],
+        arr[this.handleIndex(upElementIndex - 1)],
+      ];
+
+      this.checkData(arr);
+      this.autoClick();
+
+      local.saveDataToLocalStorage(arr);
+    }
+
+    if ((e.target as HTMLElement).classList.contains("down")) {
+      updateId = +parent.parentElement?.dataset.id!;
+
+      let upElementIndex: number = arr.findIndex((e) => e.id == updateId);
+      [arr[upElementIndex], arr[this.handleIndex(upElementIndex + 1)]] = [
+        arr[this.handleIndex(upElementIndex + 1)],
+        arr[upElementIndex],
+      ];
+
+      this.checkData(arr);
+      this.autoClick();
+
+      local.saveDataToLocalStorage(arr);
+    }
+
     if ((e.target as HTMLElement).classList.contains("check")) {
       newArr = arr.map((e) =>
         e.id == +parent.dataset.id! && e.checked == false
@@ -187,6 +228,7 @@ class Actions {
             }
           : e
       );
+
       arr = newArr;
       this.checkData(arr);
       local.saveDataToLocalStorage(arr);

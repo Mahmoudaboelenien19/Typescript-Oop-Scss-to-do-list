@@ -69,8 +69,20 @@ class Actions {
         this.removeInpBorder();
         inp.focus();
     }
+    handleIndex(index) {
+        let num = arr.length;
+        if (index >= num) {
+            return 0;
+        }
+        else if (index < 0) {
+            return arr.length - 1;
+        }
+        else {
+            return index;
+        }
+    }
     actionFn(e) {
-        var _a, _b, _c;
+        var _a, _b, _c, _d, _e;
         const parent = (_a = e.target.parentElement) === null || _a === void 0 ? void 0 : _a.parentElement;
         if (e.target.classList.contains("del")) {
             e.target.classList.add("deleted");
@@ -112,6 +124,28 @@ class Actions {
             this.autoClick();
             this.handleFilterText(arr);
         }
+        if (e.target.classList.contains("up")) {
+            updateId = +((_c = parent.parentElement) === null || _c === void 0 ? void 0 : _c.dataset.id);
+            let upElementIndex = arr.findIndex((e) => e.id == updateId);
+            [arr[this.handleIndex(upElementIndex - 1)], arr[upElementIndex]] = [
+                arr[upElementIndex],
+                arr[this.handleIndex(upElementIndex - 1)],
+            ];
+            this.checkData(arr);
+            this.autoClick();
+            local.saveDataToLocalStorage(arr);
+        }
+        if (e.target.classList.contains("down")) {
+            updateId = +((_d = parent.parentElement) === null || _d === void 0 ? void 0 : _d.dataset.id);
+            let upElementIndex = arr.findIndex((e) => e.id == updateId);
+            [arr[upElementIndex], arr[this.handleIndex(upElementIndex + 1)]] = [
+                arr[this.handleIndex(upElementIndex + 1)],
+                arr[upElementIndex],
+            ];
+            this.checkData(arr);
+            this.autoClick();
+            local.saveDataToLocalStorage(arr);
+        }
         if (e.target.classList.contains("check")) {
             newArr = arr.map((e) => e.id == +parent.dataset.id && e.checked == false
                 ? Object.assign(Object.assign({}, e), { checked: true, date: handelDate(), time: handelTime(), text: "checked" }) : e.id == +parent.dataset.id && e.checked == true
@@ -127,7 +161,7 @@ class Actions {
         // this.autoClick();
         if (arr.length == 0) {
             this.removeActiveClass();
-            (_c = document.querySelector("span.all")) === null || _c === void 0 ? void 0 : _c.classList.add("active");
+            (_e = document.querySelector("span.all")) === null || _e === void 0 ? void 0 : _e.classList.add("active");
         }
     }
     autoClick() {

@@ -49,7 +49,12 @@ class UI {
 <div id="btns">
 <i title="update" class="fa-solid fa-pen-to-square fa-sm update"></i>
 <i title="check"  class="fa fa-check fa-sm check " aria-hidden="true"></i>
-<i  title="del" class="fa-solid fa-x fa-sm del"></i></div>
+<i  title="del" class="fa-solid fa-x fa-sm del"></i>
+<div class="arrows">
+<i class="fa-solid up  fa-circle-up"></i>
+<i class="fa-solid down  fa-circle-down"></i>
+</div>
+</div>
 </div>`;
     }
 
