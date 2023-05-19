@@ -11,14 +11,6 @@
   height: 100px;
   z-index: 500;
 
-  // #form-parent {
-  //   display: flex;
-  //   align-items: center;
-  //   justify-content: center;
-  //   height: 100%;
-  //   margin: 0 auto;
-  // }
-
   form {
     @extend %centered;
     margin: 0 auto;
@@ -55,6 +47,7 @@
       transition: 0.3s;
       background-color: var(--secondary);
       color: var(--main);
+      box-shadow: 2px 2px 1px black;
       &.valid {
         border-bottom: 3px solid rgb(38, 131, 38);
       }

@@ -91,7 +91,7 @@ class UI {
     popUps.forEach((ele) => {
       setTimeout(() => {
         ele?.remove();
-      }, 4500);
+      }, 5000);
     });
   }
 }

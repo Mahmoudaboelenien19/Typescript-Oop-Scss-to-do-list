@@ -14,9 +14,6 @@ body {
   width: 100%;
   overflow: hidden;
   background: var(--main);
-  &.light {
-    background: var(--main);
-  }
 }
 
 .row {
@@ -62,11 +59,12 @@ body {
 
   .bg-span {
     display: inline-block;
-    background: #0a0704;
+    background: var(--main);
     width: calc((100vw / 20) - 3px);
     height: calc((100vw / 20) - 3px);
     transition: 2s;
-    border: 1px solid rgba(255, 255, 255, 0.121);
+    border: 1px solid var(--secondary);
+    opacity: 0.8;
     &.light {
       border: 1px solid black;
       background: rgb(197, 195, 195);
@@ -97,11 +95,11 @@ body {
   margin: 10px 0;
   position: relative;
   text-align: center;
-  animation: pop-animate 4.5s linear;
+  animation: pop-animate 4.5s linear forwards;
   @keyframes pop-animate {
     100%,
     0% {
-      transform: translateX(-150px);
+      transform: translateX(-250px);
     }
     10%,
     90% {
