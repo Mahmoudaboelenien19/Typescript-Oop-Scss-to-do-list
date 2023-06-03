@@ -12,11 +12,15 @@
   "main": "index.js",
   "scripts": {
     "build": "npx tsc -w",
+    "start": "npx serve",
     "scss": "sass --update --watch styles/scss:styles/dist",
     "prettier": " prettier --config .prettierrc  --write ***/**/* "
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "serve": "^14.2.0"
+  }
 }
