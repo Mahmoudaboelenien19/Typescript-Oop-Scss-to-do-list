@@ -151,7 +151,6 @@ body {
   color: white;
 }
 
-// @media only screen and (max-width: 800px) {
 @media (width <=900px) {
   * {
     font-size: 14px;
@@ -197,6 +196,36 @@ body {
   }
 }
 
+#mode {
+  animation: opacity-animate 2s linear forwards;
+}
+
+@keyframes opacity-animate {
+  0%,
+  90% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+#sun,
+#moon {
+  &.hide-theme {
+    animation: hide-animate 1s linear forwards !important;
+  }
+}
+@keyframes hide-animate {
+  0% {
+    opacity: 1;
+    display: block;
+  }
+
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
 .hide {
   display: none;
 }

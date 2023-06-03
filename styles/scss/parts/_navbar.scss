@@ -46,9 +46,26 @@
 
       #moon {
         color: white;
+        opacity: 0;
+        animation: icon-animate 1s linear forwards 2s;
       }
       #sun {
         color: #fdb813;
+        opacity: 0;
+        animation: icon-animate 1s linear forwards 2s;
+      }
+
+      @keyframes icon-animate {
+        0% {
+          display: none;
+        }
+        60% {
+          opacity: 0;
+          display: block;
+        }
+        100% {
+          opacity: 1;
+        }
       }
 
       #title {

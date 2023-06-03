@@ -26,7 +26,7 @@
 
     input:focus,
     input:focus ~ button {
-      box-shadow: 2px 3px 4px 0px grey;
+      box-shadow: 2px 3px 4px 0px grey !important;
     }
     #placeholder {
       position: absolute;
@@ -79,6 +79,8 @@
       gap: 5px;
       height: 100%;
       width: 100px;
+      box-shadow: 2px 2px 1px black;
+
       &:hover {
         color: var(--secondary);
       }

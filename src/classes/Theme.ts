@@ -20,17 +20,19 @@ class Theme {
     if (Theme.theme == "light") {
       document.documentElement.style.setProperty("--main", clr1);
       document.documentElement.style.setProperty("--secondary", clr2);
-      setTimeout(() => {
-        (document.querySelector(".fa-moon") as Element).classList.add("hide");
-        (document.querySelector(".fa-sun") as Element).classList.remove("hide");
-      }, 400);
+      // setTimeout(() => {
+      (document.querySelector("#moon") as Element).classList.add("hide-theme");
+      (document.querySelector("#sun") as Element).classList.remove(
+        "hide-theme"
+      );
+      // }, 400);
     } else {
-      setTimeout(() => {
-        (document.querySelector(".fa-moon") as Element).classList.remove(
-          "hide"
-        );
-        (document.querySelector(".fa-sun") as Element).classList.add("hide");
-      }, 400);
+      // setTimeout(() => {
+      (document.querySelector("#moon") as Element).classList.remove(
+        "hide-theme"
+      );
+      (document.querySelector("#sun") as Element).classList.add("hide-theme");
+      // }, 400);
 
       document.documentElement.style.setProperty("--main", clr2);
       document.documentElement.style.setProperty("--secondary", clr1);
